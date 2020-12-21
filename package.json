@@ -1,0 +1,31 @@
+{
+    "name": "mern-auth-backend",
+    "version": "1.0.0",
+    "description": "This is a codealong for MERN Auth",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jtreeves/mern-auth-backend.git"
+    },
+    "keywords": [],
+    "author": "Jackson Reeves",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jtreeves/mern-auth-backend/issues"
+    },
+    "homepage": "https://github.com/jtreeves/mern-auth-backend#readme",
+    "dependencies": {
+        "axios": "^0.21.0",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.11.8",
+        "passport": "^0.4.1",
+        "passport-jwt": "^4.0.0"
+    }
+}
