@@ -6,11 +6,13 @@ const Schema = mongoose.Schema
 
 // Create Budget Schema
 const budgetSchema = new Schema({
-    suggestions: [{}],
+    suggestion: {},
     date: {
         type: Date,
         default: Date.now()
-    }
+    },
+    utility: utilitySchema,
+    grocery: grocerySchema
 })
 
 // Export Budget
