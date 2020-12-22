@@ -4,9 +4,9 @@ const mongoose = require('mongoose')
 // Create variable for Schema shortcut
 const Schema = mongoose.Schema
 
-// Create User Schema
-const housingSchema = new Schema({
-    user_id: {
+// Create Budget Schema
+const budgetSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
@@ -24,5 +24,5 @@ const housingSchema = new Schema({
     }
 })
 
-// Export User
-module.exports = Housing = mongoose.model('Housing', housingSchema)
+// Export Budget
+module.exports = Budget = mongoose.model('Budget', budgetSchema)
