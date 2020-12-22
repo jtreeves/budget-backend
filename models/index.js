@@ -24,5 +24,6 @@ db.on('error', () => {
     console.log(`DATABASE ERROR: ${error}`)
 })
 
-// Require and export User
+// Require and export models
 module.exports.User = require('./User')
+module.exports.Housing = require('./Housing')
