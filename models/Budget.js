@@ -6,18 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Budget Schema
 const budgetSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
+    suggestions: [{}],
     date: {
         type: Date,
         default: Date.now()
