@@ -55,6 +55,33 @@ router.post('/signup', async (req, res) => {
                                     electric: 100,
                                     water: 200
                                 }
+                            },
+                            grocery: {
+                                categories: {
+                                    food: 250,
+                                    drink: 50
+                                }
+                            },
+                            transportation: {
+                                categories: {
+                                    plane: 0,
+                                    train: 0,
+                                    automobile: 25
+                                }
+                            },
+                            entertainment: {
+                                categories: {
+                                    movies: 30,
+                                    books: 75
+                                }
+                            },
+                            income: {
+                                categories: {
+                                    salary: 1000,
+                                    investment: 20,
+                                    trust: 50000,
+                                    lottery: 600
+                                }
                             }
                         })
                         res.status(201).json(newBudget)
