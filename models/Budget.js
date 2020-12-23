@@ -6,6 +6,9 @@ const Schema = mongoose.Schema
 
 const utilitySchema = require('./Utility')
 const grocerySchema = require('./Grocery')
+const transportationSchema = require('./Transportation')
+const entertainmentSchema = require('./Entertainment')
+const incomeSchema = require('./Income')
 
 // Create Budget Schema
 const budgetSchema = new Schema({
@@ -15,7 +18,10 @@ const budgetSchema = new Schema({
         default: Date.now()
     },
     utility: utilitySchema,
-    grocery: grocerySchema
+    grocery: grocerySchema,
+    transportation: transportationSchema,
+    entertainment: entertainmentSchema,
+    income: incomeSchema
 })
 
 // Export Budget
