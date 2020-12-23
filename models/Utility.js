@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Utility Schema
 const utilitySchema = new Schema({
-    categories: {},
+    categories: Array,
     date: {
         type: Date,
         default: Date.now()
