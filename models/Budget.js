@@ -9,7 +9,7 @@ const grocerySchema = require('./Grocery')
 
 // Create Budget Schema
 const budgetSchema = new Schema({
-    suggestion: {},
+    user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     date: {
         type: Date,
         default: Date.now()

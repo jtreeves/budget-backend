@@ -6,7 +6,10 @@ const Schema = mongoose.Schema
 
 // Create Utility Schema
 const utilitySchema = new Schema({
-    categories: Array,
+    categories: {
+        electric: Number,
+        water: Number
+    },
     date: {
         type: Date,
         default: Date.now()
@@ -14,4 +17,4 @@ const utilitySchema = new Schema({
 })
 
 // Export Utility
-module.exports = Utility = mongoose.model('Utility', utilitySchema)
+module.exports = utilitySchema

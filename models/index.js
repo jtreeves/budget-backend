@@ -26,4 +26,4 @@ db.on('error', () => {
 
 // Require and export models
 module.exports.User = require('./User')
-module.exports.Housing = require('./Housing')
+module.exports.Budget = require('./Budget')

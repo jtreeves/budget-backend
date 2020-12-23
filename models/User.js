@@ -23,8 +23,7 @@ const userSchema = new Schema({
     date: {
         type: Date,
         default: Date.now()
-    },
-    budgets: [budgetSchema]
+    }
 })
 
 // Export User

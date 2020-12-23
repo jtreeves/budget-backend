@@ -6,7 +6,10 @@ const Schema = mongoose.Schema
 
 // Create Grocery Schema
 const grocerySchema = new Schema({
-    categories: {},
+    categories: {
+        food: Number,
+        drink: Number
+    },
     date: {
         type: Date,
         default: Date.now()
@@ -14,4 +17,4 @@ const grocerySchema = new Schema({
 })
 
 // Export Grocery
-module.exports = Grocery = mongoose.model('Grocery', grocerySchema)
+module.exports = grocerySchema
