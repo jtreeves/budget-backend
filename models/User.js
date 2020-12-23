@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 // Create variable for Schema shortcut
 const Schema = mongoose.Schema
 
+const budgetSchema = require('./Budget')
+
 // Create User Schema
 const userSchema = new Schema({
     name: {
