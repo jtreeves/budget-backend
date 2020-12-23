@@ -48,7 +48,7 @@ router.post('/signup', async (req, res) => {
                         // Save new user with hashed password
                         const createdUser = await newUser.save()
                         // Create budget for new uer
-                        const newBudget = await db.Budget.create({
+                        const createdBudget = await db.Budget.create({
                             user: createdUser,
                             utility: {
                                 categories: {
@@ -84,7 +84,10 @@ router.post('/signup', async (req, res) => {
                                 }
                             }
                         })
-                        res.status(201).json(newBudget)
+                        res.status(201).json({
+                            user: createdUser,
+                            budget: createdBudget
+                        })
                     } catch(error) {
                         console.log(`HASHING ERROR: ${error}`)
                     }
