@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 // Create variable for Schema shortcut
 const Schema = mongoose.Schema
 
+const housingSchema = require('./Housing')
 const utilitySchema = require('./Utility')
 const grocerySchema = require('./Grocery')
 const transportationSchema = require('./Transportation')
@@ -17,6 +18,7 @@ const budgetSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+    housing: housingSchema,
     utility: utilitySchema,
     grocery: grocerySchema,
     transportation: transportationSchema,
