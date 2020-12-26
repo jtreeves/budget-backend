@@ -50,6 +50,11 @@ router.post('/signup', async (req, res) => {
                         // Create budget for new uer
                         const createdBudget = await db.Budget.create({
                             user: createdUser,
+                            housing: {
+                                categories: {
+                                    rent: 1000
+                                }
+                            },
                             utility: {
                                 categories: {
                                     electric: 100,
