@@ -8,8 +8,9 @@ const passport = require('passport')
 // Import internal configuration
 require('./configurations/passport')(passport)
 
-// Import internal controller
+// Import internal controllers
 const users = require('./controllers/users')
+const budgets = require('./controllers/budgets')
 
 // Use external middleware
 app.use(cors())
@@ -17,8 +18,9 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(passport.initialize())
 
-// Use internal controller
+// Use internal controllers
 app.use('/users', users)
+app.use('/budgets', budgets)
 
 // Get home route
 app.get('/', (req, res) => {
