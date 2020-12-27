@@ -80,5 +80,55 @@ router.put('/:id/housing', async (req, res) => {
     }
 })
 
+// Create PUT route for budgets/:id/utility
+router.put('/:id/utility', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'utility.categories.electric': req.body.electric,
+                'utility.categories.water': req.body.water
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create PUT route for budgets/:id/grocery
+router.put('/:id/grocery', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'grocery.categories.food': req.body.food,
+                'grocery.categories.drink': req.body.drink
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create PUT route for budgets/:id/income
+router.put('/:id/income', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'income.categories.salary': req.body.salary,
+                'income.categories.investment': req.body.investment,
+                'income.categories.trust': req.body.trust,
+                'income.categories.lottery': req.body.lottery
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
 // Export router
 module.exports = router
