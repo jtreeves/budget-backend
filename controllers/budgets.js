@@ -10,7 +10,7 @@ const router = express.Router()
 
 // Create GET route for budgets/test
 router.get('/test', (req, res) => {
-    res.json({msg: 'Viewing the test page for the budgets routes'})
+    res.json({msg: 'Viewing the test page for the Budget model'})
 })
 
 // Create GET route for budgets/:id

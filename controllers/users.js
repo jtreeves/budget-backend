@@ -16,7 +16,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 // Create GET route for users/test (Public)
 router.get('/test', (req, res) => {
-    res.json({msg: 'Viewing the test page for the backend of a MERN app'})
+    res.json({msg: 'Viewing the test page for User model'})
 })
 
 // Create POST route for users/signup (Public)
@@ -94,13 +94,13 @@ router.post('/signup', async (req, res) => {
                             budget: createdBudget
                         })
                     } catch(error) {
-                        console.log(`HASHING ERROR: ${error}`)
+                        res.status(400).json({msg: error})
                     }
                 })
             })
         }
     } catch(error) {
-        console.log(`SIGNUP ERROR: ${error}`)
+        res.status(400).json({msg: error})
     }
 })
 
@@ -139,7 +139,7 @@ router.post('/login', async (req, res) => {
             }
         }
     } catch(error) {
-        console.log(`LOGIN ERROR: ${error}`)
+        res.status(400).json({msg: error})
     }
 })
 
