@@ -17,7 +17,7 @@ router.get('/test', (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
-        res.status(201).json({budget: currentBudget})
+        res.status(200).json({budget: currentBudget})
     } catch(error) {
         res.status(400).json({msg: error})
     }
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/housing', async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
-        res.status(201).json({housing: currentBudget.housing})
+        res.status(200).json({housing: currentBudget.housing})
     } catch(error) {
         res.status(400).json({msg: error})
     }
@@ -37,7 +37,7 @@ router.get('/:id/housing', async (req, res) => {
 router.get('/:id/utility', async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
-        res.status(201).json({utility: currentBudget.utility})
+        res.status(200).json({utility: currentBudget.utility})
     } catch(error) {
         res.status(400).json({msg: error})
     }
@@ -47,7 +47,7 @@ router.get('/:id/utility', async (req, res) => {
 router.get('/:id/grocery', async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
-        res.status(201).json({grocery: currentBudget.grocery})
+        res.status(200).json({grocery: currentBudget.grocery})
     } catch(error) {
         res.status(400).json({msg: error})
     }
@@ -57,7 +57,24 @@ router.get('/:id/grocery', async (req, res) => {
 router.get('/:id/income', async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
-        res.status(201).json({income: currentBudget.income})
+        res.status(200).json({income: currentBudget.income})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create PUT route for budgets/:id/housing
+router.put('/:id/housing', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'housing.categories.rent': req.body.rent,
+                'housing.categories.mortgage': req.body.mortgage,
+                'housing.categories.hostel': req.body.hostel
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
     } catch(error) {
         res.status(400).json({msg: error})
     }
