@@ -33,5 +33,35 @@ router.get('/:id/housing', async (req, res) => {
     }
 })
 
+// Create GET route for budgets/:id/utility
+router.get('/:id/utility', async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        res.status(201).json({utility: currentBudget.utility})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create GET route for budgets/:id/grocery
+router.get('/:id/grocery', async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        res.status(201).json({grocery: currentBudget.grocery})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create GET route for budgets/:id/income
+router.get('/:id/income', async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        res.status(201).json({income: currentBudget.income})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
 // Export router
 module.exports = router
