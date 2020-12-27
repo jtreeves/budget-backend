@@ -52,40 +52,42 @@ router.post('/signup', async (req, res) => {
                             user: createdUser,
                             housing: {
                                 categories: {
-                                    rent: 1000
+                                    rent: 0,
+                                    mortgage: 0,
+                                    hostel: 0
                                 }
                             },
                             utility: {
                                 categories: {
-                                    electric: 100,
-                                    water: 200
+                                    electric: 0,
+                                    water: 0
                                 }
                             },
                             grocery: {
                                 categories: {
-                                    food: 250,
-                                    drink: 50
+                                    food: 0,
+                                    drink: 0
                                 }
                             },
                             transportation: {
                                 categories: {
                                     plane: 0,
                                     train: 0,
-                                    automobile: 25
+                                    automobile: 0
                                 }
                             },
                             entertainment: {
                                 categories: {
-                                    movies: 30,
-                                    books: 75
+                                    movies: 0,
+                                    books: 0
                                 }
                             },
                             income: {
                                 categories: {
-                                    salary: 1000,
-                                    investment: 20,
-                                    trust: 50000,
-                                    lottery: 600
+                                    salary: 0,
+                                    investment: 0,
+                                    trust: 0,
+                                    lottery: 0
                                 }
                             }
                         })
