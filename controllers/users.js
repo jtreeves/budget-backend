@@ -16,7 +16,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 // Create GET route for users/test (Public)
 router.get('/test', (req, res) => {
-    res.json({msg: 'Viewing the test page for the backend of a MERN app'})
+    res.json({msg: 'Viewing the test page for User model'})
 })
 
 // Create POST route for users/signup (Public)
@@ -50,37 +50,44 @@ router.post('/signup', async (req, res) => {
                         // Create budget for new uer
                         const createdBudget = await db.Budget.create({
                             user: createdUser,
+                            housing: {
+                                categories: {
+                                    rent: 0,
+                                    mortgage: 0,
+                                    hostel: 0
+                                }
+                            },
                             utility: {
                                 categories: {
-                                    electric: 100,
-                                    water: 200
+                                    electric: 0,
+                                    water: 0
                                 }
                             },
                             grocery: {
                                 categories: {
-                                    food: 250,
-                                    drink: 50
+                                    food: 0,
+                                    drink: 0
                                 }
                             },
                             transportation: {
                                 categories: {
                                     plane: 0,
                                     train: 0,
-                                    automobile: 25
+                                    automobile: 0
                                 }
                             },
                             entertainment: {
                                 categories: {
-                                    movies: 30,
-                                    books: 75
+                                    movies: 0,
+                                    books: 0
                                 }
                             },
                             income: {
                                 categories: {
-                                    salary: 1000,
-                                    investment: 20,
-                                    trust: 50000,
-                                    lottery: 600
+                                    salary: 0,
+                                    investment: 0,
+                                    trust: 0,
+                                    lottery: 0
                                 }
                             }
                         })
@@ -89,13 +96,13 @@ router.post('/signup', async (req, res) => {
                             budget: createdBudget
                         })
                     } catch(error) {
-                        console.log(`HASHING ERROR: ${error}`)
+                        res.status(400).json({msg: error})
                     }
                 })
             })
         }
     } catch(error) {
-        console.log(`SIGNUP ERROR: ${error}`)
+        res.status(400).json({msg: error})
     }
 })
 
@@ -134,7 +141,7 @@ router.post('/login', async (req, res) => {
             }
         }
     } catch(error) {
-        console.log(`LOGIN ERROR: ${error}`)
+        res.status(400).json({msg: error})
     }
 })
 
