@@ -54,6 +54,7 @@ router.post('/:id', async (req, res) => {
                 }
             }
         })
+        res.status(200).json({budget: newBudget})
     } catch(error) {
         res.status(400).json({msg: error})
     }
