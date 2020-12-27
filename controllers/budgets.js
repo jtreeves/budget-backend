@@ -8,9 +8,65 @@ const db = require('../models')
 // Create router
 const router = express.Router()
 
-// Create GET route for budgets/test
-router.get('/test', (req, res) => {
-    res.json({msg: 'Viewing the test page for the Budget model'})
+// Create POST route for budgets/:id
+router.post('/:id', async (req, res) => {
+    try {
+        const newBudget = await db.Budget.create({
+            user: req.params.id,
+            housing: {
+                categories: {
+                    rent: 0,
+                    mortgage: 0,
+                    hostel: 0
+                }
+            },
+            utility: {
+                categories: {
+                    electric: 0,
+                    water: 0
+                }
+            },
+            grocery: {
+                categories: {
+                    food: 0,
+                    drink: 0
+                }
+            },
+            transportation: {
+                categories: {
+                    plane: 0,
+                    train: 0,
+                    automobile: 0
+                }
+            },
+            entertainment: {
+                categories: {
+                    movies: 0,
+                    books: 0
+                }
+            },
+            income: {
+                categories: {
+                    salary: 0,
+                    investment: 0,
+                    trust: 0,
+                    lottery: 0
+                }
+            }
+        })
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create GET route for budgets/all/:id
+router.get('/all/:id', async (req, res) => {
+    try {
+        const allBudgets = await db.Budget.find({user: req.params.id})
+        res.status(200).json({budgets: allBudgets})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
 })
 
 // Create GET route for budgets/:id
