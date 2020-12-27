@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 // Create variable for Schema shortcut
 const Schema = mongoose.Schema
 
+// Import schemas
 const housingSchema = require('./Housing')
 const utilitySchema = require('./Utility')
 const grocerySchema = require('./Grocery')
