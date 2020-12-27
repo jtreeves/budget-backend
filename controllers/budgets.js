@@ -53,6 +53,26 @@ router.get('/:id/grocery', async (req, res) => {
     }
 })
 
+// Create GET route for budgets/:id/transportation
+router.get('/:id/transportation', async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        res.status(200).json({transportation: currentBudget.transportation})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create GET route for budgets/:id/entertainment
+router.get('/:id/entertainment', async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        res.status(200).json({entertainment: currentBudget.entertainment})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
 // Create GET route for budgets/:id/income
 router.get('/:id/income', async (req, res) => {
     try {
@@ -104,6 +124,39 @@ router.put('/:id/grocery', async (req, res) => {
             {$set: {
                 'grocery.categories.food': req.body.food,
                 'grocery.categories.drink': req.body.drink
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create PUT route for budgets/:id/transportation
+router.put('/:id/transportation', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'transportation.categories.plane': req.body.plane,
+                'transportation.categories.train': req.body.train,
+                'transportation.categories.automobile': req.body.automobile
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create PUT route for budgets/:id/entertainment
+router.put('/:id/entertainment', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'entertainment.categories.movies': req.body.movies,
+                'entertainment.categories.books': req.body.books
             }}
         )
         res.status(200).json({budget: updatedBudget})
