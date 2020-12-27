@@ -19,7 +19,17 @@ router.get('/:id', async (req, res) => {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(201).json({budget: currentBudget})
     } catch(error) {
-        console.log(`BUDGET ERROR: ${error}`)
+        res.status(400).json({msg: error})
+    }
+})
+
+// Create GET route for budgets/:id/housing
+router.get('/:id/housing', async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        res.status(201).json({housing: currentBudget.housing})
+    } catch(error) {
+        res.status(400).json({msg: error})
     }
 })
 
