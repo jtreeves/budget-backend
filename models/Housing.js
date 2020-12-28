@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Housing Schema
 const housingSchema = new Schema({
-    categories: {
+    inputs: {
         rent: Number,
         mortgage: Number,
         hostel: Number

@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Income Schema
 const incomeSchema = new Schema({
-    categories: {
+    inputs: {
         salary: Number,
         investment: Number,
         trust: Number,

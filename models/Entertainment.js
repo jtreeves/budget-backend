@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Entertainment Schema
 const entertainmentSchema = new Schema({
-    categories: {
+    inputs: {
         movies: Number,
         books: Number
     },

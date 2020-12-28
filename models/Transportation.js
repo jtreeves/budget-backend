@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Transportation Schema
 const transportationSchema = new Schema({
-    categories: {
+    inputs: {
         plane: Number,
         train: Number,
         automobile: Number

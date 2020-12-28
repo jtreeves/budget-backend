@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 // Create Grocery Schema
 const grocerySchema = new Schema({
-    categories: {
+    inputs: {
         food: Number,
         drink: Number
     },

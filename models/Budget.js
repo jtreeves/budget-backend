@@ -19,12 +19,14 @@ const budgetSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    housing: housingSchema,
-    utility: utilitySchema,
-    grocery: grocerySchema,
-    transportation: transportationSchema,
-    entertainment: entertainmentSchema,
-    income: incomeSchema
+    catagories: {
+        housing: housingSchema,
+        utility: utilitySchema,
+        grocery: grocerySchema,
+        transportation: transportationSchema,
+        entertainment: entertainmentSchema,
+        income: incomeSchema
+    },
 })
 
 // Export Budget
