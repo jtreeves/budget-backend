@@ -6,15 +6,12 @@ const Schema = mongoose.Schema
 
 // Create Grocery Schema
 const foodSchema = new Schema({
-    inputs: {
-        food: Number,
-        drink: Number
-    },
+    inputs: { type: Schema.Types.Mixed, default: {} },
     date: {
         type: Date,
         default: Date.now()
-    }
-})
+    },
+}, { minimize: false })
 
 // Export food
 module.exports = foodSchema

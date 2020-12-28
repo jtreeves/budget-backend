@@ -6,15 +6,12 @@ const Schema = mongoose.Schema
 
 // Create Misc. Schema
 const miscSchema = new Schema({
-    inputs: {
-        random1: Number,
-        random2: Number
-    },
+    inputs: { type: Schema.Types.Mixed, default: {} },
     date: {
         type: Date,
         default: Date.now()
-    }
-})
+    },
+}, { minimize: false })
 
 // Export Misc.
 module.exports = miscSchema

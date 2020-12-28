@@ -6,15 +6,12 @@ const Schema = mongoose.Schema
 
 // Create Utility Schema
 const utilitySchema = new Schema({
-    inputs: {
-        electric: Number,
-        water: Number
-    },
+    inputs: { type: Schema.Types.Mixed, default: {} },
     date: {
         type: Date,
         default: Date.now()
-    }
-})
+    },
+}, { minimize: false })
 
 // Export Utility
 module.exports = utilitySchema
