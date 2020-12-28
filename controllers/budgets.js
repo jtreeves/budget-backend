@@ -13,51 +13,53 @@ router.post('/:id', async (req, res) => {
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
-            housing: {
-                inputs: {
-                    rent: 0,
-                    mortgage: 0,
-                    hostel: 0
-                }
-            },
-            utility: {
-                inputs: {
-                    electric: 0,
-                    water: 0
-                }
-            },
-            grocery: {
-                inputs: {
-                    food: 0,
-                    drink: 0
-                }
-            },
-            transportation: {
-                inputs: {
-                    plane: 0,
-                    train: 0,
-                    automobile: 0
-                }
-            },
-            entertainment: {
-                inputs: {
-                    movies: 0,
-                    books: 0
-                }
-            },
-            misc: {
-                inputs: {
-                    random1: 0,
-                    random2: 0
-                }
-            },
-            income: {
-                inputs: {
-                    salary: 0,
-                    investment: 0,
-                    trust: 0,
-                    lottery: 0
-                }
+            categories: {
+                housing: {
+                    inputs: {
+                        rent: 0,
+                        mortgage: 0,
+                        hostel: 0
+                    }
+                },
+                utility: {
+                    inputs: {
+                        electric: 0,
+                        water: 0
+                    }
+                },
+                grocery: {
+                    inputs: {
+                        food: 0,
+                        drink: 0
+                    }
+                },
+                transportation: {
+                    inputs: {
+                        plane: 0,
+                        train: 0,
+                        automobile: 0
+                    }
+                },
+                entertainment: {
+                    inputs: {
+                        movies: 0,
+                        books: 0
+                    }
+                },
+                misc: {
+                    inputs: {
+                        random1: 0,
+                        random2: 0
+                    }
+                },
+                income: {
+                    inputs: {
+                        salary: 0,
+                        investment: 0,
+                        trust: 0,
+                        lottery: 0
+                    }
+                },  
             },
         })
         res.status(200).json({budget: newBudget})
