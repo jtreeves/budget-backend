@@ -45,6 +45,12 @@ router.post('/:id', async (req, res) => {
                     books: 0
                 }
             },
+            misc: {
+                inputs: {
+                    random1: 0,
+                    random2: 0
+                }
+            },
             income: {
                 inputs: {
                     salary: 0,

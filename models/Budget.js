@@ -10,6 +10,7 @@ const utilitySchema = require('./schema/Utility')
 const foodSchema = require('./schema/Food')
 const transportationSchema = require('./schema/Transportation')
 const entertainmentSchema = require('./schema/Entertainment')
+const miscSchema = require('./schema/Misc')
 const incomeSchema = require('./schema/Income')
 
 // Create Budget Schema
@@ -24,6 +25,7 @@ const budgetSchema = new Schema({
     food: foodSchema,
     transportation: transportationSchema,
     entertainment: entertainmentSchema,
+    misc: miscSchema,
     income: incomeSchema
 })
 
