@@ -5,12 +5,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Import schemas
-const housingSchema = require('./Housing')
-const utilitySchema = require('./Utility')
-const grocerySchema = require('./Grocery')
-const transportationSchema = require('./Transportation')
-const entertainmentSchema = require('./Entertainment')
-const incomeSchema = require('./Income')
+const housingSchema = require('./schema/Housing')
+const utilitySchema = require('./schema/Utility')
+const foodSchema = require('./schema/Food')
+const transportationSchema = require('./schema/Transportation')
+const entertainmentSchema = require('./schema/Entertainment')
+const incomeSchema = require('./schema/Income')
 
 // Create Budget Schema
 const budgetSchema = new Schema({
@@ -19,14 +19,12 @@ const budgetSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    catagories: {
-        housing: housingSchema,
-        utility: utilitySchema,
-        grocery: grocerySchema,
-        transportation: transportationSchema,
-        entertainment: entertainmentSchema,
-        income: incomeSchema
-    },
+    housing: housingSchema,
+    utility: utilitySchema,
+    food: foodSchema,
+    transportation: transportationSchema,
+    entertainment: entertainmentSchema,
+    income: incomeSchema
 })
 
 // Export Budget

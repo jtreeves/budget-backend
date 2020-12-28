@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create Grocery Schema
-const grocerySchema = new Schema({
+const foodSchema = new Schema({
     inputs: {
         food: Number,
         drink: Number
@@ -16,5 +16,5 @@ const grocerySchema = new Schema({
     }
 })
 
-// Export Grocery
-module.exports = grocerySchema
+// Export food
+module.exports = foodSchema
