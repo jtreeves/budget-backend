@@ -130,6 +130,22 @@ router.get('/:id/income', async (req, res) => {
     }
 })
 
+// Create PUT route for budgets/:id
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'categories': req.body.categories
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
+})
+
+/*
 // Create PUT route for budgets/:id/housing
 router.put('/:id/housing', async (req, res) => {
     try {
@@ -164,13 +180,13 @@ router.put('/:id/utility', async (req, res) => {
 })
 
 // Create PUT route for budgets/:id/grocery
-router.put('/:id/grocery', async (req, res) => {
+router.put('/:id/food', async (req, res) => {
     try {
         const updatedBudget = await db.Budget.updateOne(
             {_id: req.params.id},
             {$set: {
-                'grocery.categories.food': req.body.food,
-                'grocery.categories.drink': req.body.drink
+                'food.categories.food': req.body.food,
+                'food.categories.drink': req.body.drink
             }}
         )
         res.status(200).json({budget: updatedBudget})
@@ -229,6 +245,6 @@ router.put('/:id/income', async (req, res) => {
         res.status(400).json({msg: error})
     }
 })
-
+*/
 // Export router
 module.exports = router
