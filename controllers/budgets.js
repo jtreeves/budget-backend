@@ -132,6 +132,8 @@ router.get('/:id/income', async (req, res) => {
 
 // Create PUT route for budgets/:id
 router.put('/:id', async (req, res) => {
+    console.log("YOU FUCKING MADE IT TO THE BACKEND");
+    console.log(req.body);
     try {
         const updatedBudget = await db.Budget.updateOne(
             {_id: req.params.id},
