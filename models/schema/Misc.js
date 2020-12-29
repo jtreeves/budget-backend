@@ -4,17 +4,14 @@ const mongoose = require('mongoose')
 // Create variable for Schema shortcut
 const Schema = mongoose.Schema
 
-// Create Grocery Schema
-const grocerySchema = new Schema({
-    categories: {
-        food: Number,
-        drink: Number
-    },
+// Create Misc. Schema
+const miscSchema = new Schema({
+    inputs: { type: Schema.Types.Mixed, default: {} },
     date: {
         type: Date,
         default: Date.now()
-    }
-})
+    },
+}, { minimize: false })
 
-// Export Grocery
-module.exports = grocerySchema
+// Export Misc.
+module.exports = miscSchema

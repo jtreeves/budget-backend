@@ -13,46 +13,36 @@ router.post('/:id', async (req, res) => {
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
-            housing: {
-                categories: {
-                    rent: 0,
-                    mortgage: 0,
-                    hostel: 0
-                }
+            categories: {
+                housing: {
+                    inputs: {
+                    }
+                },
+                utility: {
+                    inputs: {
+                    }
+                },
+                food: {
+                    inputs: {
+                    }
+                },
+                transportation: {
+                    inputs: {
+                    }
+                },
+                entertainment: {
+                    inputs: {
+                    }
+                },
+                misc: {
+                    inputs: {
+                    }
+                },
+                income: {
+                    inputs: {
+                    }
+                },  
             },
-            utility: {
-                categories: {
-                    electric: 0,
-                    water: 0
-                }
-            },
-            grocery: {
-                categories: {
-                    food: 0,
-                    drink: 0
-                }
-            },
-            transportation: {
-                categories: {
-                    plane: 0,
-                    train: 0,
-                    automobile: 0
-                }
-            },
-            entertainment: {
-                categories: {
-                    movies: 0,
-                    books: 0
-                }
-            },
-            income: {
-                categories: {
-                    salary: 0,
-                    investment: 0,
-                    trust: 0,
-                    lottery: 0
-                }
-            }
         })
         res.status(200).json({budget: newBudget})
     } catch(error) {
@@ -140,6 +130,24 @@ router.get('/:id/income', async (req, res) => {
     }
 })
 
+// Create PUT route for budgets/:id
+router.put('/:id', async (req, res) => {
+    console.log("YOU FUCKING MADE IT TO THE BACKEND");
+    console.log(req.body);
+    try {
+        const updatedBudget = await db.Budget.updateOne(
+            {_id: req.params.id},
+            {$set: {
+                'categories': req.body.categories
+            }}
+        )
+        res.status(200).json({budget: updatedBudget})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
+})
+
+/*
 // Create PUT route for budgets/:id/housing
 router.put('/:id/housing', async (req, res) => {
     try {
@@ -174,13 +182,13 @@ router.put('/:id/utility', async (req, res) => {
 })
 
 // Create PUT route for budgets/:id/grocery
-router.put('/:id/grocery', async (req, res) => {
+router.put('/:id/food', async (req, res) => {
     try {
         const updatedBudget = await db.Budget.updateOne(
             {_id: req.params.id},
             {$set: {
-                'grocery.categories.food': req.body.food,
-                'grocery.categories.drink': req.body.drink
+                'food.categories.food': req.body.food,
+                'food.categories.drink': req.body.drink
             }}
         )
         res.status(200).json({budget: updatedBudget})
@@ -239,6 +247,6 @@ router.put('/:id/income', async (req, res) => {
         res.status(400).json({msg: error})
     }
 })
-
+*/
 // Export router
 module.exports = router

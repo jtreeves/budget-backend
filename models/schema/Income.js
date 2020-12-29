@@ -6,17 +6,12 @@ const Schema = mongoose.Schema
 
 // Create Income Schema
 const incomeSchema = new Schema({
-    categories: {
-        salary: Number,
-        investment: Number,
-        trust: Number,
-        lottery: Number
-    },
+    inputs: { type: Schema.Types.Mixed, default: {} },
     date: {
         type: Date,
         default: Date.now()
-    }
-})
+    },
+}, { minimize: false })
 
 // Export Income
 module.exports = incomeSchema

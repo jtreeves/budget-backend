@@ -49,47 +49,37 @@ router.post('/signup', async (req, res) => {
                         const createdUser = await newUser.save()
                         // Create budget for new uer
                         const createdBudget = await db.Budget.create({
-                            user: createdUser,
-                            housing: {
-                                categories: {
-                                    rent: 0,
-                                    mortgage: 0,
-                                    hostel: 0
-                                }
+                            user: createdUser.id,
+                            categories: {
+                                housing: {
+                                    inputs: {
+                                    }
+                                },
+                                utility: {
+                                    inputs: {
+                                    }
+                                },
+                                food: {
+                                    inputs: {
+                                    }
+                                },
+                                transportation: {
+                                    inputs: {
+                                    }
+                                },
+                                entertainment: {
+                                    inputs: {
+                                    }
+                                },
+                                misc: {
+                                    inputs: {
+                                    }
+                                },
+                                income: {
+                                    inputs: {
+                                    }
+                                },  
                             },
-                            utility: {
-                                categories: {
-                                    electric: 0,
-                                    water: 0
-                                }
-                            },
-                            grocery: {
-                                categories: {
-                                    food: 0,
-                                    drink: 0
-                                }
-                            },
-                            transportation: {
-                                categories: {
-                                    plane: 0,
-                                    train: 0,
-                                    automobile: 0
-                                }
-                            },
-                            entertainment: {
-                                categories: {
-                                    movies: 0,
-                                    books: 0
-                                }
-                            },
-                            income: {
-                                categories: {
-                                    salary: 0,
-                                    investment: 0,
-                                    trust: 0,
-                                    lottery: 0
-                                }
-                            }
                         })
                         res.status(201).json({
                             user: createdUser,

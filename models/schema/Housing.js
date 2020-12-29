@@ -6,16 +6,13 @@ const Schema = mongoose.Schema
 
 // Create Housing Schema
 const housingSchema = new Schema({
-    categories: {
-        rent: Number,
-        mortgage: Number,
-        hostel: Number
-    },
+    inputs: { type: Schema.Types.Mixed, default: {} },
     date: {
         type: Date,
         default: Date.now()
-    }
-})
+    },
+}, { minimize: false })
 
 // Export Housing
 module.exports = housingSchema
+
