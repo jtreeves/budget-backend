@@ -10,37 +10,33 @@ const router = express.Router()
 
 // Create POST route for budgets/:id
 router.post('/:id', async (req, res) => {
+
+    const { housing, utility, food, transportation, misc, income, entertainment } = req.body.categories
+    console.log('ayyyyooooooo');
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
             categories: {
                 housing: {
-                    inputs: {
-                    }
+                    inputs: housing.inputs
                 },
                 utility: {
-                    inputs: {
-                    }
+                    inputs: utility.inputs
                 },
                 food: {
-                    inputs: {
-                    }
+                    inputs: food.inputs
                 },
                 transportation: {
-                    inputs: {
-                    }
+                    inputs: transportation.inputs
                 },
                 entertainment: {
-                    inputs: {
-                    }
+                    inputs: entertainment.inputs
                 },
                 misc: {
-                    inputs: {
-                    }
+                    inputs: misc.inputs
                 },
                 income: {
-                    inputs: {
-                    }
+                    inputs: income.inputs
                 },  
             },
         })
