@@ -12,10 +12,12 @@ const router = express.Router()
 router.post('/:id', async (req, res) => {
 
     const { housing, utility, food, transportation, misc, income, entertainment } = req.body.categories
-    console.log('ayyyyooooooo');
+    
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
+            title: req.body.title,
+            colorScheme: req.body.colorScheme,
             categories: {
                 housing: {
                     inputs: housing.inputs
