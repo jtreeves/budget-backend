@@ -14,11 +14,6 @@ const router = express.Router()
 // Create JSON web token
 const JWT_SECRET = process.env.JWT_SECRET
 
-// Create GET route for users/test (Public)
-router.get('/test', (req, res) => {
-    res.json({msg: 'Viewing the test page for User model'})
-})
-
 // Create POST route for users/signup (Public)
 router.post('/signup', async (req, res) => {
     try {
@@ -53,35 +48,14 @@ router.post('/signup', async (req, res) => {
                             title: "Budget 1",
                             colorScheme: "Green",
                             categories: {
-                                housing: {
-                                    inputs: {
-                                    }
-                                },
-                                utility: {
-                                    inputs: {
-                                    }
-                                },
-                                food: {
-                                    inputs: {
-                                    }
-                                },
-                                transportation: {
-                                    inputs: {
-                                    }
-                                },
-                                entertainment: {
-                                    inputs: {
-                                    }
-                                },
-                                misc: {
-                                    inputs: {
-                                    }
-                                },
-                                income: {
-                                    inputs: {
-                                    }
-                                },  
-                            },
+                                housing: {inputs: {}},
+                                utility: {inputs: {}},
+                                food: {inputs: {}},
+                                transportation: {inputs: {}},
+                                entertainment: {inputs: {}},
+                                misc: {inputs: {}},
+                                income: {inputs: {}}  
+                            }
                         })
                         res.status(201).json({
                             user: createdUser,
@@ -144,6 +118,31 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
         name: req.user.name,
         email: req.user.email
     })
+})
+
+// Greate PUT route for users/current (Private)
+router.put('/current', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const updatedUser = await db.User.updateOne(
+            {_id: req.params.id},
+            {$set: {name: req.body.name}}
+        )
+        res.status(200).json({user: updatedUser})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
+})
+
+// Create DELETE route for users/current (Private)
+router.delete('/current', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const currentUser = await db.User.deleteOne(
+            {_id: req.params.id}
+        )
+        res.status(200).json({user: currentUser})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
 })
 
 // Export router
