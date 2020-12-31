@@ -47,4 +47,14 @@ Alternatively, you may use the live version of the [Kaleidoscope](HEROKULINKTK) 
 
 ## Dependencies
 
+- axios
+- bcryptjs
+- cors
+- dotenv
+- express
+- jsonwebtoken
+- mongoose
+- passport
+- passport-jwt
+
 ## Further Thoughts
