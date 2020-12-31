@@ -1,3 +1,7 @@
+// Import external dependencies
+const expect = require('chai').expect
+const assert = require('chai').assert
+
 // Import internal dependencies
 const db = require('../models/User')
 const route = require('../controllers/users')

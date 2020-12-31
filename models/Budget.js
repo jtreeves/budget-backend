@@ -5,13 +5,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Import schemas
-const housingSchema = require('./schema/Housing')
-const utilitySchema = require('./schema/Utility')
-const foodSchema = require('./schema/Food')
-const transportationSchema = require('./schema/Transportation')
-const entertainmentSchema = require('./schema/Entertainment')
-const miscSchema = require('./schema/Misc')
-const incomeSchema = require('./schema/Income')
+const housingSchema = require('./schemas/Housing')
+const utilitySchema = require('./schemas/Utility')
+const foodSchema = require('./schemas/Food')
+const transportationSchema = require('./schemas/Transportation')
+const entertainmentSchema = require('./schemas/Entertainment')
+const miscSchema = require('./schemas/Misc')
+const incomeSchema = require('./schemas/Income')
 
 // Create Budget Schema
 const budgetSchema = new Schema({
