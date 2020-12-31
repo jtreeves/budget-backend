@@ -51,35 +51,14 @@ router.post('/signup', async (req, res) => {
                         const createdBudget = await db.Budget.create({
                             user: createdUser.id,
                             categories: {
-                                housing: {
-                                    inputs: {
-                                    }
-                                },
-                                utility: {
-                                    inputs: {
-                                    }
-                                },
-                                food: {
-                                    inputs: {
-                                    }
-                                },
-                                transportation: {
-                                    inputs: {
-                                    }
-                                },
-                                entertainment: {
-                                    inputs: {
-                                    }
-                                },
-                                misc: {
-                                    inputs: {
-                                    }
-                                },
-                                income: {
-                                    inputs: {
-                                    }
-                                },  
-                            },
+                                housing: {inputs: {}},
+                                utility: {inputs: {}},
+                                food: {inputs: {}},
+                                transportation: {inputs: {}},
+                                entertainment: {inputs: {}},
+                                misc: {inputs: {}},
+                                income: {inputs: {}}  
+                            }
                         })
                         res.status(201).json({
                             user: createdUser,
