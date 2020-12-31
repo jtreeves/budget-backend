@@ -6,3 +6,15 @@ This repository features:
 - A model for the app's users
 - A model for the users' budgets
 - Routes for full CRUD functionality for both models
+
+Installation Instructions
+
+ERD
+
+Routes Map
+
+Explanations of Technologies Used
+
+Explanation of General Approach
+
+Unsolved Problems and Major Hurdles
