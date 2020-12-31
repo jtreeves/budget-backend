@@ -4,7 +4,9 @@
     "description": "This is a codealong for MERN Auth",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "userTest": "mocha tests/userTest.js",
+        "budgetTest": "mocha tests/budgetTest.js"
     },
     "repository": {
         "type": "git",
@@ -27,5 +29,8 @@
         "mongoose": "^5.11.8",
         "passport": "^0.4.1",
         "passport-jwt": "^4.0.0"
+    },
+    "devDependencies": {
+        "mocha": "^8.2.1"
     }
 }
