@@ -2,18 +2,18 @@
 
 const assert = require('assert')
 const db = require('../models')
+// const routes = require('../controllers')
 
-beforeEach(async () => {
-    await db.User.deleteMany({})
+beforeEach(() => {
+    db.User.deleteMany({})
 })
 
 describe('POST route for users/signup', () => {
-    it('should save a new user without error', (done) => {
-        const johnDoe = new db.User({
+    it('should create a new user', () => {
+        db.User.create({
             name: 'John Doe',
             email: 'john@email.com',
             password: 'john1234'
         })
-        johnDoe.save(done)
     })
 })
