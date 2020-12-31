@@ -35,7 +35,7 @@ router.post('/:id', async (req, res) => {
 })
 
 // Create GET route for budgets/all/:id
-router.get('/all/:id', async (req, res) => {
+router.get('/all/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const allBudgets = await db.Budget.find({user: req.params.id})
         res.status(200).json({budgets: allBudgets})
@@ -45,7 +45,7 @@ router.get('/all/:id', async (req, res) => {
 })
 
 // Create GET route for budgets/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({budget: currentBudget})
@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // Create GET route for budgets/:id/housing
-router.get('/:id/housing', async (req, res) => {
+router.get('/:id/housing', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({housing: currentBudget.housing})
@@ -65,7 +65,7 @@ router.get('/:id/housing', async (req, res) => {
 })
 
 // Create GET route for budgets/:id/utility
-router.get('/:id/utility', async (req, res) => {
+router.get('/:id/utility', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({utility: currentBudget.utility})
@@ -75,7 +75,7 @@ router.get('/:id/utility', async (req, res) => {
 })
 
 // Create GET route for budgets/:id/grocery
-router.get('/:id/grocery', async (req, res) => {
+router.get('/:id/grocery', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({grocery: currentBudget.grocery})
@@ -85,7 +85,7 @@ router.get('/:id/grocery', async (req, res) => {
 })
 
 // Create GET route for budgets/:id/transportation
-router.get('/:id/transportation', async (req, res) => {
+router.get('/:id/transportation', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({transportation: currentBudget.transportation})
@@ -95,7 +95,7 @@ router.get('/:id/transportation', async (req, res) => {
 })
 
 // Create GET route for budgets/:id/entertainment
-router.get('/:id/entertainment', async (req, res) => {
+router.get('/:id/entertainment', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({entertainment: currentBudget.entertainment})
@@ -105,7 +105,7 @@ router.get('/:id/entertainment', async (req, res) => {
 })
 
 // Create GET route for budgets/:id/income
-router.get('/:id/income', async (req, res) => {
+router.get('/:id/income', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentBudget = await db.Budget.findOne({_id: req.params.id})
         res.status(200).json({income: currentBudget.income})
