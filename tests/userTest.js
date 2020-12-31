@@ -3,6 +3,10 @@
 const assert = require('assert')
 const db = require('../models')
 
+beforeEach(async () => {
+    await db.User.deleteMany({})
+})
+
 describe('POST route for users/signup', () => {
     it('should save a new user without error', (done) => {
         const johnDoe = new db.User({
