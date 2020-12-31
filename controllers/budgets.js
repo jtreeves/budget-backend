@@ -127,5 +127,17 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
     }
 })
 
+// Create DELETE route for budgets/:id
+router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.deleteOne(
+            {_id: req.params.id}
+        )
+        res.status(200).json({budget: currentBudget})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
+})
+
 // Export router
 module.exports = router
