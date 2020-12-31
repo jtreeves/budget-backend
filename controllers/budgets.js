@@ -114,7 +114,7 @@ router.put('/:id', async (req, res) => {
     try {
         const updatedBudget = await db.Budget.updateOne(
             {_id: req.params.id},
-            {$set: {'categories': req.body.categories}}
+            {$set: {categories: req.body.categories}}
         )
         res.status(200).json({budget: updatedBudget})
     } catch(error) {
