@@ -1,4 +1,5 @@
 // Import external dependencies
+const request = require('supertest')
 const chai = require('chai')
 const expect = chai.expect
 const assert = chai.assert
