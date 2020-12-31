@@ -118,5 +118,30 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     })
 })
 
+// Greate PUT route for users/current (Private)
+router.put('/current', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const updatedUser = await db.User.updateOne(
+            {_id: req.params.id},
+            {$set: {name: req.body.name}}
+        )
+        res.status(200).json({user: updatedUser})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
+})
+
+// Create DELETE route for users/current (Private)
+router.delete('/current', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const currentUser = await db.User.deleteOne(
+            {_id: req.params.id}
+        )
+        res.status(200).json({user: currentUser})
+    } catch(error) {
+        res.status(400).json({ msg: error })
+    }
+})
+
 // Export router
 module.exports = router
