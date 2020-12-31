@@ -7,6 +7,8 @@ This is the backend repository for the Kaleidoscope app. It contains the code ne
 1. [Text](URL)
 2. [Text](URL)
 
+## About Kaleidoscope
+
 This repository features:
 - Mongoose for database storage
 - Passport for password authentication
@@ -14,14 +16,14 @@ This repository features:
 - A model for the users' budgets
 - Routes for full CRUD functionality for both models
 
-Installation Instructions
+## Installation Instructions
 
-ERD
+## ERD
 
-Routes Map
+## Routes Map
 
-Explanations of Technologies Used
+## Explanations of Technologies Used
 
-Explanation of General Approach
+## Explanation of General Approach
 
-Unsolved Problems and Major Hurdles
+## Unsolved Problems and Major Hurdles
