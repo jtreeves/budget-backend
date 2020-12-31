@@ -14,7 +14,7 @@ const router = express.Router()
 const JWT_SECRET = process.env.JWT_SECRET
 
 // Create POST route for budgets/:id
-router.post('/:id', async (req, res) => {
+router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
@@ -115,7 +115,7 @@ router.get('/:id/income', passport.authenticate('jwt', {session: false}), async 
 })
 
 // Create PUT route for budgets/:id
-router.put('/:id', async (req, res) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const updatedBudget = await db.Budget.updateOne(
             {_id: req.params.id},
