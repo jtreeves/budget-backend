@@ -49,6 +49,16 @@ Notes about general approach TK.
 
 ## Routes
 
+| Method | Path             | File       | Description              |
+| ------ | ---------------- | ---------- | ------------------------ |
+| POST   | /users/signup    | users.js   | Sign up a new user       |
+| POST   | /users/login     | users.js   | Log in an existing user  |
+| GET    | /users/current   | users.js   | Display a user's data    |
+| POST   | /budgets/:id     | budgets.js | Create a new budget      |
+| GET    | /budgets/all/:id | budgets.js | View all budgets of user |
+| GET    | /budgets/:id     | budgets.js | View one budget of user  |
+| PUT    | /budgets/:id     | budgets.js | Update one budget        |
+
 ## Dependencies
 
 - axios
