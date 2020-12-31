@@ -4,8 +4,8 @@ const assert = require('assert')
 const db = require('../models')
 // const routes = require('../controllers')
 
-beforeEach(() => {
-    db.User.deleteMany({})
+beforeEach(async () => {
+    await db.User.deleteMany({})
 })
 
 describe('POST route for users/signup', () => {
