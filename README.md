@@ -1,6 +1,6 @@
 # Kaleidoscope Backend
 
-This is the backend repository for the Kaleidoscope app. It contains the code necessary for the server to manipulate the data for the app. It was designed to work with the app's [frontend repository](https://github.com/jtreeves/budget-frontend).
+This is the backend repository for the Kaleidoscope app. It contains the code necessary for the server to manipulate the data for the app. It was designed to work with the app's [frontend repository](https://github.com/jtreeves/budget-frontend). To engage with a live version of the entire app, visit [its deployed site](HEROKULINKTK).
 
 ## Table of Contents
 
@@ -14,12 +14,7 @@ This is the backend repository for the Kaleidoscope app. It contains the code ne
 
 ## About Kaleidoscope
 
-This repository features:
-- Mongoose for database storage
-- Passport for password authentication
-- A model for the app's users
-- A model for the users' budgets
-- Routes for full CRUD functionality for both models
+Kaleidoscope is an app for seeing how simple life changes can result in dramatic budget opportunities. It was made through the collaborative efforts of Alan Avery, Jackson Reeves, Jeremy Uriz, and Thomas Gilbert.
 
 ## Installation Instructions
 
