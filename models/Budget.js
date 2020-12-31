@@ -16,6 +16,8 @@ const incomeSchema = require('./schema/Income')
 // Create Budget Schema
 const budgetSchema = new Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    title: String,
+    colorScheme: String,
     date: {
         type: Date,
         default: Date.now()

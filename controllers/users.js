@@ -45,6 +45,8 @@ router.post('/signup', async (req, res) => {
                         // Create budget for new uer
                         const createdBudget = await db.Budget.create({
                             user: createdUser.id,
+                            title: "Budget 1",
+                            colorScheme: "Green",
                             categories: {
                                 housing: {inputs: {}},
                                 utility: {inputs: {}},

@@ -14,19 +14,38 @@ const router = express.Router()
 const JWT_SECRET = process.env.JWT_SECRET
 
 // Create POST route for budgets/:id
+
 router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
+
+    const { housing, utility, food, transportation, misc, income, entertainment } = req.body.categories
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
+            title: req.body.title,
+            colorScheme: req.body.colorScheme,
             categories: {
-                housing: {inputs: {}},
-                utility: {inputs: {}},
-                food: {inputs: {}},
-                transportation: {inputs: {}},
-                entertainment: {inputs: {}},
-                misc: {inputs: {}},
-                income: {inputs: {}} 
-            }
+                housing: {
+                    inputs: housing.inputs
+                },
+                utility: {
+                    inputs: utility.inputs
+                },
+                food: {
+                    inputs: food.inputs
+                },
+                transportation: {
+                    inputs: transportation.inputs
+                },
+                entertainment: {
+                    inputs: entertainment.inputs
+                },
+                misc: {
+                    inputs: misc.inputs
+                },
+                income: {
+                    inputs: income.inputs
+                },  
+            },
         })
         res.status(200).json({budget: newBudget})
     } catch(error) {
@@ -116,14 +135,32 @@ router.get('/:id/income', passport.authenticate('jwt', {session: false}), async 
 
 // Create PUT route for budgets/:id
 router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {categories: req.body.categories}}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({ msg: error })
+    if (!req.body.title || !req.body.colorScheme) {
+        try {
+            const updatedBudget = await db.Budget.updateOne(
+                {_id: req.params.id},
+                {$set: {
+                    'categories': req.body.categories
+                }}
+            )
+            res.status(200).json({budget: updatedBudget})
+        } catch(error) {
+            res.status(400).json({ msg: error })
+        }
+    } else {
+        try {
+            const updatedBudget = await db.Budget.updateOne(
+                {_id: req.params.id},
+                {$set: {
+                    'title': req.body.title,
+                    'colorScheme': req.body.colorScheme,
+                    'categories': req.body.categories
+                }}
+            )
+            res.status(200).json({budget: updatedBudget})
+        } catch(error) {
+            res.status(400).json({ msg: error })
+        }
     }
 })
 
