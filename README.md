@@ -39,6 +39,8 @@ Alternatively, you may use the live version of the [Kaleidoscope](HEROKULINKTK) 
 
 ## Explanation
 
+Notes about general approach TK.
+
 ## Features
 
 ## Models
@@ -58,3 +60,5 @@ Alternatively, you may use the live version of the [Kaleidoscope](HEROKULINKTK) 
 - passport-jwt
 
 ## Further Thoughts
+
+Notes aboud stretch goals and problem areas TK.
