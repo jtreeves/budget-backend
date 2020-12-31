@@ -43,6 +43,9 @@ Notes about general approach TK.
 
 ## Features
 
+- Models for users and budgets with full CRUD functionality
+- Authentication measures to protect user information
+
 ## Models
 
 ![ERD](/images/erd.png)
