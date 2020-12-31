@@ -12,7 +12,6 @@ const router = express.Router()
 router.post('/:id', async (req, res) => {
 
     const { housing, utility, food, transportation, misc, income, entertainment } = req.body.categories
-    
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,
@@ -130,18 +129,35 @@ router.get('/:id/income', async (req, res) => {
 
 // Create PUT route for budgets/:id
 router.put('/:id', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'title': req.body.title,
-                'colorScheme': req.body.colorScheme,
-                'categories': req.body.categories
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({ msg: error })
+    console.log("___________________");
+    console.log(req.body.title);
+    console.log(req.body.colorScheme);
+    if (!req.body.title || !req.body.colorScheme) {
+        try {
+            const updatedBudget = await db.Budget.updateOne(
+                {_id: req.params.id},
+                {$set: {
+                    'categories': req.body.categories
+                }}
+            )
+            res.status(200).json({budget: updatedBudget})
+        } catch(error) {
+            res.status(400).json({ msg: error })
+        }
+    } else {
+        try {
+            const updatedBudget = await db.Budget.updateOne(
+                {_id: req.params.id},
+                {$set: {
+                    'title': req.body.title,
+                    'colorScheme': req.body.colorScheme,
+                    'categories': req.body.categories
+                }}
+            )
+            res.status(200).json({budget: updatedBudget})
+        } catch(error) {
+            res.status(400).json({ msg: error })
+        }
     }
 })
 
