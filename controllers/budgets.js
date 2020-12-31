@@ -14,35 +14,14 @@ router.post('/:id', async (req, res) => {
         const newBudget = await db.Budget.create({
             user: req.params.id,
             categories: {
-                housing: {
-                    inputs: {
-                    }
-                },
-                utility: {
-                    inputs: {
-                    }
-                },
-                food: {
-                    inputs: {
-                    }
-                },
-                transportation: {
-                    inputs: {
-                    }
-                },
-                entertainment: {
-                    inputs: {
-                    }
-                },
-                misc: {
-                    inputs: {
-                    }
-                },
-                income: {
-                    inputs: {
-                    }
-                },  
-            },
+                housing: {inputs: {}},
+                utility: {inputs: {}},
+                food: {inputs: {}},
+                transportation: {inputs: {}},
+                entertainment: {inputs: {}},
+                misc: {inputs: {}},
+                income: {inputs: {}} 
+            }
         })
         res.status(200).json({budget: newBudget})
     } catch(error) {
@@ -132,14 +111,10 @@ router.get('/:id/income', async (req, res) => {
 
 // Create PUT route for budgets/:id
 router.put('/:id', async (req, res) => {
-    console.log("YOU FUCKING MADE IT TO THE BACKEND");
-    console.log(req.body);
     try {
         const updatedBudget = await db.Budget.updateOne(
             {_id: req.params.id},
-            {$set: {
-                'categories': req.body.categories
-            }}
+            {$set: {'categories': req.body.categories}}
         )
         res.status(200).json({budget: updatedBudget})
     } catch(error) {
@@ -147,106 +122,5 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-/*
-// Create PUT route for budgets/:id/housing
-router.put('/:id/housing', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'housing.categories.rent': req.body.rent,
-                'housing.categories.mortgage': req.body.mortgage,
-                'housing.categories.hostel': req.body.hostel
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({msg: error})
-    }
-})
-
-// Create PUT route for budgets/:id/utility
-router.put('/:id/utility', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'utility.categories.electric': req.body.electric,
-                'utility.categories.water': req.body.water
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({msg: error})
-    }
-})
-
-// Create PUT route for budgets/:id/grocery
-router.put('/:id/food', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'food.categories.food': req.body.food,
-                'food.categories.drink': req.body.drink
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({msg: error})
-    }
-})
-
-// Create PUT route for budgets/:id/transportation
-router.put('/:id/transportation', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'transportation.categories.plane': req.body.plane,
-                'transportation.categories.train': req.body.train,
-                'transportation.categories.automobile': req.body.automobile
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({msg: error})
-    }
-})
-
-// Create PUT route for budgets/:id/entertainment
-router.put('/:id/entertainment', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'entertainment.categories.movies': req.body.movies,
-                'entertainment.categories.books': req.body.books
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({msg: error})
-    }
-})
-
-// Create PUT route for budgets/:id/income
-router.put('/:id/income', async (req, res) => {
-    try {
-        const updatedBudget = await db.Budget.updateOne(
-            {_id: req.params.id},
-            {$set: {
-                'income.categories.salary': req.body.salary,
-                'income.categories.investment': req.body.investment,
-                'income.categories.trust': req.body.trust,
-                'income.categories.lottery': req.body.lottery
-            }}
-        )
-        res.status(200).json({budget: updatedBudget})
-    } catch(error) {
-        res.status(400).json({msg: error})
-    }
-})
-*/
 // Export router
 module.exports = router
