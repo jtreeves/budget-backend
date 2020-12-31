@@ -1,16 +1,16 @@
 // Tests for the users routes
 
 const assert = require('assert')
-const db = require('../models')
-// const routes = require('../controllers')
+const db = require('../models/User')
+const route = require('../controllers/users')
 
 beforeEach(async () => {
-    await db.User.deleteMany({})
+    await db.deleteMany({})
 })
 
 describe('POST route for users/signup', () => {
     it('should create a new user', () => {
-        db.User.create({
+        db.create({
             name: 'John Doe',
             email: 'john@email.com',
             password: 'john1234'
