@@ -45,6 +45,8 @@ Notes about general approach TK.
 
 ## Models
 
+![ERD](/images/erd.png)
+
 ## Routes
 
 ## Dependencies
