@@ -129,9 +129,6 @@ router.get('/:id/income', async (req, res) => {
 
 // Create PUT route for budgets/:id
 router.put('/:id', async (req, res) => {
-    console.log("___________________");
-    console.log(req.body.title);
-    console.log(req.body.colorScheme);
     if (!req.body.title || !req.body.colorScheme) {
         try {
             const updatedBudget = await db.Budget.updateOne(
