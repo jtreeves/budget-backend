@@ -14,11 +14,6 @@ const router = express.Router()
 // Create JSON web token
 const JWT_SECRET = process.env.JWT_SECRET
 
-// Create GET route for users/test (Public)
-router.get('/test', (req, res) => {
-    res.json({msg: 'Viewing the test page for User model'})
-})
-
 // Create POST route for users/signup (Public)
 router.post('/signup', async (req, res) => {
     try {
@@ -51,35 +46,14 @@ router.post('/signup', async (req, res) => {
                         const createdBudget = await db.Budget.create({
                             user: createdUser.id,
                             categories: {
-                                housing: {
-                                    inputs: {
-                                    }
-                                },
-                                utility: {
-                                    inputs: {
-                                    }
-                                },
-                                food: {
-                                    inputs: {
-                                    }
-                                },
-                                transportation: {
-                                    inputs: {
-                                    }
-                                },
-                                entertainment: {
-                                    inputs: {
-                                    }
-                                },
-                                misc: {
-                                    inputs: {
-                                    }
-                                },
-                                income: {
-                                    inputs: {
-                                    }
-                                },  
-                            },
+                                housing: {inputs: {}},
+                                utility: {inputs: {}},
+                                food: {inputs: {}},
+                                transportation: {inputs: {}},
+                                entertainment: {inputs: {}},
+                                misc: {inputs: {}},
+                                income: {inputs: {}}  
+                            }
                         })
                         res.status(201).json({
                             user: createdUser,
