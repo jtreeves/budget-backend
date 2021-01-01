@@ -8,7 +8,6 @@ chai.should()
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-// const route = require('../controllers/users')
 
 // Delete all users before running each test
 beforeEach(async () => {
@@ -17,8 +16,8 @@ beforeEach(async () => {
 
 // Test POST route for users/signup
 describe('POST route for users/signup', () => {
-    it('should create a new user', (done) => {
-        request(app)
+    it('creates a new user and saves it to the database with date field', async () => {
+        const newUser = await request(app)
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
@@ -26,6 +25,10 @@ describe('POST route for users/signup', () => {
                 email: 'john@email.com',
                 password: 'john1234'
             })
-            .expect(201, done)
+        const foundUser = await db.User.findOne({
+            email: 'john@email.com'
+        })
+        expect(newUser).to.exist
+        expect(foundUser).to.have.property('date')
     })
 })
