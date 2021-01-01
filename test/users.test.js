@@ -75,4 +75,15 @@ describe('POST route for users/login', () => {
             })
         expect(currentUser.status).to.equal(400)
     })
+
+    it('rejects a user without an existing account', async () => {
+        const currentUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'bobby@email.com',
+                password: 'bobby1234'
+            })
+        expect(currentUser.status).to.equal(400)
+    })
 })
