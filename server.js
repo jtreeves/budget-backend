@@ -30,7 +30,10 @@ app.get('/', (req, res) => {
 // Create port
 const PORT = process.env.PORT || 8000
 
-// Listen on port
-app.listen(PORT, () => {
+// Create server to listen on port
+const server = app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`)
 })
+
+// Export server
+module.exports = server
