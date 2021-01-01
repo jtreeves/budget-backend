@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const app = require('../server')
 const db = require('../models')
 
-// Delete all users and budgets before running each test
+// Delete all users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
     await db.Budget.deleteMany({})
