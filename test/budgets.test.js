@@ -27,12 +27,18 @@ describe('POST route for budgets/:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'susan@email.com',
-                password: 'susan1234'
+                email: 'john@email.com',
+                password: 'john1234'
             })
+        console.log(`LOGGING USER: ${loggingUser}`)
+        console.log(`LOGGING USER KEYS: ${Object.keys(loggingUser)}`)
+        console.log(`LOGGING USER BODY: ${loggingUser.body}`)
+        console.log(`LOGGING USER BODY KEYS: ${Object.keys(loggingUser.body)}`)
+        console.log(`LOGGING USER BODY.TOKEN: ${loggingUser.body.token}`)
         const currentUser = await request(app)
             .get('/users/current')
             .set('Authorization', loggingUser.body.token)
+        console.log(`CURRENT USER BODY.ID: ${currentUser.body.id}`)
         const newBudget = await request(app)
             .post(`/budgets/${currentUser.body.id}`)
             .set('Authorization', loggingUser.body.token)
