@@ -6,9 +6,6 @@ const expect = require('chai').expect
 const app = require('../server')
 const db = require('../models')
 
-// Create constant for token
-const token = 'token'
-
 // Delete all users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
