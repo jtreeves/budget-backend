@@ -70,7 +70,6 @@ describe('POST route for users/login', () => {
                 email: 'john@email.com',
                 password: 'john1234'
             })
-        console.log(`LOGIN POST: ${currentUser.text}`)
         expect(currentUser.status).to.equal(200)
     })
 
@@ -105,17 +104,20 @@ describe('GET route for users/current', () => {
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
                 email: 'john@email.com',
-                password: 'notjohn1234'
+                password: 'john1234'
             })
         const currentUser = await request(app)
             .get('/users/current')
             .set('Authorization', loggingUser.text)
-        // console.log(`KEYS: ${Object.keys(currentUser)}`)
-        // console.log(`RES KEYS: ${Object.keys(currentUser.res)}`)
-        console.log(`TEXT: ${currentUser.text}`)
-        console.log(`BODY KEYS: ${Object.keys(currentUser.body)}`)
-        console.log(`HEADERS KEYS: ${Object.keys(currentUser.headers)}`)
-        console.log(`INFO: ${currentUser.info}`)
+        // console.log(`LOGGING KEYS: ${Object.keys(loggingUser)}`)
+        // console.log(`CURRENT KEYS: ${Object.keys(currentUser)}`)
+        console.log(`LOGGING TEXT: ${loggingUser.text}`)
+        console.log(`CURRENT TEXT: ${currentUser.text}`)
+        console.log(`LOGGING STATUS: ${loggingUser.status}`)
+        console.log(`CURRENT STATUS: ${currentUser.status}`)
+        // console.log(`BODY KEYS: ${Object.keys(currentUser.body)}`)
+        // console.log(`HEADERS KEYS: ${Object.keys(currentUser.headers)}`)
+        // console.log(`INFO: ${currentUser.info}`)
         expect(1).to.exist
     })
 })
