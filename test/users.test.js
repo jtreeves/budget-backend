@@ -96,7 +96,8 @@ describe('POST route for users/login', () => {
                 email: 'mark@email.com',
                 password: 'mark1234'
             })
-        expect(currentUser.status).to.equal(400)
+        console.log(`BODY.MSG: ${currentUser.body.msg}`)
+        expect(currentUser.body.msg).to.equal('User not found')
     })
 })
 
