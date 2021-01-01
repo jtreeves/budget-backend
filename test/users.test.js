@@ -12,11 +12,12 @@ const db = require('../models')
 // Delete all users before running each test
 before(async () => {
     await db.User.deleteMany({})
+    await db.Budget.deleteMany({})
 })
 
 // Test POST route for users/signup
 describe('POST route for users/signup', () => {
-    it('creates a new user and saves it to the database with date field', async () => {
+    it('creates a new user and saves it to the database with a hashed password, a date field, and a new budget', async () => {
         const newUser = await request(app)
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -28,8 +29,14 @@ describe('POST route for users/signup', () => {
         const foundUser = await db.User.findOne({
             email: 'john@email.com'
         })
+        const foundBudget = await db.Budget.findOne({
+            user: foundUser._id
+        })
         expect(newUser.status).to.equal(200)
+        expect(foundUser).to.exist
+        expect(foundUser.password).to.not.equal('john1234')
         expect(foundUser).to.have.property('date')
+        expect(foundBudget).to.have.property('categories')
     })
 })
 
