@@ -56,7 +56,8 @@ describe('POST route for users/signup', () => {
                 email: 'john@email.com',
                 password: 'john1234'
             })
-        expect(newUser.status).to.equal(400)
+        console.log(`BODY.MSG: ${newUser.body.msg}`)
+        expect(newUser.body.msg).to.equal('Email already in use')
     })
 })
 
