@@ -10,44 +10,67 @@ const db = require('../models')
 before(async () => {
     await db.User.deleteMany({})
     await db.Budget.deleteMany({})
-    await request(app)
-        .post('/users/signup')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            name: 'Susan Smith',
-            email: 'susan@email.com',
-            password: 'susan1234'
-        })
 })
 
 // Test POST route for budgets/:id
 describe('POST route for budgets/:id', () => {
     it('creates a new budget for an existing user and saves it to the database', async () => {
+        await request(app)
+            .post('/users/signup')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                name: 'Susan Smith',
+                email: 'susan@email.com',
+                password: 'susan1234'
+            })
         const loggingUser = await request(app)
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'john@email.com',
-                password: 'john1234'
+                email: 'susan@email.com',
+                password: 'susan1234'
             })
-        console.log(`LOGGING USER: ${loggingUser}`)
-        console.log(`LOGGING USER KEYS: ${Object.keys(loggingUser)}`)
-        console.log(`LOGGING USER BODY: ${loggingUser.body}`)
-        console.log(`LOGGING USER BODY KEYS: ${Object.keys(loggingUser.body)}`)
-        console.log(`LOGGING USER BODY.TOKEN: ${loggingUser.body.token}`)
+        console.log(`LOGGING USER.BODY.TOKEN: ${loggingUser.body.token}`)
         const currentUser = await request(app)
             .get('/users/current')
             .set('Authorization', loggingUser.body.token)
-        console.log(`CURRENT USER BODY.ID: ${currentUser.body.id}`)
+        console.log(`CURRENT USER.BODY.ID: ${currentUser.body.id}`)
         const newBudget = await request(app)
             .post(`/budgets/${currentUser.body.id}`)
             .set('Authorization', loggingUser.body.token)
             .send({
-                user: currentUser.body.id
+                user: currentUser.body.id,
+                title: 'test title',
+                colorScheme: 'test color',
+                categories: {
+                    housing: {
+                        // inputs: housing.inputs
+                    },
+                    utility: {
+                        // inputs: utility.inputs
+                    },
+                    food: {
+                        // inputs: food.inputs
+                    },
+                    transportation: {
+                        // inputs: transportation.inputs
+                    },
+                    entertainment: {
+                        // inputs: entertainment.inputs
+                    },
+                    misc: {
+                        // inputs: misc.inputs
+                    },
+                    income: {
+                        // inputs: income.inputs
+                    }
+                }
             })
+        console.log(`NEW BUDGET: ${newBudget}`)
         const foundBudgets = await db.Budget.find({
             user: currentUser.body.id
         })
+        console.log(`FOUND BUDGETS: ${foundBudgets}`)
         expect(newBudget).to.exist
         expect(foundBudgets).to.have.lengthOf.above(1)
     })
