@@ -113,7 +113,7 @@ router.post('/login', async (req, res) => {
 
 // Create GET route for users/current (Private)
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({
+    res.status(200).json({
         id: req.user.id,
         name: req.user.name,
         email: req.user.email

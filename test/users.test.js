@@ -53,7 +53,7 @@ describe('POST route for users/signup', () => {
                 email: 'john@email.com',
                 password: 'john1234'
             })
-        expect(newUser.status).to.equal(400)
+        expect(newUser.body.msg).to.equal('Email already in use')
     })
 })
 
@@ -78,7 +78,7 @@ describe('POST route for users/login', () => {
                 email: 'john@email.com',
                 password: 'notjohn1234'
             })
-        expect(currentUser.status).to.equal(400)
+        expect(currentUser.body.msg).to.equal('Password is incorrect')
     })
 
     it('rejects a user without an existing account', async () => {
@@ -89,6 +89,30 @@ describe('POST route for users/login', () => {
                 email: 'mark@email.com',
                 password: 'mark1234'
             })
-        expect(currentUser.status).to.equal(400)
+        expect(currentUser.body.msg).to.equal('User not found')
+    })
+})
+
+// Test GET route for users/current
+describe('GET route for users/current', () => {
+    it('displays info of authenticated user', async () => {
+        const loggingUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        const currentUser = await request(app)
+            .get('/users/current')
+            .set('Authorization', loggingUser.body.token)
+        expect(currentUser.body).to.have.property('id')
+    })
+
+    it('fails to display info of unauthenticated user', async () => {
+        const currentUser = await request(app)
+            .get('/users/current')
+            .set('Authorization', 'Bearer token')
+        expect(currentUser.body).to.not.have.property('id')
     })
 })
