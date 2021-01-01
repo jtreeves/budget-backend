@@ -9,10 +9,18 @@ chai.should()
 const app = require('../server')
 const db = require('../models')
 
-// Delete all users before running each test
+// Delete all users and budgets before running each test
 before(async () => {
     await db.User.deleteMany({})
     await db.Budget.deleteMany({})
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: 'John Doe',
+            email: 'john@email.com',
+            password: 'john1234'
+        })
 })
 
 // Test POST route for users/signup
@@ -22,19 +30,19 @@ describe('POST route for users/signup', () => {
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: 'John Doe',
-                email: 'john@email.com',
-                password: 'john1234'
+                name: 'Adam Smith',
+                email: 'adam@email.com',
+                password: 'adam1234'
             })
         const foundUser = await db.User.findOne({
-            email: 'john@email.com'
+            email: 'adam@email.com'
         })
         const foundBudget = await db.Budget.findOne({
             user: foundUser._id
         })
         expect(newUser.status).to.equal(200)
         expect(foundUser).to.exist
-        expect(foundUser.password).to.not.equal('john1234')
+        expect(foundUser.password).to.not.equal('adam1234')
         expect(foundUser).to.have.property('date')
         expect(foundBudget).to.have.property('categories')
     })
@@ -44,9 +52,9 @@ describe('POST route for users/signup', () => {
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: 'New John Doe',
+                name: 'John Doe',
                 email: 'john@email.com',
-                password: 'newjohn1234'
+                password: 'john1234'
             })
         expect(newUser.status).to.equal(400)
     })
@@ -81,8 +89,8 @@ describe('POST route for users/login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'bobby@email.com',
-                password: 'bobby1234'
+                email: 'mark@email.com',
+                password: 'mark1234'
             })
         expect(currentUser.status).to.equal(400)
     })
