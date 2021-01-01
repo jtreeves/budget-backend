@@ -81,6 +81,10 @@ describe('POST route for users/login', () => {
                 email: 'john@email.com',
                 password: 'notjohn1234'
             })
+        console.log(`LOGIN FAIL TEXT: ${currentUser.text}`)
+        console.log(`LOGIN FAIL BODY: ${currentUser.body}`)
+        console.log(`LOGIN FAIL BODY KEYS: ${Object.keys(currentUser.body)}`)
+        console.log(`LOGIN FAIL BODY.MSG: ${currentUser.body.msg}`)
         expect(currentUser.status).to.equal(400)
     })
 
@@ -110,5 +114,14 @@ describe('GET route for users/current', () => {
             .get('/users/current')
             .set('Authorization', loggingUser.body.token)
         expect(currentUser.body).to.have.property('id')
+    })
+
+    it('fails to display info of unauthenticated user', async () => {
+        const currentUser = await request(app)
+            .get('/users/current')
+            .set('Authorization', 'Bearer token')
+        console.log(currentUser.text)
+        console.log(currentUser.body)
+        expect(currentUser.body).to.not.have.property('id')
     })
 })
