@@ -6,6 +6,9 @@ const expect = require('chai').expect
 const app = require('../server')
 const db = require('../models')
 
+// Create constant for token
+const token = 'token'
+
 // Delete all users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
@@ -90,5 +93,21 @@ describe('POST route for users/login', () => {
                 password: 'mark1234'
             })
         expect(currentUser.status).to.equal(400)
+    })
+})
+
+// Test GET route for users/current
+describe('GET route for users/current', () => {
+    it('displays info of authenticated user', async () => {
+        const currentUser = await request(app)
+            .get('/users/current')
+            .set('Authorization', `Bearer ${token}`)
+        console.log(`KEYS: ${Object.keys(currentUser)}`)
+        console.log(`RES: ${currentUser.res}`)
+        console.log(`TEXT: ${currentUser.text}`)
+        console.log(`BODY: ${currentUser.body}`)
+        console.log(`HEADERS: ${currentUser.headers}`)
+        console.log(`INFO: ${currentUser.info}`)
+        expect(currentUser).to.exist
     })
 })
