@@ -38,6 +38,18 @@ describe('POST route for users/signup', () => {
         expect(foundUser).to.have.property('date')
         expect(foundBudget).to.have.property('categories')
     })
+
+    it('fails to create a user if email already in use', async () => {
+        const newUser = await request(app)
+            .post('/users/signup')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                name: 'New John Doe',
+                email: 'john@email.com',
+                password: 'newjohn1234'
+            })
+        expect(newUser.status).to.equal(400)
+    })
 })
 
 // Test POST route for users/login
