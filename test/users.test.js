@@ -85,7 +85,7 @@ describe('POST route for users/login', () => {
         console.log(`LOGIN FAIL BODY: ${currentUser.body}`)
         console.log(`LOGIN FAIL BODY KEYS: ${Object.keys(currentUser.body)}`)
         console.log(`LOGIN FAIL BODY.MSG: ${currentUser.body.msg}`)
-        expect(currentUser.status).to.equal(400)
+        expect(currentUser.body.msg).to.equal('Password is incorrect')
     })
 
     it('rejects a user without an existing account', async () => {
