@@ -10,7 +10,7 @@ const app = require('../server')
 const db = require('../models')
 
 // Delete all users before running each test
-beforeEach(async () => {
+before(async () => {
     await db.User.deleteMany({})
 })
 
@@ -28,7 +28,32 @@ describe('POST route for users/signup', () => {
         const foundUser = await db.User.findOne({
             email: 'john@email.com'
         })
-        expect(newUser).to.exist
+        expect(newUser.status).to.equal(200)
         expect(foundUser).to.have.property('date')
+    })
+})
+
+// Test POST route for users/login
+describe('POST route for users/login', () => {
+    it('authenticates a user with the correct email-password combination', async () => {
+        const currentUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        expect(currentUser.status).to.equal(200)
+    })
+
+    it('fails to authenticate a user without the correct email-password combination', async () => {
+        const currentUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'notjohn1234'
+            })
+        expect(currentUser.status).to.equal(400)
     })
 })

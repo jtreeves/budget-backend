@@ -81,7 +81,7 @@ router.post('/signup', async (req, res) => {
                                 },  
                             },
                         })
-                        res.status(201).json({
+                        res.status(200).json({
                             user: createdUser,
                             budget: createdBudget
                         })
@@ -120,7 +120,7 @@ router.post('/login', async (req, res) => {
                 }
                 // Sign token to finalize login
                 jwt.sign(payload, JWT_SECRET, {expiresIn: '1h'}, (error, token) => {
-                    res.json({
+                    res.status(200).json({
                         success: true,
                         token: `Bearer ${token}`
                     })
