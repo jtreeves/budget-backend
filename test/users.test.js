@@ -56,7 +56,6 @@ describe('POST route for users/signup', () => {
                 email: 'john@email.com',
                 password: 'john1234'
             })
-        console.log(`BODY.MSG: ${newUser.body.msg}`)
         expect(newUser.body.msg).to.equal('Email already in use')
     })
 })
@@ -82,10 +81,6 @@ describe('POST route for users/login', () => {
                 email: 'john@email.com',
                 password: 'notjohn1234'
             })
-        console.log(`LOGIN FAIL TEXT: ${currentUser.text}`)
-        console.log(`LOGIN FAIL BODY: ${currentUser.body}`)
-        console.log(`LOGIN FAIL BODY KEYS: ${Object.keys(currentUser.body)}`)
-        console.log(`LOGIN FAIL BODY.MSG: ${currentUser.body.msg}`)
         expect(currentUser.body.msg).to.equal('Password is incorrect')
     })
 
@@ -97,7 +92,6 @@ describe('POST route for users/login', () => {
                 email: 'mark@email.com',
                 password: 'mark1234'
             })
-        console.log(`BODY.MSG: ${currentUser.body.msg}`)
         expect(currentUser.body.msg).to.equal('User not found')
     })
 })
@@ -122,8 +116,6 @@ describe('GET route for users/current', () => {
         const currentUser = await request(app)
             .get('/users/current')
             .set('Authorization', 'Bearer token')
-        console.log(currentUser.text)
-        console.log(currentUser.body)
         expect(currentUser.body).to.not.have.property('id')
     })
 })
