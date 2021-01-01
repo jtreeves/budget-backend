@@ -70,6 +70,7 @@ describe('POST route for users/login', () => {
                 email: 'john@email.com',
                 password: 'john1234'
             })
+        console.log(`LOGIN POST: ${currentUser.text}`)
         expect(currentUser.status).to.equal(200)
     })
 
@@ -103,7 +104,7 @@ describe('GET route for users/current', () => {
             .get('/users/current')
             .set('Authorization', `Bearer ${token}`)
         console.log(`KEYS: ${Object.keys(currentUser)}`)
-        console.log(`RES: ${currentUser.res}`)
+        console.log(`RES KEYS: ${Object.keys(currentUser.res)}`)
         console.log(`TEXT: ${currentUser.text}`)
         console.log(`BODY: ${currentUser.body}`)
         console.log(`HEADERS: ${currentUser.headers}`)
