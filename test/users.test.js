@@ -1,9 +1,6 @@
 // Import external dependencies
 const request = require('supertest')
-const chai = require('chai')
-const expect = chai.expect
-const assert = chai.assert
-chai.should()
+const expect = require('chai').expect
 
 // Import internal dependencies
 const app = require('../server')
