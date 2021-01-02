@@ -90,9 +90,7 @@ describe('GET route for budgets/:id', () => {
 // Test GET route for budgets/all/:id
 describe('GET route for budgets/all/:id', () => {
     it('returns all budgets associated with a specific user', async () => {
-        
-        
-        await request(app)
+        const newUser = await request(app)
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
@@ -133,26 +131,6 @@ describe('GET route for budgets/all/:id', () => {
         const getBudgets = await request(app)
             .get(`/budgets/all/${foundUser._id}`)
             .set('Authorization', loggingUser.body.token)
-        
-        // console.log(`FOUND BUDGETS: ${foundBudgets}`)
-        console.log(`FOUND BUDGETS.LENGTH: ${foundBudgets.length}`)
-        // console.log(`GET BUDGETS: ${getBudgets}`)
-        // console.log(`GET BUDGETS KEYS: ${Object.keys(getBudgets)}`)
-        // console.log(`GET BUDGETS.TEXT: ${getBudgets.text}`)
-        // console.log(`GET BUDGETS.BODY: ${getBudgets.body}`)
-        // console.log(`GET BUDGETS.BODY KEYS: ${Object.keys(getBudgets.body)}`)
-        // console.log(`GET BUDGETS.TEXT.LENGTH: ${getBudgets.text.length}`)
-        console.log(`GET BUDGETS.BODY.BUDGETS.LENGTH: ${getBudgets.body.budgets.length}`)
-
-        // _events,_eventsCount,_maxListeners,res,request,req,text,body,files,buffered,headers,header,statusCode,status,statusType,info,ok,redirect,clientError,serverError,error,created,accepted,noContent,badRequest,unauthorized,notAcceptable,forbidden,notFound,unprocessableEntity,type,charset,links,setEncoding,redirects,pipe
-        
-        
-        // let matchBudgets
-        // if (getBudget.body.budget._id == foundBudget._id) {
-        //     matchBudgets = true
-        // } else {
-        //     matchBudgets = false
-        // }
-        expect(getBudgets).to.exist
+        expect(getBudgets.body.budgets.length).to.equal(foundBudgets.length)
     })
 })
