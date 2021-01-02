@@ -134,3 +134,31 @@ describe('GET route for budgets/all/:id', () => {
         expect(getBudgets.body.budgets.length).to.equal(foundBudgets.length)
     })
 })
+
+// Test DELETE route for budgets/:id
+describe('DELETE route for budgets/:id', () => {
+    it('deletes a specific budget', async () => {
+        const loggingUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        const foundUser = await db.User.findOne({
+            email: 'john@email.com'
+        })
+        console.log(`FOUND USER._ID: ${foundUser._id}`)
+        const foundBudget = await db.Budget.findOne({
+            user: foundUser._id
+        })
+        console.log(`FOUND BUDGET._ID: ${foundBudget._id}`)
+        const deletedBudget = await request(app)
+            .delete(`/budgets/${foundBudget._id}`)
+            .set('Authorization', loggingUser.body.token)
+            .send({
+                _id: foundBudget._id
+            })
+        expect(deletedBudget.status).to.equal(200)
+    })
+})
