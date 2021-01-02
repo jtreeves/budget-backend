@@ -21,7 +21,7 @@ before(async () => {
 })
 
 // Test POST route for users/signup
-describe('POST route for users/signup', () => {
+describe('USERS: POST route for /signup', () => {
     it('creates a new user and saves it to the database with a hashed password, a date field, and a new budget', async () => {
         const newUser = await request(app)
             .post('/users/signup')
@@ -58,7 +58,7 @@ describe('POST route for users/signup', () => {
 })
 
 // Test POST route for users/login
-describe('POST route for users/login', () => {
+describe('USERS: POST route for /login', () => {
     it('authenticates a user with the correct email-password combination', async () => {
         const currentUser = await request(app)
             .post('/users/login')
@@ -94,7 +94,7 @@ describe('POST route for users/login', () => {
 })
 
 // Test GET route for users/current
-describe('GET route for users/current', () => {
+describe('USERS: GET route for /current', () => {
     it('displays info of authenticated user', async () => {
         const loggingUser = await request(app)
             .post('/users/login')
@@ -119,7 +119,7 @@ describe('GET route for users/current', () => {
 
 // THIS TEST PASSES BUT DOESN'T UPDATE ANYTHING
 // Test PUT route for users/current
-describe('PUT route for users/current', () => {
+describe('USERS: PUT route for /current', () => {
     it('updates name field for a specific user', async () => {
         const loggingUser = await request(app)
             .post('/users/login')
@@ -144,7 +144,7 @@ describe('PUT route for users/current', () => {
 
 // THIS TEST PASSES BUT DOESN'T DELETE ANYTHING
 // Test DELETE route for users/current
-describe('DELETE route for users/current', () => {
+describe('USERS: DELETE route for /current', () => {
     it('deletes a user', async () => {
         const loggingUser = await request(app)
             .post('/users/login')

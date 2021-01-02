@@ -13,7 +13,7 @@ before(async () => {
 })
 
 // Test POST route for budgets/:id
-describe('POST route for budgets/:id', () => {
+describe('BUDGETS: POST route for /:id', () => {
     it('creates a new budget for an existing user and saves it to the database', async () => {
         await request(app)
             .post('/users/signup')
@@ -59,7 +59,7 @@ describe('POST route for budgets/:id', () => {
 })
 
 // Test GET route for budgets/:id
-describe('GET route for budgets/:id', () => {
+describe('BUDGETS: GET route for /:id', () => {
     it('displays data for a specific budget', async () => {
         const loggingUser = await request(app)
             .post('/users/login')
@@ -88,7 +88,7 @@ describe('GET route for budgets/:id', () => {
 })
 
 // Test GET route for budgets/all/:id
-describe('GET route for budgets/all/:id', () => {
+describe('BUDGETS: GET route for /all/:id', () => {
     it('returns all budgets associated with a specific user', async () => {
         const newUser = await request(app)
             .post('/users/signup')
@@ -137,7 +137,7 @@ describe('GET route for budgets/all/:id', () => {
 
 // THIS PASSES BUT DOES NOT UPDATE BUDGET'S TITLE
 // Test PUT route for budgets/:id
-describe('PUT route for budgets/:id', () => {
+describe('BUDGETS: PUT route for /:id', () => {
     it('updates a specific budget', async () => {
         const loggingUser = await request(app)
             .post('/users/login')
@@ -165,7 +165,7 @@ describe('PUT route for budgets/:id', () => {
 
 // THIS WORKS BUT IT LETS YOU DELETE THE A USER'S ONLY BUDGET
 // Test DELETE route for budgets/:id
-describe('DELETE route for budgets/:id', () => {
+describe('BUDGETS: DELETE route for /:id', () => {
     it('deletes a specific budget', async () => {
         const loggingUser = await request(app)
             .post('/users/login')
