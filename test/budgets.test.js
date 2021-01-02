@@ -77,19 +77,12 @@ describe('GET route for budgets/:id', () => {
         const getBudget = await request(app)
             .get(`/budgets/${foundBudget._id}`)
             .set('Authorization', loggingUser.body.token)
-        console.log(`FOUND BUDGET._ID: ${foundBudget._id}`)
-        console.log(`FOUND BUDGET._ID._BSONTYPE: ${foundBudget._id._bsontype}`)
-        console.log(`FOUND BUDGET._ID._BSONTYPE.ID: ${foundBudget._id._bsontype.id}`)
-        console.log(`FOUND BUDGET._ID._BSONTYPE KEYS: ${Object.keys(foundBudget._id._bsontype)}`)
-        console.log(`GET BUDGET.BODY.BUDGET._ID: ${getBudget.body.budget._id}`)
-        console.log(`GET BUDGET.BODY.BUDGET KEYS: ${Object.keys(getBudget.body.budget)}`)
+        let matchBudgets
         if (getBudget.body.budget._id == foundBudget._id) {
-            console.log('MATCH!')
+            matchBudgets = true
         } else {
-            console.log('NO MATCH!')
+            matchBudgets = false
         }
-        expect(getBudget).to.exist
-        expect(getBudget.body.budget).to.have.property('categories')
-        // expect(getBudget.body.budget._id).to.equal(foundBudget._id)
+        expect(matchBudgets).to.equal(true)
     })
 })
