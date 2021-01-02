@@ -131,7 +131,8 @@ describe('PUT route for users/current', () => {
         const foundUser = await db.User.findOne({
             email: 'john@email.com'
         })
-        console.log(`FOUND USER: ${foundUser}`)
+        console.log(`FOUND USER._ID: ${foundUser._id}`)
+        console.log(`FOUND USER.NAME: ${foundUser.name}`)
         const currentUser = await request(app)
             .put('/users/current')
             .set('Authorization', loggingUser.body.token)
@@ -140,6 +141,9 @@ describe('PUT route for users/current', () => {
                 name: 'Jonathan Doezius'
             })
         console.log(`CURRENT USER: ${currentUser}`)
-        expect(currentUser.body.name).to.equal('Jonathan Doezius')
+        console.log(`CURRENT USER KEYS: ${Object.keys(currentUser)}`)
+        console.log(`CURRENT USER.BODY.USER: ${currentUser.body.user}`)
+        console.log(`CURRENT USER.BODY.USER KEYS: ${Object.keys(currentUser.body.user)}`)
+        expect(currentUser.body.user.name).to.equal('Jonathan Doezius')
     })
 })
