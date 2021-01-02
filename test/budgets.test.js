@@ -57,3 +57,29 @@ describe('POST route for budgets/:id', () => {
         expect(foundBudgets).to.have.lengthOf.above(1)
     })
 })
+
+// Test GET route for budgets/:id
+describe('GET route for budgets/:id', () => {
+    it('displays data for a specific budget', async () => {
+        const loggingUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        const foundUser = await db.User.findOne({
+            email: 'john@email.com'
+        })
+        const foundBudget = await db.Budget.findOne({
+            user: foundUser._id
+        })
+        const getBudget = await request(app)
+            .get(`/budgets/${foundBudget._id}`)
+            .set('Authorization', loggingUser.body.token)
+        console.log(`GET BUDGET: ${getBudget}`)
+        console.log(`GET BUDGET KEYS: ${Object.keys(getBudget)}`)
+        expect(getBudget).to.exist
+        // expect(getBudget)
+    })
+})
