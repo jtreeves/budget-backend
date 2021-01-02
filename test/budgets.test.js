@@ -135,6 +135,33 @@ describe('GET route for budgets/all/:id', () => {
     })
 })
 
+// Test PUT route for budgets/:id
+describe('PUT route for budgets/:id', () => {
+    it('updates a specific budget', async () => {
+        const loggingUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        const foundUser = await db.User.findOne({
+            email: 'john@email.com'
+        })
+        const foundBudget = await db.Budget.findOne({
+            user: foundUser._id
+        })
+        const updatedBudget = await request(app)
+            .put(`/budgets/${foundBudget._id}`)
+            .set('Authorization', loggingUser.body.token)
+            .send({
+                _id: foundBudget._id,
+                title: 'Updated Budget Name'
+            })
+        expect(updatedBudget.status).to.equal(200)
+    })
+})
+
 // THIS WORKS BUT IT LETS YOU DELETE THE A USER'S ONLY BUDGET
 // Test DELETE route for budgets/:id
 describe('DELETE route for budgets/:id', () => {
