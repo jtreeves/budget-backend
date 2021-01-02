@@ -7,7 +7,7 @@ const app = require('../server')
 const db = require('../models')
 
 // Delete all users and budgets before running tests
-before(async () => {
+beforeEach(async () => {
     await db.User.deleteMany({})
     await db.Budget.deleteMany({})
     await request(app)
