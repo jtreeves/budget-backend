@@ -117,6 +117,7 @@ describe('GET route for users/current', () => {
     })
 })
 
+// THIS TEST PASSES BUT DOESN'T UPDATE ANYTHING
 // Test PUT route for users/current
 describe('PUT route for users/current', () => {
     it('updates name field for a specific user', async () => {
@@ -137,14 +138,11 @@ describe('PUT route for users/current', () => {
                 _id: foundUser._id,
                 name: 'Jonathan Doezius'
             })
-        // const foundUpdatedUser = await db.User.findOne({
-        //     email: 'john@email.com'
-        // })
-        // expect(foundUpdatedUser.name).to.equal('Jonathan Doezius')
         expect(currentUser.status).to.equal(200)
     })
 })
 
+// THIS TEST PASSES BUT DOESN'T DELETE ANYTHING
 // Test DELETE route for users/current
 describe('DELETE route for users/current', () => {
     it('deletes a user', async () => {
