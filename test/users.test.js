@@ -116,3 +116,30 @@ describe('GET route for users/current', () => {
         expect(currentUser.body).to.not.have.property('id')
     })
 })
+
+// Test PUT route for users/current
+describe('PUT route for users/current', () => {
+    it('updates name field for a specific user', async () => {
+        const loggingUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        console.log(`LOGGING USER: ${loggingUser}`)
+        const foundUser = await db.User.findOne({
+            email: 'john@email.com'
+        })
+        console.log(`FOUND USER: ${foundUser}`)
+        const currentUser = await request(app)
+            .put('/users/current')
+            .set('Authorization', loggingUser.body.token)
+            .send({
+                _id: foundUser._id,
+                name: 'Jonathan Doezius'
+            })
+        console.log(`CURRENT USER: ${currentUser}`)
+        expect(currentUser.body.name).to.equal('Jonathan Doezius')
+    })
+})
