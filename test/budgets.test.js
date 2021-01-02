@@ -135,6 +135,7 @@ describe('GET route for budgets/all/:id', () => {
     })
 })
 
+// THIS WORKS BUT IT LETS YOU DELETE THE A USER'S ONLY BUDGET
 // Test DELETE route for budgets/:id
 describe('DELETE route for budgets/:id', () => {
     it('deletes a specific budget', async () => {
@@ -148,11 +149,9 @@ describe('DELETE route for budgets/:id', () => {
         const foundUser = await db.User.findOne({
             email: 'john@email.com'
         })
-        console.log(`FOUND USER._ID: ${foundUser._id}`)
         const foundBudget = await db.Budget.findOne({
             user: foundUser._id
         })
-        console.log(`FOUND BUDGET._ID: ${foundBudget._id}`)
         const deletedBudget = await request(app)
             .delete(`/budgets/${foundBudget._id}`)
             .set('Authorization', loggingUser.body.token)
