@@ -144,3 +144,26 @@ describe('PUT route for users/current', () => {
         expect(currentUser.status).to.equal(200)
     })
 })
+
+// Test DELETE route for users/current
+describe('DELETE route for users/current', () => {
+    it('deletes a user', async () => {
+        const loggingUser = await request(app)
+            .post('/users/login')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                email: 'john@email.com',
+                password: 'john1234'
+            })
+        const foundUser = await db.User.findOne({
+            email: 'john@email.com'
+        })
+        const deletedUser = await request(app)
+            .delete('/users/current')
+            .set('Authorization', loggingUser.body.token)
+            .send({
+                _id: foundUser._id,
+            })
+        expect(deletedUser.status).to.equal(200)
+    })
+})
