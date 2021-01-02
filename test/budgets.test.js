@@ -135,6 +135,7 @@ describe('GET route for budgets/all/:id', () => {
     })
 })
 
+// THIS PASSES BUT DOES NOT UPDATE BUDGET'S TITLE
 // Test PUT route for budgets/:id
 describe('PUT route for budgets/:id', () => {
     it('updates a specific budget', async () => {
