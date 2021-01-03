@@ -70,19 +70,19 @@ before(async () => {
 // Find users in database
 before(async () => {
     dbAdam = await db.User.findOne({
-        email: userList[0].email
+        email: usersList[0].email
     })
 
     dbDebra = await db.User.findOne({
-        email: userList[1].email
+        email: usersList[1].email
     })
 
     dbJohn = await db.User.findOne({
-        email: userList[2].email
+        email: usersList[2].email
     })
 
     dbSusan = await db.User.findOne({
-        email: userList[3].email
+        email: usersList[3].email
     })
 })
 
@@ -99,7 +99,7 @@ before(async () => {
     johnFirstBudget = await db.Budget.findOne({
         user: dbJohn._id
     })
-    
+
     susanFirstBudget = await db.Budget.findOne({
         user: dbSusan._id
     })
