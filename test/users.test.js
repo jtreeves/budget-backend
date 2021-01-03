@@ -116,14 +116,11 @@ describe('USERS: PUT route for /current', () => {
                 email: users[0].email,
                 password: users[0].password
             })
-        const foundUser = await db.User.findOne({
-            email: users[0].email
-        })
         const currentUser = await request(app)
             .put('/users/current')
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: foundUser._id,
+                _id: dbUsers[0]._id,
                 name: 'Jonathan Doezius'
             })
         expect(currentUser.status).to.equal(200)
@@ -141,14 +138,11 @@ describe('USERS: DELETE route for /current', () => {
                 email: users[3].email,
                 password: users[3].password
             })
-        const foundUser = await db.User.findOne({
-            email: users[3].email
-        })
         const deletedUser = await request(app)
             .delete('/users/current')
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: foundUser._id
+                _id: dbUsers[3]._id
             })
         expect(deletedUser.status).to.equal(200)
     })
