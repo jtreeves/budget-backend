@@ -16,12 +16,6 @@ let dbAdam, dbDebra, dbJohn, dbSusan
 // Create new variables for users' budgets
 let adamFirstBudget, debraFirstBudget, johnFirstBudget, susanFirstBudget
 
-// Create array to store database versions of test users
-const dbUsers = [dbAdam, dbDebra, dbJohn, dbSusan]
-
-// Create array to store budgets
-const dbBudgets = [adamFirstBudget, debraFirstBudget, johnFirstBudget, susanFirstBudget]
-
 // Delete all existing users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
@@ -115,5 +109,11 @@ describe('SERVER: GET route for /', () => {
         expect(user.body.msg).to.equal('Viewing the backend of the Kaleidoscope app')
     })
 })
+
+// Create array to store database versions of test users
+const dbUsers = [dbAdam, dbDebra, dbJohn, dbSusan]
+
+// Create array to store budgets
+const dbBudgets = [adamFirstBudget, debraFirstBudget, johnFirstBudget, susanFirstBudget]
 
 module.exports = { dbUsers, dbBudgets }
