@@ -16,8 +16,8 @@ describe('BUDGETS: POST route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: usersList[1].name,
-                email: usersList[1].email
+                email: usersList[1].email,
+                password: usersList[1].password
             })
         const currentUser = await request(app)
             .get('/users/current')
@@ -54,8 +54,8 @@ describe('BUDGETS: GET route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: usersList[2].name,
-                email: usersList[2].email
+                email: usersList[2].email,
+                password: usersList[2].password
             })
         const foundUser = await db.User.findOne({
             email: usersList[2].email
@@ -83,8 +83,8 @@ describe('BUDGETS: GET route for /all/:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: usersList[1].name,
-                email: usersList[1].email
+                email: usersList[1].email,
+                password: usersList[1].password
             })
         const foundUser = await db.User.findOne({
             email: usersList[1].email
@@ -107,8 +107,8 @@ describe('BUDGETS: PUT route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: usersList[2].name,
-                email: usersList[2].email
+                email: usersList[2].email,
+                password: usersList[2].password
             })
         const foundUser = await db.User.findOne({
             email: usersList[2].email
@@ -135,8 +135,8 @@ describe('BUDGETS: DELETE route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: usersList[2].name,
-                email: usersList[2].email
+                email: usersList[2].email,
+                password: usersList[2].password
             })
         const foundUser = await db.User.findOne({
             email: usersList[2].email
