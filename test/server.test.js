@@ -8,7 +8,10 @@ const db = require('../models')
 const usersList = require('../seeders/userSeeder')
 
 // Create new variables for four new test users from list
-let { adamUser, debraUser, johnUser, susanUser }
+let adamUser
+let debraUser
+let johnUser
+let susanUser
 
 // Delete all existing users and budgets before running tests
 before(async () => {
