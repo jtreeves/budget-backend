@@ -6,12 +6,6 @@ const expect = require('chai').expect
 const app = require('../server')
 const db = require('../models')
 
-// // Delete all users and budgets before running tests
-// before(async () => {
-//     await db.User.deleteMany({})
-//     await db.Budget.deleteMany({})
-// })
-
 // Test POST route for budgets/:id
 describe('BUDGETS: POST route for /:id', () => {
     it('creates a new budget for an existing user and saves it to the database', async () => {
