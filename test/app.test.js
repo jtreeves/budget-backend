@@ -10,6 +10,18 @@ const usersList = require('../seeders/userSeeder')
 // Create new variables for four new test users from list
 let adamUser, debraUser, johnUser, susanUser
 
+// Create new variables for database versions of test users
+let dbAdam, dbDebra, dbJohn, dbSusan
+
+// Create new variables for users' budgets
+let adamFirstBudget, debraFirstBudget, johnFirstBudget, susanFirstBudget
+
+// Create array to store database versions of test users
+const dbUsers = [dbAdam, dbDebra, dbJohn, dbSusan]
+
+// Create array to store budgets
+const dbBudgets = [adamFirstBudget, debraFirstBudget, johnFirstBudget, susanFirstBudget]
+
 // Delete all existing users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
@@ -55,6 +67,44 @@ before(async () => {
         })
 })
 
+// Find users in database
+before(async () => {
+    dbAdam = await db.User.findOne({
+        email: userList[0].email
+    })
+
+    dbDebra = await db.User.findOne({
+        email: userList[1].email
+    })
+
+    dbJohn = await db.User.findOne({
+        email: userList[2].email
+    })
+
+    dbSusan = await db.User.findOne({
+        email: userList[3].email
+    })
+})
+
+// Find budgets in database
+before(async () => {
+    adamFirstBudget = await db.Budget.findOne({
+        user: dbAdam._id
+    })
+
+    debraFirstBudget = await db.Budget.findOne({
+        user: dbDebra._id
+    })
+
+    johnFirstBudget = await db.Budget.findOne({
+        user: dbJohn._id
+    })
+    
+    susanFirstBudget = await db.Budget.findOne({
+        user: dbSusan._id
+    })
+})
+
 // Test home page
 describe('SERVER: GET route for /', () => {
     it('accesses backend and displays stored message', async () => {
@@ -65,3 +115,5 @@ describe('SERVER: GET route for /', () => {
         expect(user.body.msg).to.equal('Viewing the backend of the Kaleidoscope app')
     })
 })
+
+module.exports = dbUsers, dbBudgets
