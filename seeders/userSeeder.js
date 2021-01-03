@@ -22,4 +22,6 @@ const susan = {
     password: 'susan1234'
 }
 
-const users = [adam, debra, john, susan]
+const usersList = [adam, debra, john, susan]
+
+module.exports = usersList

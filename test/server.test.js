@@ -5,6 +5,7 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
+const usersList = require('../seeders/userSeeder')
 
 // Delete all users and budgets before running tests
 before(async () => {
@@ -18,9 +19,9 @@ before(async () => {
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-            name: 'John Doe',
-            email: 'john@email.com',
-            password: 'john1234'
+            name: usersList[2].name,
+            email: usersList[2].email,
+            password: usersList[2].password
         })
 })
 
