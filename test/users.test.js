@@ -139,17 +139,17 @@ describe('USERS: DELETE route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: usersList[0].email,
-                password: usersList[0].password
+                email: usersList[3].email,
+                password: usersList[3].password
             })
         const foundUser = await db.User.findOne({
-            email: usersList[0].email
+            email: usersList[3].email
         })
         const deletedUser = await request(app)
             .delete('/users/current')
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: foundUser._id,
+                _id: foundUser._id
             })
         expect(deletedUser.status).to.equal(200)
     })
