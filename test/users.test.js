@@ -13,19 +13,19 @@ describe('USERS: POST route for /signup', () => {
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: 'Adam Smith',
-                email: 'adam@email.com',
-                password: 'adam1234'
+                name: 'Mark Davidson',
+                email: 'mark@email.com',
+                password: 'mark1234'
             })
         const foundUser = await db.User.findOne({
-            email: 'adam@email.com'
+            email: 'mark@email.com'
         })
         const foundBudget = await db.Budget.findOne({
             user: foundUser._id
         })
         expect(newUser.status).to.equal(200)
         expect(foundUser).to.exist
-        expect(foundUser.password).to.not.equal('adam1234')
+        expect(foundUser.password).to.not.equal('mark1234')
         expect(foundUser).to.have.property('date')
         expect(foundBudget).to.have.property('categories')
     })
@@ -72,8 +72,8 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'mark@email.com',
-                password: 'mark1234'
+                email: 'victor@email.com',
+                password: 'victor1234'
             })
         expect(currentUser.body.msg).to.equal('User not found')
     })
