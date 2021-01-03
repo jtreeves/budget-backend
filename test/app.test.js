@@ -72,7 +72,7 @@ before(async () => {
     dbAdam = await db.User.findOne({
         email: usersList[0].email
     })
-
+    console.log(`DB ADAM: ${dbAdam}`)
     dbDebra = await db.User.findOne({
         email: usersList[1].email
     })
@@ -91,7 +91,7 @@ before(async () => {
     adamFirstBudget = await db.Budget.findOne({
         user: dbAdam._id
     })
-
+    console.log(`ADAM FIRST BUDGET: ${adamFirstBudget}`)
     debraFirstBudget = await db.Budget.findOne({
         user: dbDebra._id
     })
@@ -116,4 +116,4 @@ describe('SERVER: GET route for /', () => {
     })
 })
 
-module.exports = dbUsers, dbBudgets
+module.exports = { dbUsers, dbBudgets }
