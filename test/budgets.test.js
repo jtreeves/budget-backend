@@ -5,9 +5,9 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const { dbUsers, dbBudgets } = require('./app.test')
+const { dbUsers, dbBudgets } = require('./server.test')
 // const dbBudgets = require('./app.test')
-const usersList = require('../seeders/userSeeder')
+const users = require('../seeders/userSeeder')
 
 // Test POST route for budgets/:id
 describe('BUDGETS: POST route for /:id', () => {
@@ -16,8 +16,8 @@ describe('BUDGETS: POST route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: usersList[1].email,
-                password: usersList[1].password
+                email: users[1].email,
+                password: users[1].password
             })
         const currentUser = await request(app)
             .get('/users/current')
@@ -54,11 +54,11 @@ describe('BUDGETS: GET route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: usersList[2].email,
-                password: usersList[2].password
+                email: users[2].email,
+                password: users[2].password
             })
         // const foundUser = await db.User.findOne({
-        //     email: usersList[2].email
+        //     email: users[2].email
         // })
         // const foundBudget = await db.Budget.findOne({
         //     user: foundUser._id
@@ -86,11 +86,11 @@ describe('BUDGETS: GET route for /all/:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: usersList[1].email,
-                password: usersList[1].password
+                email: users[1].email,
+                password: users[1].password
             })
         const foundUser = await db.User.findOne({
-            email: usersList[1].email
+            email: users[1].email
         })
         const foundBudgets = await db.Budget.find({
             user: foundUser._id
@@ -110,11 +110,11 @@ describe('BUDGETS: PUT route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: usersList[2].email,
-                password: usersList[2].password
+                email: users[2].email,
+                password: users[2].password
             })
         const foundUser = await db.User.findOne({
-            email: usersList[2].email
+            email: users[2].email
         })
         const foundBudget = await db.Budget.findOne({
             user: foundUser._id
@@ -138,11 +138,11 @@ describe('BUDGETS: DELETE route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: usersList[2].email,
-                password: usersList[2].password
+                email: users[2].email,
+                password: users[2].password
             })
         const foundUser = await db.User.findOne({
-            email: usersList[2].email
+            email: users[2].email
         })
         const foundBudget = await db.Budget.findOne({
             user: foundUser._id
