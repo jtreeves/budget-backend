@@ -7,6 +7,7 @@ const app = require('../server')
 const db = require('../models')
 const dbUsers = require('./app.test')
 const dbBudgets = require('./app.test')
+const usersList = require('../seeders/userSeeder')
 
 // Test POST route for users/signup
 describe('USERS: POST route for /signup', () => {
@@ -37,9 +38,9 @@ describe('USERS: POST route for /signup', () => {
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: 'John Doe',
-                email: 'john@email.com',
-                password: 'john1234'
+                name: usersList[0].name,
+                email: usersList[0].email,
+                password: usersList[0].password
             })
         expect(newUser.body.msg).to.equal('Email already in use')
     })
