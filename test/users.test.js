@@ -53,8 +53,8 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'john@email.com',
-                password: 'john1234'
+                email: usersList[0].email,
+                password: usersList[0].password
             })
         expect(currentUser.status).to.equal(200)
     })
@@ -64,8 +64,8 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'john@email.com',
-                password: 'notjohn1234'
+                email: usersList[0].email,
+                password: 'notcorrectpassword'
             })
         expect(currentUser.body.msg).to.equal('Password is incorrect')
     })
@@ -89,8 +89,8 @@ describe('USERS: GET route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'john@email.com',
-                password: 'john1234'
+                email: usersList[0].email,
+                password: usersList[0].password
             })
         const currentUser = await request(app)
             .get('/users/current')
@@ -114,11 +114,11 @@ describe('USERS: PUT route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'john@email.com',
-                password: 'john1234'
+                email: usersList[0].email,
+                password: usersList[0].password
             })
         const foundUser = await db.User.findOne({
-            email: 'john@email.com'
+            email: usersList[0].email
         })
         const currentUser = await request(app)
             .put('/users/current')
@@ -139,11 +139,11 @@ describe('USERS: DELETE route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'john@email.com',
-                password: 'john1234'
+                email: usersList[0].email,
+                password: usersList[0].password
             })
         const foundUser = await db.User.findOne({
-            email: 'john@email.com'
+            email: usersList[0].email
         })
         const deletedUser = await request(app)
             .delete('/users/current')
