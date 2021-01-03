@@ -18,6 +18,7 @@ const budgetSchema = new Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     title: String,
     colorScheme: String,
+    location: String,
     date: {
         type: Date,
         default: Date.now()

@@ -20,6 +20,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    firstTimeUser: Boolean,
     date: {
         type: Date,
         default: Date.now()

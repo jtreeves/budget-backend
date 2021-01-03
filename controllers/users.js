@@ -29,7 +29,8 @@ router.post('/signup', async (req, res) => {
             const newUser = new db.User({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                firstTimeUser: true
             })
             // Create salt for password
             bcrypt.genSalt(10, (error, salt) => {
@@ -42,24 +43,9 @@ router.post('/signup', async (req, res) => {
                         newUser.password = hash
                         // Save new user with hashed password
                         const createdUser = await newUser.save()
-                        // Create budget for new uer
-                        const createdBudget = await db.Budget.create({
-                            user: createdUser.id,
-                            title: "Budget 1",
-                            colorScheme: "Green",
-                            categories: {
-                                housing: {inputs: {}},
-                                utility: {inputs: {}},
-                                food: {inputs: {}},
-                                transportation: {inputs: {}},
-                                entertainment: {inputs: {}},
-                                misc: {inputs: {}},
-                                income: {inputs: {}}  
-                            }
-                        })
+
                         res.status(200).json({
-                            user: createdUser,
-                            budget: createdBudget
+                            user: createdUser
                         })
                     } catch(error) {
                         res.status(400).json({msg: error})
@@ -92,7 +78,8 @@ router.post('/login', async (req, res) => {
                 const payload = {
                     id: currentUser.id,
                     email: currentUser.email,
-                    name: currentUser.name
+                    name: currentUser.name,
+                    firstTimeUser: currentUser.firstTimeUser
                 }
                 // Sign token to finalize login
                 jwt.sign(payload, JWT_SECRET, {expiresIn: '1h'}, (error, token) => {
@@ -112,20 +99,22 @@ router.post('/login', async (req, res) => {
 })
 
 // Create GET route for users/current (Private)
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.status(200).json({
-        id: req.user.id,
-        name: req.user.name,
-        email: req.user.email
-    })
+router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const user = await db.User.findOne({_id: req.params.id})
+        res.status(200).json({user})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
 })
 
 // Greate PUT route for users/current (Private)
-router.put('/current', passport.authenticate('jwt', {session: false}), async (req, res) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    const { firstTimeUser } = req.body
     try {
         const updatedUser = await db.User.updateOne(
             {_id: req.params.id},
-            {$set: {name: req.body.name}}
+            {$set: { firstTimeUser: firstTimeUser }}
         )
         res.status(200).json({user: updatedUser})
     } catch(error) {
