@@ -86,22 +86,22 @@ before(async () => {
 // Find budgets in database
 before(async () => {
     dbAdamBudget = await db.Budget.findOne({
-        user: dbAdam._id
+        user: dbAdamUser._id
     })
     dbBudgets.push(dbAdamBudget)
 
     dbDebraBudget = await db.Budget.findOne({
-        user: dbDebra._id
+        user: dbDebraUser._id
     })
     dbBudgets.push(dbDebraBudget)
 
     dbJohnBudget = await db.Budget.findOne({
-        user: dbJohn._id
+        user: dbJohnUser._id
     })
     dbBudgets.push(dbJohnBudget)
 
     dbSusanBudget = await db.Budget.findOne({
-        user: dbSusan._id
+        user: dbSusanUser._id
     })
     dbBudgets.push(dbSusanBudget)
 })
