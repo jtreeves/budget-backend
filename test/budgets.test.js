@@ -5,8 +5,8 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const dbUsers = require('./app.test')
-const dbBudgets = require('./app.test')
+const { dbUsers, dbBudgets } = require('./app.test')
+// const dbBudgets = require('./app.test')
 const usersList = require('../seeders/userSeeder')
 
 // Test POST route for budgets/:id
@@ -57,17 +57,20 @@ describe('BUDGETS: GET route for /:id', () => {
                 email: usersList[2].email,
                 password: usersList[2].password
             })
-        const foundUser = await db.User.findOne({
-            email: usersList[2].email
-        })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
+        // const foundUser = await db.User.findOne({
+        //     email: usersList[2].email
+        // })
+        // const foundBudget = await db.Budget.findOne({
+        //     user: foundUser._id
+        // })
+        console.log(`DB BUDGETS: ${dbBudgets}`)
+        console.log(`DB BUDGETS[2]: ${dbBudgets[2]}`)
+        console.log(`DB BUDGETS[2] KEYS: ${Object.keys(dbBudgets[2])}`)
         const getBudget = await request(app)
-            .get(`/budgets/${foundBudget._id}`)
+            .get(`/budgets/${dbBudgets[2]._id}`)
             .set('Authorization', loggingUser.body.token)
         let matchBudgets
-        if (getBudget.body.budget._id == foundBudget._id) {
+        if (getBudget.body.budget._id == dbBudgets[2]._id) {
             matchBudgets = true
         } else {
             matchBudgets = false
