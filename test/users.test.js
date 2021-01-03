@@ -7,18 +7,18 @@ const app = require('../server')
 const db = require('../models')
 
 // Delete all users and budgets before running tests
-beforeEach(async () => {
-    await db.User.deleteMany({})
-    await db.Budget.deleteMany({})
-    await request(app)
-        .post('/users/signup')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            name: 'John Doe',
-            email: 'john@email.com',
-            password: 'john1234'
-        })
-})
+// beforeEach(async () => {
+//     await db.User.deleteMany({})
+//     await db.Budget.deleteMany({})
+//     await request(app)
+//         .post('/users/signup')
+//         .set('Content-Type', 'application/x-www-form-urlencoded')
+//         .send({
+//             name: 'John Doe',
+//             email: 'john@email.com',
+//             password: 'john1234'
+//         })
+// })
 
 // Test POST route for users/signup
 describe('USERS: POST route for /signup', () => {
