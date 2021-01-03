@@ -7,21 +7,51 @@ const app = require('../server')
 const db = require('../models')
 const usersList = require('../seeders/userSeeder')
 
-// Delete all users and budgets before running tests
+// Create new variables for four new test users from list
+let { adamUser, debraUser, johnUser, susanUser }
+
+// Delete all existing users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
     await db.Budget.deleteMany({})
 })
 
-// Create single user before running tests
+// Create four new test users before running tests
 before(async () => {
-    await request(app)
+    adamUser = await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: usersList[0].name,
+            email: usersList[0].email,
+            password: usersList[0].password
+        })
+    
+    debraUser = await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: usersList[1].name,
+            email: usersList[1].email,
+            password: usersList[1].password
+        })
+
+    johnUser = await request(app)
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
             name: usersList[2].name,
             email: usersList[2].email,
             password: usersList[2].password
+        })
+
+    susanUser = await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: usersList[3].name,
+            email: usersList[3].email,
+            password: usersList[3].password
         })
 })
 
@@ -36,20 +66,47 @@ describe('SERVER: GET route for /', () => {
     })
 })
 
-// Delete all users and budgets after running tests
+// Delete all existing users and budgets after running tests
 after(async () => {
     await db.User.deleteMany({})
     await db.Budget.deleteMany({})
 })
 
-// Create single user after running tests
+// Create four new test users after running tests
 after(async () => {
-    await request(app)
+    adamUser = await request(app)
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-            name: 'John Doe',
-            email: 'john@email.com',
-            password: 'john1234'
+            name: usersList[0].name,
+            email: usersList[0].email,
+            password: usersList[0].password
+        })
+    
+    debraUser = await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: usersList[1].name,
+            email: usersList[1].email,
+            password: usersList[1].password
+        })
+
+    johnUser = await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: usersList[2].name,
+            email: usersList[2].email,
+            password: usersList[2].password
+        })
+
+    susanUser = await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: usersList[3].name,
+            email: usersList[3].email,
+            password: usersList[3].password
         })
 })
