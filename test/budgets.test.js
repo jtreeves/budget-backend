@@ -79,14 +79,11 @@ describe('BUDGETS: GET route for /all/:id', () => {
                 email: users[1].email,
                 password: users[1].password
             })
-        const foundUser = await db.User.findOne({
-            email: users[1].email
-        })
         const foundBudgets = await db.Budget.find({
-            user: foundUser._id
+            user: dbUsers[1]._id
         })
         const getBudgets = await request(app)
-            .get(`/budgets/all/${foundUser._id}`)
+            .get(`/budgets/all/${dbUsers[1]._id}`)
             .set('Authorization', loggingUser.body.token)
         expect(getBudgets.body.budgets.length).to.equal(foundBudgets.length)
     })
@@ -103,17 +100,11 @@ describe('BUDGETS: PUT route for /:id', () => {
                 email: users[2].email,
                 password: users[2].password
             })
-        const foundUser = await db.User.findOne({
-            email: users[2].email
-        })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         const updatedBudget = await request(app)
-            .put(`/budgets/${foundBudget._id}`)
+            .put(`/budgets/${dbBudgets[2]._id}`)
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: foundBudget._id,
+                _id: dbBudgets[2]._id,
                 title: 'Updated Budget Name'
             })
         expect(updatedBudget.status).to.equal(200)
@@ -131,17 +122,11 @@ describe('BUDGETS: DELETE route for /:id', () => {
                 email: users[2].email,
                 password: users[2].password
             })
-        const foundUser = await db.User.findOne({
-            email: users[2].email
-        })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         const deletedBudget = await request(app)
-            .delete(`/budgets/${foundBudget._id}`)
+            .delete(`/budgets/${dbBudgets[2]._id}`)
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: foundBudget._id
+                _id: dbBudgets[2]._id
             })
         expect(deletedBudget.status).to.equal(200)
     })
