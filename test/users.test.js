@@ -109,7 +109,6 @@ describe('USERS: PUT route for /:id', () => {
     })
 })
 
-// THIS TEST PASSES BUT DOESN'T DELETE ANYTHING
 // Test DELETE route for users/:id
 describe('USERS: DELETE route for /:id', () => {
     it('deletes a user', async () => {
