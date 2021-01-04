@@ -13,34 +13,6 @@ let dbUsers = {}
 let dbBudgets = {}
 let tokens = {}
 
-// Create functions for creating users and budgets
-async function createUser(user) {
-    await request(app)
-        .post('/users/signup')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            name: user.name,
-            email: user.email,
-            password: user.password
-        })
-}
-
-async function loggingUser(user) {
-    const loggedUser = await request(app)
-        .post('/users/login')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            email: user.email,
-            password: user.password
-        })
-    console.log(`LOGGED USER: ${loggedUser}`)
-    console.log(`LOGGED USER.BODY: ${loggedUser.body}`)
-    console.log(`LOGGED USER.BODY.TOKEN: ${loggedUser.body.token}`)
-    console.log(`LOGGED USER KEYS: ${Object.keys(loggedUser)}`)
-    console.log(`LOGGED USER.BODY KEYS: ${Object.keys(loggedUser.body)}`)
-    return loggedUser.body.token
-}
-
 // Delete all existing users and budgets before running tests
 before(async () => {
     await db.User.deleteMany({})
@@ -48,13 +20,60 @@ before(async () => {
 })
 
 // Create new test users before running tests
-before(() => {
-    createUser(users.adam)
-    createUser(users.debra)
-    createUser(users.john)
-    createUser(users.mark)
-    createUser(users.rebecca)
-    createUser(users.susan)
+before(async () => {
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.adam.name,
+            email: users.adam.email,
+            password: users.adam.password
+        })
+    
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.debra.name,
+            email: users.debra.email,
+            password: users.debra.password
+        })
+
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.john.name,
+            email: users.john.email,
+            password: users.john.password
+        })
+
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.mark.name,
+            email: users.mark.email,
+            password: users.mark.password
+        })
+
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.rebecca.name,
+            email: users.rebecca.email,
+            password: users.rebecca.password
+        })
+
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.susan.name,
+            email: users.susan.email,
+            password: users.susan.password
+        })
 })
 
 // Log in newly created users and grab their tokens
@@ -67,20 +86,15 @@ before(async () => {
             password: users.adam.password
         })
     tokens.adam = loggingAdam.body.token
-    console.log(`TOKENS.ADAM: ${tokens.adam}`)
     
-    // const loggingDebra = await request(app)
-    //     .post('/users/login')
-    //     .set('Content-Type', 'application/x-www-form-urlencoded')
-    //     .send({
-    //         email: users.debra.email,
-    //         password: users.debra.password
-    //     })
-    // tokens.debra = loggingDebra.body.token
-    // const loggingDebra = loggingUser(users.debra)
-    tokens.debra = loggingUser(users.debra)
-    console.log(`TOKENS.DEBRA: ${tokens.debra}`)
-    console.log(`TOKENS.DEBRA KEYS: ${Object.keys(tokens.debra)}`)
+    const loggingDebra = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.debra.email,
+            password: users.debra.password
+        })
+    tokens.debra = loggingDebra.body.token
 
     const loggingJohn = await request(app)
         .post('/users/login')
@@ -90,7 +104,6 @@ before(async () => {
             password: users.john.password
         })
     tokens.john = loggingJohn.body.token
-    console.log(`TOKENS.JOHN: ${tokens.john}`)
 
     const loggingMark = await request(app)
         .post('/users/login')
