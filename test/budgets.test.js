@@ -67,6 +67,7 @@ describe('BUDGETS: GET route for /all/:id', () => {
 })
 
 // THIS PASSES BUT DOES NOT UPDATE BUDGET'S TITLE
+// INSTEAD IT VOIDS ALL THE CATEGORIES
 // Test PUT route for budgets/:id
 describe('BUDGETS: PUT route for /:id', () => {
     it('updates a specific budget', async () => {

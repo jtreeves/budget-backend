@@ -170,7 +170,7 @@ before(async () => {
 before(async () => {
     const dbAdamBudget = await db.Budget.create({
         user: dbUsers.adam._id,
-        title: budgets.rich.title,
+        title: 'Adam Budget',
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
@@ -187,7 +187,7 @@ before(async () => {
 
     const dbDebraBudget = await db.Budget.create({
         user: dbUsers.debra._id,
-        title: budgets.rich.title,
+        title: 'Debra Budget',
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
@@ -204,7 +204,7 @@ before(async () => {
 
     const dbJohnBudget = await db.Budget.create({
         user: dbUsers.john._id,
-        title: budgets.rich.title,
+        title: 'John Budget',
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
@@ -221,7 +221,7 @@ before(async () => {
 
     const dbMarkBudget = await db.Budget.create({
         user: dbUsers.mark._id,
-        title: budgets.rich.title,
+        title: 'Mark Budget',
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
@@ -238,7 +238,7 @@ before(async () => {
 
     const dbRebeccaBudget = await db.Budget.create({
         user: dbUsers.rebecca._id,
-        title: budgets.rich.title,
+        title: 'Rebecca Budget',
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
@@ -255,7 +255,7 @@ before(async () => {
 
     const dbSusanBudget = await db.Budget.create({
         user: dbUsers.susan._id,
-        title: budgets.rich.title,
+        title: 'Susan Budget',
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
