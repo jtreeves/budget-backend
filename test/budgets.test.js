@@ -5,7 +5,7 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const users = require('../seeders/userSeeder')
+const users = require('../seeders/users')
 const { dbUsers, dbBudgets, tokens } = require('./server.test')
 
 // Test POST route for budgets/:id

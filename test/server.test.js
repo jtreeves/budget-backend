@@ -5,7 +5,8 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const users = require('../seeders/userSeeder')
+const users = require('../seeders/users')
+const budgets = require('../seeders/budgets')
 
 // Create objects for holding users, budgets, and tokens
 let dbUsers = {}
