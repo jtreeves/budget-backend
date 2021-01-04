@@ -21,6 +21,7 @@ router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, 
             user: req.params.id,
             title: req.body.title,
             colorScheme: req.body.colorScheme,
+            location: req.body.location,
             categories: {
                 housing: {inputs: housing.inputs},
                 utility: {inputs: utility.inputs},
@@ -70,17 +71,18 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
                 {$set: {
                     'categories': req.body.categories
                 }}
-            )
-            res.status(200).json({budget: updatedBudget})
-        } catch(error) {
-            res.status(400).json({ msg: error })
-        }
-    } else {
-        try {
+                )
+                res.status(200).json({budget: updatedBudget})
+            } catch(error) {
+                res.status(400).json({ msg: error })
+            }
+        } else {
+            try {
             const updatedBudget = await db.Budget.updateOne(
                 {_id: req.params.id},
                 {$set: {
                     'title': req.body.title,
+                    'location': req.body.location,
                     'colorScheme': req.body.colorScheme,
                     'categories': req.body.categories
                 }}
