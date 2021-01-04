@@ -185,105 +185,90 @@ before(async () => {
     })
     dbBudgets.adam = dbAdamBudget
 
-    const dbAdamBudget = await request(app)
-        .post(`/budgets/${dbUsers.adam._id}`)
-        .set('Authorization', tokens.adam)
-        .send({
-            user: dbUsers.adam._id,
-            title: budgets.rich.title,
-            colorScheme: budgets.rich.colorScheme,
-            location: budgets.rich.location,
-            income: budgets.rich.income,
-            categories: {
-                housing: budgets.rich.housing,
-                utility: budgets.rich.utility,
-                food: budgets.rich.food,
-                transportation: budgets.rich.transportation,
-                entertainment: budgets.rich.entertainment,
-                misc: budgets.rich.misc
-            }
-        })
-    dbBudgets.adam = dbAdamBudget.body.budget
+    const dbDebraBudget = await db.Budget.createOne({
+        user: dbUsers.debra._id,
+        title: budgets.rich.title,
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: {
+            housing: budgets.rich.housing,
+            utility: budgets.rich.utility,
+            food: budgets.rich.food,
+            transportation: budgets.rich.transportation,
+            entertainment: budgets.rich.entertainment,
+            misc: budgets.rich.misc
+        }
+    })
+    dbBudgets.debra = dbDebraBudget
 
-    const dbAdamBudget = await request(app)
-        .post(`/budgets/${dbUsers.adam._id}`)
-        .set('Authorization', tokens.adam)
-        .send({
-            user: dbUsers.adam._id,
-            title: budgets.rich.title,
-            colorScheme: budgets.rich.colorScheme,
-            location: budgets.rich.location,
-            income: budgets.rich.income,
-            categories: {
-                housing: budgets.rich.housing,
-                utility: budgets.rich.utility,
-                food: budgets.rich.food,
-                transportation: budgets.rich.transportation,
-                entertainment: budgets.rich.entertainment,
-                misc: budgets.rich.misc
-            }
-        })
-    dbBudgets.adam = dbAdamBudget.body.budget
+    const dbJohnBudget = await db.Budget.createOne({
+        user: dbUsers.john._id,
+        title: budgets.rich.title,
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: {
+            housing: budgets.rich.housing,
+            utility: budgets.rich.utility,
+            food: budgets.rich.food,
+            transportation: budgets.rich.transportation,
+            entertainment: budgets.rich.entertainment,
+            misc: budgets.rich.misc
+        }
+    })
+    dbBudgets.john = dbJohnBudget
 
-    const dbAdamBudget = await request(app)
-        .post(`/budgets/${dbUsers.adam._id}`)
-        .set('Authorization', tokens.adam)
-        .send({
-            user: dbUsers.adam._id,
-            title: budgets.rich.title,
-            colorScheme: budgets.rich.colorScheme,
-            location: budgets.rich.location,
-            income: budgets.rich.income,
-            categories: {
-                housing: budgets.rich.housing,
-                utility: budgets.rich.utility,
-                food: budgets.rich.food,
-                transportation: budgets.rich.transportation,
-                entertainment: budgets.rich.entertainment,
-                misc: budgets.rich.misc
-            }
-        })
-    dbBudgets.adam = dbAdamBudget.body.budget
+    const dbMarkBudget = await db.Budget.createOne({
+        user: dbUsers.mark._id,
+        title: budgets.rich.title,
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: {
+            housing: budgets.rich.housing,
+            utility: budgets.rich.utility,
+            food: budgets.rich.food,
+            transportation: budgets.rich.transportation,
+            entertainment: budgets.rich.entertainment,
+            misc: budgets.rich.misc
+        }
+    })
+    dbBudgets.mark = dbMarkBudget
 
-    const dbAdamBudget = await request(app)
-        .post(`/budgets/${dbUsers.adam._id}`)
-        .set('Authorization', tokens.adam)
-        .send({
-            user: dbUsers.adam._id,
-            title: budgets.rich.title,
-            colorScheme: budgets.rich.colorScheme,
-            location: budgets.rich.location,
-            income: budgets.rich.income,
-            categories: {
-                housing: budgets.rich.housing,
-                utility: budgets.rich.utility,
-                food: budgets.rich.food,
-                transportation: budgets.rich.transportation,
-                entertainment: budgets.rich.entertainment,
-                misc: budgets.rich.misc
-            }
-        })
-    dbBudgets.adam = dbAdamBudget.body.budget
+    const dbRebeccaBudget = await db.Budget.createOne({
+        user: dbUsers.rebecca._id,
+        title: budgets.rich.title,
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: {
+            housing: budgets.rich.housing,
+            utility: budgets.rich.utility,
+            food: budgets.rich.food,
+            transportation: budgets.rich.transportation,
+            entertainment: budgets.rich.entertainment,
+            misc: budgets.rich.misc
+        }
+    })
+    dbBudgets.rebecca = dbRebeccaBudget
 
-    const dbAdamBudget = await request(app)
-        .post(`/budgets/${dbUsers.adam._id}`)
-        .set('Authorization', tokens.adam)
-        .send({
-            user: dbUsers.adam._id,
-            title: budgets.rich.title,
-            colorScheme: budgets.rich.colorScheme,
-            location: budgets.rich.location,
-            income: budgets.rich.income,
-            categories: {
-                housing: budgets.rich.housing,
-                utility: budgets.rich.utility,
-                food: budgets.rich.food,
-                transportation: budgets.rich.transportation,
-                entertainment: budgets.rich.entertainment,
-                misc: budgets.rich.misc
-            }
-        })
-    dbBudgets.adam = dbAdamBudget.body.budget
+    const dbSusanBudget = await db.Budget.createOne({
+        user: dbUsers.susan._id,
+        title: budgets.rich.title,
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: {
+            housing: budgets.rich.housing,
+            utility: budgets.rich.utility,
+            food: budgets.rich.food,
+            transportation: budgets.rich.transportation,
+            entertainment: budgets.rich.entertainment,
+            misc: budgets.rich.misc
+        }
+    })
+    dbBudgets.susan = dbSusanBudget
 })
 
 // Test home page
