@@ -7,7 +7,7 @@ const app = require('../server')
 const db = require('../models')
 const users = require('../seeders/userSeeder')
 
-// Create new variables for test users and budgets
+// // Create new variables for test users and budgets
 let dbAdamUser, dbDebraUser, dbJohnUser, dbSusanUser
 let dbAdamBudget, dbDebraBudget, dbJohnBudget, dbSusanBudget
 
