@@ -90,12 +90,7 @@ describe('USERS: GET route for /:id', () => {
         const currentUser = await request(app)
             .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', 'Bearer token')
-        console.log(`CURRENT USER: ${currentUser}`)
-        console.log(`CURRENT USER.BODY: ${currentUser.body}`)
-        console.log(`CURRENT USER.ERROR: ${currentUser.error}`)
-        console.log(`CURRENT USER KEYS: ${Object.keys(currentUser)}`)
-        console.log(`CURRENT USER.BODY KEYS: ${Object.keys(currentUser.body)}`)
-        expect(currentUser.error).to.not.have.property('error')
+        expect(currentUser.error).to.not.equal('false')
     })
 })
 
