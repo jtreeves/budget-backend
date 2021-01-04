@@ -83,14 +83,19 @@ describe('USERS: GET route for /:id', () => {
         const currentUser = await request(app)
             .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', tokens.john)
-        expect(currentUser.body).to.have.property('id')
+        expect(currentUser.body.user).to.have.property('_id')
     })
 
     it('fails to display info of unauthenticated user', async () => {
         const currentUser = await request(app)
             .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', 'Bearer token')
-        expect(currentUser.body).to.not.have.property('id')
+        console.log(`CURRENT USER: ${currentUser}`)
+        console.log(`CURRENT USER.BODY: ${currentUser.body}`)
+        console.log(`CURRENT USER.ERROR: ${currentUser.error}`)
+        console.log(`CURRENT USER KEYS: ${Object.keys(currentUser)}`)
+        console.log(`CURRENT USER.BODY KEYS: ${Object.keys(currentUser.body)}`)
+        expect(currentUser.error).to.not.have.property('error')
     })
 })
 
