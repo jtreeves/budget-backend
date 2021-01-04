@@ -22,14 +22,14 @@ router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, 
             title: req.body.title,
             colorScheme: req.body.colorScheme,
             location: req.body.location,
+            income: req.body.income,
             categories: {
                 housing: {inputs: housing.inputs},
                 utility: {inputs: utility.inputs},
                 food: {inputs: food.inputs},
                 transportation: {inputs: transportation.inputs},
                 entertainment: {inputs: entertainment.inputs},
-                misc: {inputs: misc.inputs},
-                income: {inputs: income.inputs}  
+                misc: {inputs: misc.inputs}
             }
         })
         res.status(200).json({budget: newBudget})
@@ -80,8 +80,9 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
                 {_id: req.params.id},
                 {$set: {
                     title: req.body.title,
-                    location: req.body.location,
                     colorScheme: req.body.colorScheme,
+                    location: req.body.location,
+                    income: req.body.income,
                     categories: req.body.categories
                 }}
             )
