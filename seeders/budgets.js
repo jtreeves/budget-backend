@@ -48,25 +48,37 @@ const poorBudget = {
     income: 100000,
     categories: {
         housing: {
-            rent: 500
+            inputs: {
+                'rent': 500
+            }
         },
         utility: {
-            water: 50,
-            electric: 40
+            inputs: {
+                'water': 50,
+                'electric': 40
+            }
         },
         food: {
-            grocery: 100,
-            restaurant: 15
+            inputs: {
+                'grocery': 100,
+                'restaurant': 15
+            }
         },
         transportation: {
-            gas: 150
+            inputs: {
+                'gas': 150
+            }
         },
         entertainment: {
-            books: 10,
-            movies: 5
+            inputs: {
+                'books': 10,
+                'movies': 5
+            }
         },
         misc: {
-            flower: 1
+            inputs: {
+                'flower': 1
+            }
         }
     }
 }

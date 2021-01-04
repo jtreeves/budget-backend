@@ -201,20 +201,20 @@ before(async () => {
     const dbMarkBudget = await db.Budget.create({
         user: dbUsers.mark._id,
         title: 'Mark Budget',
-        colorScheme: budgets.rich.colorScheme,
-        location: budgets.rich.location,
-        income: budgets.rich.income,
-        categories: budgets.rich.categories
+        colorScheme: budgets.poor.colorScheme,
+        location: budgets.poor.location,
+        income: budgets.poor.income,
+        categories: budgets.poor.categories
     })
     dbBudgets.mark = dbMarkBudget
 
     const dbRebeccaBudget = await db.Budget.create({
         user: dbUsers.rebecca._id,
         title: 'Rebecca Budget',
-        colorScheme: budgets.rich.colorScheme,
-        location: budgets.rich.location,
-        income: budgets.rich.income,
-        categories: budgets.rich.categories
+        colorScheme: budgets.empty.colorScheme,
+        location: budgets.empty.location,
+        income: budgets.empty.income,
+        categories: budgets.empty.categories
     })
     dbBudgets.rebecca = dbRebeccaBudget
 
