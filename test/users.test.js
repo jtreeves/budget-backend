@@ -84,13 +84,6 @@ describe('USERS: POST route for /login', () => {
 // Test GET route for users/current
 describe('USERS: GET route for /current', () => {
     it('displays info of authenticated user', async () => {
-        // const loggingUser = await request(app)
-        //     .post('/users/login')
-        //     .set('Content-Type', 'application/x-www-form-urlencoded')
-        //     .send({
-        //         email: users.adam.email,
-        //         password: users.adam.password
-        //     })
         const currentUser = await request(app)
             .get('/users/current')
             .set('Authorization', tokens.john)
@@ -109,13 +102,6 @@ describe('USERS: GET route for /current', () => {
 // Test PUT route for users/current
 describe('USERS: PUT route for /current', () => {
     it('updates name field for a specific user', async () => {
-        // const loggingUser = await request(app)
-        //     .post('/users/login')
-        //     .set('Content-Type', 'application/x-www-form-urlencoded')
-        //     .send({
-        //         email: users.adam.email,
-        //         password: users.adam.password
-        //     })
         const currentUser = await request(app)
             .put('/users/current')
             .set('Authorization', tokens.adam)
@@ -131,13 +117,6 @@ describe('USERS: PUT route for /current', () => {
 // Test DELETE route for users/current
 describe('USERS: DELETE route for /current', () => {
     it('deletes a user', async () => {
-        // const loggingUser = await request(app)
-        //     .post('/users/login')
-        //     .set('Content-Type', 'application/x-www-form-urlencoded')
-        //     .send({
-        //         email: users.susan.email,
-        //         password: users.susan.password
-        //     })
         const deletedUser = await request(app)
             .delete('/users/current')
             .set('Authorization', tokens.susan)
