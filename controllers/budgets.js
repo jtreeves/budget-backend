@@ -1,7 +1,7 @@
 // Import external dependencies
 require('dotenv').config()
 const express = require('express')
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 const passport = require('passport')
 
 // Import internal models
@@ -10,8 +10,8 @@ const db = require('../models')
 // Create router
 const router = express.Router()
 
-// Create JSON web token
-const JWT_SECRET = process.env.JWT_SECRET
+// // Create JSON web token
+// const JWT_SECRET = process.env.JWT_SECRET
 
 // Create POST route for budgets/:id
 router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
