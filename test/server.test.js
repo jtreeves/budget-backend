@@ -19,7 +19,7 @@ before(async () => {
     await db.Budget.deleteMany({})
 })
 
-// Create four new test users before running tests
+// Create new test users before running tests
 before(async () => {
     await request(app)
         .post('/users/signup')
@@ -76,6 +76,63 @@ before(async () => {
         })
 })
 
+// Log in newly created users and grab their tokens
+before(async () => {
+    const loggingAdam = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.adam.email,
+            password: users.adam.password
+        })
+    tokens.adam = loggingAdam.body.token
+    
+    const loggingDebra = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.debra.email,
+            password: users.debra.password
+        })
+    tokens.debra = loggingDebra.body.token
+
+    const loggingJohn = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.john.email,
+            password: users.john.password
+        })
+    tokens.john = loggingJohn.body.token
+
+    const loggingMark = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.mark.email,
+            password: users.mark.password
+        })
+    tokens.mark = loggingMark.body.token
+
+    const loggingRebecca = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.rebecca.email,
+            password: users.rebecca.password
+        })
+    tokens.rebecca = loggingRebecca.body.token
+
+    const loggingSusan = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.susan.email,
+            password: users.susan.password
+        })
+    tokens.susan = loggingSusan.body.token
+})
+
 // Find new users in database
 before(async () => {
     dbAdamUser = await db.User.findOne({
@@ -109,8 +166,32 @@ before(async () => {
     dbUsers.susan = dbSusanUser
 })
 
-// Find new users' budgets in database
+// Create budgets for new users
 before(async () => {
+    
+    
+    
+    
+    const newBudget = await request(app)
+            .post(`/budgets/${dbUsers.john._id}`)
+            .set('Authorization', tokens.john)
+            .send({
+                user: dbUsers.john._id,
+                title: 'Test Budget',
+                colorScheme: 'Not Green',
+                location: 'New York, NY',
+                income: 1000000,
+                categories: {
+                    housing: {inputs: {}},
+                    utility: {inputs: {}},
+                    food: {inputs: {}},
+                    transportation: {inputs: {}},
+                    entertainment: {inputs: {}},
+                    misc: {inputs: {}}
+                }
+            })
+    
+    
     dbAdamBudget = await db.Budget.findOne({
         user: dbAdamUser._id
     })
@@ -140,45 +221,6 @@ before(async () => {
         user: dbSusanUser._id
     })
     dbBudgets.susan = dbSusanBudget
-})
-
-// Log in a subset of newly created users and grab their tokens
-before(async () => {
-    const loggingAdam = await request(app)
-        .post('/users/login')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            email: users.adam.email,
-            password: users.adam.password
-        })
-    tokens.adam = loggingAdam.body.token
-    
-    const loggingDebra = await request(app)
-        .post('/users/login')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            email: users.debra.email,
-            password: users.debra.password
-        })
-    tokens.debra = loggingDebra.body.token
-
-    const loggingJohn = await request(app)
-        .post('/users/login')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            email: users.john.email,
-            password: users.john.password
-        })
-    tokens.john = loggingJohn.body.token
-
-    const loggingSusan = await request(app)
-        .post('/users/login')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            email: users.susan.email,
-            password: users.susan.password
-        })
-    tokens.susan = loggingSusan.body.token
 })
 
 // Test home page
