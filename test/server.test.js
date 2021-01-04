@@ -175,12 +175,12 @@ before(async () => {
         location: budgets.rich.location,
         income: budgets.rich.income,
         categories: {
-            housing: budgets.rich.housing,
-            utility: budgets.rich.utility,
-            food: budgets.rich.food,
-            transportation: budgets.rich.transportation,
-            entertainment: budgets.rich.entertainment,
-            misc: budgets.rich.misc
+            housing: {inputs: budgets.rich.housing},
+            utility: {inputs: budgets.rich.utility},
+            food: {inputs: budgets.rich.food},
+            transportation: {inputs: budgets.rich.transportation},
+            entertainment: {inputs: budgets.rich.entertainment},
+            misc: {inputs: budgets.rich.misc}
         }
     })
     dbBudgets.adam = dbAdamBudget
@@ -192,12 +192,12 @@ before(async () => {
         location: budgets.rich.location,
         income: budgets.rich.income,
         categories: {
-            housing: budgets.rich.housing,
-            utility: budgets.rich.utility,
-            food: budgets.rich.food,
-            transportation: budgets.rich.transportation,
-            entertainment: budgets.rich.entertainment,
-            misc: budgets.rich.misc
+            housing: {inputs: budgets.rich.housing},
+            utility: {inputs: budgets.rich.utility},
+            food: {inputs: budgets.rich.food},
+            transportation: {inputs: budgets.rich.transportation},
+            entertainment: {inputs: budgets.rich.entertainment},
+            misc: {inputs: budgets.rich.misc}
         }
     })
     dbBudgets.debra = dbDebraBudget
@@ -209,12 +209,12 @@ before(async () => {
         location: budgets.rich.location,
         income: budgets.rich.income,
         categories: {
-            housing: budgets.rich.housing,
-            utility: budgets.rich.utility,
-            food: budgets.rich.food,
-            transportation: budgets.rich.transportation,
-            entertainment: budgets.rich.entertainment,
-            misc: budgets.rich.misc
+            housing: {inputs: budgets.rich.housing},
+            utility: {inputs: budgets.rich.utility},
+            food: {inputs: budgets.rich.food},
+            transportation: {inputs: budgets.rich.transportation},
+            entertainment: {inputs: budgets.rich.entertainment},
+            misc: {inputs: budgets.rich.misc}
         }
     })
     dbBudgets.john = dbJohnBudget
@@ -226,12 +226,12 @@ before(async () => {
         location: budgets.rich.location,
         income: budgets.rich.income,
         categories: {
-            housing: budgets.rich.housing,
-            utility: budgets.rich.utility,
-            food: budgets.rich.food,
-            transportation: budgets.rich.transportation,
-            entertainment: budgets.rich.entertainment,
-            misc: budgets.rich.misc
+            housing: {inputs: budgets.rich.housing},
+            utility: {inputs: budgets.rich.utility},
+            food: {inputs: budgets.rich.food},
+            transportation: {inputs: budgets.rich.transportation},
+            entertainment: {inputs: budgets.rich.entertainment},
+            misc: {inputs: budgets.rich.misc}
         }
     })
     dbBudgets.mark = dbMarkBudget
@@ -243,12 +243,12 @@ before(async () => {
         location: budgets.rich.location,
         income: budgets.rich.income,
         categories: {
-            housing: budgets.rich.housing,
-            utility: budgets.rich.utility,
-            food: budgets.rich.food,
-            transportation: budgets.rich.transportation,
-            entertainment: budgets.rich.entertainment,
-            misc: budgets.rich.misc
+            housing: {inputs: budgets.rich.housing},
+            utility: {inputs: budgets.rich.utility},
+            food: {inputs: budgets.rich.food},
+            transportation: {inputs: budgets.rich.transportation},
+            entertainment: {inputs: budgets.rich.entertainment},
+            misc: {inputs: budgets.rich.misc}
         }
     })
     dbBudgets.rebecca = dbRebeccaBudget
@@ -260,12 +260,12 @@ before(async () => {
         location: budgets.rich.location,
         income: budgets.rich.income,
         categories: {
-            housing: budgets.rich.housing,
-            utility: budgets.rich.utility,
-            food: budgets.rich.food,
-            transportation: budgets.rich.transportation,
-            entertainment: budgets.rich.entertainment,
-            misc: budgets.rich.misc
+            housing: {inputs: budgets.rich.housing},
+            utility: {inputs: budgets.rich.utility},
+            food: {inputs: budgets.rich.food},
+            transportation: {inputs: budgets.rich.transportation},
+            entertainment: {inputs: budgets.rich.entertainment},
+            misc: {inputs: budgets.rich.misc}
         }
     })
     dbBudgets.susan = dbSusanBudget

@@ -10,7 +10,7 @@ const { dbUsers, tokens } = require('./server.test')
 
 // Test POST route for users/signup
 describe('USERS: POST route for /signup', () => {
-    it('creates a new user and saves it to the database with a hashed password, a date field, and a new budget', async () => {
+    it('creates a new user and saves it to the database with a hashed password and a date field', async () => {
         const newUser = await request(app)
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -22,14 +22,10 @@ describe('USERS: POST route for /signup', () => {
         const foundUser = await db.User.findOne({
             email: users.bryan.email
         })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         expect(newUser.status).to.equal(200)
         expect(foundUser).to.exist
         expect(foundUser.password).to.not.equal('mark1234')
         expect(foundUser).to.have.property('date')
-        expect(foundBudget).to.have.property('categories')
     })
 
     it('fails to create a user if email already in use', async () => {
