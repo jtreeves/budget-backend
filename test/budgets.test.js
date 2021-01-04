@@ -74,17 +74,44 @@ describe('BUDGETS: PUT route for /:id', () => {
             .set('Authorization', tokens.john)
             .send({
                 _id: dbBudgets.john._id,
-                title: 'Updated Budget Name',
+                title: 'Updated Budget for John',
                 colorScheme: 'Not A Real Color',
                 location: 'Nashville, TN',
                 income: 50000,
                 categories: {
-                    housing: {inputs: budgets.rich.housing},
-                    utility: {inputs: budgets.rich.utility},
-                    food: {inputs: budgets.rich.food},
-                    transportation: {inputs: budgets.rich.transportation},
-                    entertainment: {inputs: budgets.rich.entertainment},
-                    misc: {inputs: budgets.rich.misc}
+                    housing: {
+                        inputs: {
+                            'rent': 1000
+                        }
+                    },
+                    utility: {
+                        inputs: {
+                            'water': 100,
+                            'electric': 100
+                        }
+                    },
+                    food: {
+                        inputs: {
+                            'grocery': 200,
+                            'restaurant': 150
+                        }
+                    },
+                    transportation: {
+                        inputs: {
+                            'gas': 350
+                        }
+                    },
+                    entertainment: {
+                        inputs: {
+                            'books': 75,
+                            'movies': 85
+                        }
+                    },
+                    misc: {
+                        inputs: {
+                            'flower': 1
+                        }
+                    }
                 }
             })
         expect(updatedBudget.status).to.equal(200)
