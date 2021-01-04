@@ -174,14 +174,7 @@ before(async () => {
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
-        categories: {
-            housing: {inputs: budgets.rich.housing},
-            utility: {inputs: budgets.rich.utility},
-            food: {inputs: budgets.rich.food},
-            transportation: {inputs: budgets.rich.transportation},
-            entertainment: {inputs: budgets.rich.entertainment},
-            misc: {inputs: budgets.rich.misc}
-        }
+        categories: budgets.rich.categories
     })
     dbBudgets.adam = dbAdamBudget
 
@@ -191,14 +184,7 @@ before(async () => {
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
-        categories: {
-            housing: {inputs: budgets.rich.housing},
-            utility: {inputs: budgets.rich.utility},
-            food: {inputs: budgets.rich.food},
-            transportation: {inputs: budgets.rich.transportation},
-            entertainment: {inputs: budgets.rich.entertainment},
-            misc: {inputs: budgets.rich.misc}
-        }
+        categories: budgets.rich.categories
     })
     dbBudgets.debra = dbDebraBudget
 
@@ -208,14 +194,7 @@ before(async () => {
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
-        categories: {
-            housing: {inputs: budgets.rich.housing},
-            utility: {inputs: budgets.rich.utility},
-            food: {inputs: budgets.rich.food},
-            transportation: {inputs: budgets.rich.transportation},
-            entertainment: {inputs: budgets.rich.entertainment},
-            misc: {inputs: budgets.rich.misc}
-        }
+        categories: budgets.rich.categories
     })
     dbBudgets.john = dbJohnBudget
 
@@ -225,14 +204,7 @@ before(async () => {
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
-        categories: {
-            housing: {inputs: budgets.rich.housing},
-            utility: {inputs: budgets.rich.utility},
-            food: {inputs: budgets.rich.food},
-            transportation: {inputs: budgets.rich.transportation},
-            entertainment: {inputs: budgets.rich.entertainment},
-            misc: {inputs: budgets.rich.misc}
-        }
+        categories: budgets.rich.categories
     })
     dbBudgets.mark = dbMarkBudget
 
@@ -242,14 +214,7 @@ before(async () => {
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
-        categories: {
-            housing: {inputs: budgets.rich.housing},
-            utility: {inputs: budgets.rich.utility},
-            food: {inputs: budgets.rich.food},
-            transportation: {inputs: budgets.rich.transportation},
-            entertainment: {inputs: budgets.rich.entertainment},
-            misc: {inputs: budgets.rich.misc}
-        }
+        categories: budgets.rich.categories
     })
     dbBudgets.rebecca = dbRebeccaBudget
 
@@ -259,14 +224,7 @@ before(async () => {
         colorScheme: budgets.rich.colorScheme,
         location: budgets.rich.location,
         income: budgets.rich.income,
-        categories: {
-            housing: {inputs: budgets.rich.housing},
-            utility: {inputs: budgets.rich.utility},
-            food: {inputs: budgets.rich.food},
-            transportation: {inputs: budgets.rich.transportation},
-            entertainment: {inputs: budgets.rich.entertainment},
-            misc: {inputs: budgets.rich.misc}
-        }
+        categories: budgets.rich.categories
     })
     dbBudgets.susan = dbSusanBudget
 })
