@@ -24,7 +24,7 @@ app.use('/budgets', budgets)
 
 // Get home route
 app.get('/', (req, res) => {
-    res.status(200).json({msg: 'Viewing the backend of a MERN app'})
+    res.status(200).json({msg: 'Viewing the backend of the Kaleidoscope app'})
 })
 
 // Create port

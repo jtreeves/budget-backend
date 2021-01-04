@@ -5,39 +5,17 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-
-// Delete all users and budgets before running tests
-before(async () => {
-    await db.User.deleteMany({})
-    await db.Budget.deleteMany({})
-})
+const users = require('../seeders/userSeeder')
+const { dbUsers, dbBudgets, tokens } = require('./server.test')
 
 // Test POST route for budgets/:id
 describe('BUDGETS: POST route for /:id', () => {
     it('creates a new budget for an existing user and saves it to the database', async () => {
-        await request(app)
-            .post('/users/signup')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                name: 'Susan Smith',
-                email: 'susan@email.com',
-                password: 'susan1234'
-            })
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: 'susan@email.com',
-                password: 'susan1234'
-            })
-        const currentUser = await request(app)
-            .get('/users/current')
-            .set('Authorization', loggingUser.body.token)
         const newBudget = await request(app)
-            .post(`/budgets/${currentUser.body.id}`)
-            .set('Authorization', loggingUser.body.token)
+            .post(`/budgets/${dbUsers.john._id}`)
+            .set('Authorization', tokens.john)
             .send({
-                user: currentUser.body.id,
+                user: dbUsers.john._id,
                 title: 'Test Budget',
                 colorScheme: 'Not Green',
                 categories: {
@@ -51,7 +29,7 @@ describe('BUDGETS: POST route for /:id', () => {
                 }
             })
         const foundBudgets = await db.Budget.find({
-            user: currentUser.body.id
+            user: dbUsers.john._id
         })
         expect(newBudget).to.exist
         expect(foundBudgets).to.have.lengthOf.above(1)
@@ -61,24 +39,11 @@ describe('BUDGETS: POST route for /:id', () => {
 // Test GET route for budgets/:id
 describe('BUDGETS: GET route for /:id', () => {
     it('displays data for a specific budget', async () => {
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: 'john@email.com',
-                password: 'john1234'
-            })
-        const foundUser = await db.User.findOne({
-            email: 'john@email.com'
-        })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         const getBudget = await request(app)
-            .get(`/budgets/${foundBudget._id}`)
-            .set('Authorization', loggingUser.body.token)
+            .get(`/budgets/${dbBudgets.john._id}`)
+            .set('Authorization', tokens.john)
         let matchBudgets
-        if (getBudget.body.budget._id == foundBudget._id) {
+        if (getBudget.body.budget._id == dbBudgets.john._id) {
             matchBudgets = true
         } else {
             matchBudgets = false
@@ -90,47 +55,12 @@ describe('BUDGETS: GET route for /:id', () => {
 // Test GET route for budgets/all/:id
 describe('BUDGETS: GET route for /all/:id', () => {
     it('returns all budgets associated with a specific user', async () => {
-        const newUser = await request(app)
-            .post('/users/signup')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                name: 'David Davidson',
-                email: 'david@email.com',
-                password: 'david1234'
-            })
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: 'david@email.com',
-                password: 'david1234'
-            })
-        const foundUser = await db.User.findOne({
-            email: 'david@email.com'
-        })
-        const newBudget = await request(app)
-            .post(`/budgets/${foundUser._id}`)
-            .set('Authorization', loggingUser.body.token)
-            .send({
-                user: foundUser._id,
-                title: 'Test Budget',
-                colorScheme: 'Not Green',
-                categories: {
-                    housing: {inputs: {}},
-                    utility: {inputs: {}},
-                    food: {inputs: {}},
-                    transportation: {inputs: {}},
-                    entertainment: {inputs: {}},
-                    misc: {inputs: {}},
-                    income: {inputs: {}}  
-                }
-            })
         const foundBudgets = await db.Budget.find({
-            user: foundUser._id
+            user: dbUsers.john._id
         })
         const getBudgets = await request(app)
-            .get(`/budgets/all/${foundUser._id}`)
-            .set('Authorization', loggingUser.body.token)
+            .get(`/budgets/all/${dbUsers.john._id}`)
+            .set('Authorization', tokens.john)
         expect(getBudgets.body.budgets.length).to.equal(foundBudgets.length)
     })
 })
@@ -139,24 +69,11 @@ describe('BUDGETS: GET route for /all/:id', () => {
 // Test PUT route for budgets/:id
 describe('BUDGETS: PUT route for /:id', () => {
     it('updates a specific budget', async () => {
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: 'john@email.com',
-                password: 'john1234'
-            })
-        const foundUser = await db.User.findOne({
-            email: 'john@email.com'
-        })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         const updatedBudget = await request(app)
-            .put(`/budgets/${foundBudget._id}`)
-            .set('Authorization', loggingUser.body.token)
+            .put(`/budgets/${dbBudgets.john._id}`)
+            .set('Authorization', tokens.john)
             .send({
-                _id: foundBudget._id,
+                _id: dbBudgets.john._id,
                 title: 'Updated Budget Name'
             })
         expect(updatedBudget.status).to.equal(200)
@@ -167,24 +84,11 @@ describe('BUDGETS: PUT route for /:id', () => {
 // Test DELETE route for budgets/:id
 describe('BUDGETS: DELETE route for /:id', () => {
     it('deletes a specific budget', async () => {
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: 'john@email.com',
-                password: 'john1234'
-            })
-        const foundUser = await db.User.findOne({
-            email: 'john@email.com'
-        })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         const deletedBudget = await request(app)
-            .delete(`/budgets/${foundBudget._id}`)
-            .set('Authorization', loggingUser.body.token)
+            .delete(`/budgets/${dbBudgets.debra._id}`)
+            .set('Authorization', tokens.debra)
             .send({
-                _id: foundBudget._id
+                _id: dbBudgets.debra._id
             })
         expect(deletedBudget.status).to.equal(200)
     })
