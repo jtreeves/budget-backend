@@ -83,6 +83,12 @@ describe('USERS: GET route for /current', () => {
         const currentUser = await request(app)
             .get('/users/current')
             .set('Authorization', tokens.john)
+        console.log(`CURRENT USER: ${currentUser}`)
+        console.log(`CURRENT USER.BODY: ${currentUser.body}`)
+        console.log(`CURRENT USER.BODY.MSG: ${currentUser.body.msg}`)
+        console.log(`CURRENT USER KEYS: ${Object.keys(currentUser)}`)
+        console.log(`CURRENT USER.BODY KEYS: ${Object.keys(currentUser.body)}`)
+        console.log(`CURRENT USER.BODY.MSG KEYS: ${Object.keys(currentUser.body.msg)}`)
         expect(currentUser.body).to.have.property('id')
     })
 
