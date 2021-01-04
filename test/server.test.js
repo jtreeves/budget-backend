@@ -12,8 +12,8 @@ let dbAdamUser, dbDebraUser, dbJohnUser, dbSusanUser
 let dbAdamBudget, dbDebraBudget, dbJohnBudget, dbSusanBudget
 
 // Create arrays for holding users and budgets
-let dbUsers = []
-let dbBudgets = []
+let dbUsers = {}
+let dbBudgets = {}
 
 // Delete all existing users and budgets before running tests
 before(async () => {
@@ -65,22 +65,22 @@ before(async () => {
     dbAdamUser = await db.User.findOne({
         email: users.adam.email
     })
-    dbUsers.push(dbAdamUser)
+    dbUsers.adam = dbAdamUser
 
     dbDebraUser = await db.User.findOne({
         email: users.debra.email
     })
-    dbUsers.push(dbDebraUser)
+    dbUsers.debra = dbDebraUser
 
     dbJohnUser = await db.User.findOne({
         email: users.john.email
     })
-    dbUsers.push(dbJohnUser)
+    dbUsers.john = dbJohnUser
 
     dbSusanUser = await db.User.findOne({
         email: users.susan.email
     })
-    dbUsers.push(dbSusanUser)
+    dbUsers.susan = dbSusanUser
 })
 
 // Find budgets in database
@@ -88,22 +88,22 @@ before(async () => {
     dbAdamBudget = await db.Budget.findOne({
         user: dbAdamUser._id
     })
-    dbBudgets.push(dbAdamBudget)
+    dbBudgets.adam = dbAdamBudget
 
     dbDebraBudget = await db.Budget.findOne({
         user: dbDebraUser._id
     })
-    dbBudgets.push(dbDebraBudget)
+    dbBudgets.debra = dbDebraBudget
 
     dbJohnBudget = await db.Budget.findOne({
         user: dbJohnUser._id
     })
-    dbBudgets.push(dbJohnBudget)
+    dbBudgets.john = dbJohnBudget
 
     dbSusanBudget = await db.Budget.findOne({
         user: dbSusanUser._id
     })
-    dbBudgets.push(dbSusanBudget)
+    dbBudgets.susan = dbSusanBudget
 })
 
 // Test home page

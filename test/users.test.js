@@ -120,8 +120,8 @@ describe('USERS: PUT route for /current', () => {
             .put('/users/current')
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: dbUsers[0]._id,
-                name: 'Jonathan Doezius'
+                _id: dbUsers.adam._id,
+                name: 'Adam Is Awesome'
             })
         expect(currentUser.status).to.equal(200)
     })
@@ -142,7 +142,7 @@ describe('USERS: DELETE route for /current', () => {
             .delete('/users/current')
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: dbUsers[3]._id
+                _id: dbUsers.susan._id
             })
         expect(deletedUser.status).to.equal(200)
     })
