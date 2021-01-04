@@ -57,10 +57,10 @@ describe('BUDGETS: GET route for /:id', () => {
                 password: users.john.password
             })
         const getBudget = await request(app)
-            .get(`/budgets/${dbBudgets[2]._id}`)
+            .get(`/budgets/${dbBudgets.john._id}`)
             .set('Authorization', loggingUser.body.token)
         let matchBudgets
-        if (getBudget.body.budget._id == dbBudgets[2]._id) {
+        if (getBudget.body.budget._id == dbBudgets.john._id) {
             matchBudgets = true
         } else {
             matchBudgets = false
@@ -80,10 +80,10 @@ describe('BUDGETS: GET route for /all/:id', () => {
                 password: users.debra.password
             })
         const foundBudgets = await db.Budget.find({
-            user: dbUsers[1]._id
+            user: dbUsers.debra._id
         })
         const getBudgets = await request(app)
-            .get(`/budgets/all/${dbUsers[1]._id}`)
+            .get(`/budgets/all/${dbUsers.debra._id}`)
             .set('Authorization', loggingUser.body.token)
         expect(getBudgets.body.budgets.length).to.equal(foundBudgets.length)
     })
@@ -101,10 +101,10 @@ describe('BUDGETS: PUT route for /:id', () => {
                 password: users.john.password
             })
         const updatedBudget = await request(app)
-            .put(`/budgets/${dbBudgets[2]._id}`)
+            .put(`/budgets/${dbBudgets.john._id}`)
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: dbBudgets[2]._id,
+                _id: dbBudgets.john._id,
                 title: 'Updated Budget Name'
             })
         expect(updatedBudget.status).to.equal(200)
@@ -123,10 +123,10 @@ describe('BUDGETS: DELETE route for /:id', () => {
                 password: users.john.password
             })
         const deletedBudget = await request(app)
-            .delete(`/budgets/${dbBudgets[2]._id}`)
+            .delete(`/budgets/${dbBudgets.john._id}`)
             .set('Authorization', loggingUser.body.token)
             .send({
-                _id: dbBudgets[2]._id
+                _id: dbBudgets.john._id
             })
         expect(deletedBudget.status).to.equal(200)
     })
