@@ -90,7 +90,7 @@ describe('USERS: GET route for /:id', () => {
         const currentUser = await request(app)
             .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', 'Bearer token')
-        expect(currentUser.error).to.not.equal('false')
+        expect(currentUser.error).to.not.equal(false)
     })
 })
 
@@ -111,7 +111,13 @@ describe('USERS: PUT route for /:id', () => {
         console.log(`UPDATED USER KEYS: ${Object.keys(updatedUser)}`)
         console.log(`UPDATED USER.BODY KEYS: ${Object.keys(updatedUser.body)}`)
         console.log(`UPDATED USER.BODY.USER KEYS: ${Object.keys(updatedUser.body.user)}`)
-        expect(updatedUser.body.user.firstTimeUser).to.equal('false')
+        const foundUser = await db.User.findOne({
+            _id: dbUsers.adam._id
+        })
+        console.log(`FOUND USER: ${foundUser}`)
+        console.log(`FOUND USER.FIRSTTIMEUSER: ${foundUser.firstTimeUser}`)
+        console.log(`FOUND USER KEYS: ${Object.keys(foundUser)}`)
+        expect(foundUser.firstTimeUser).to.equal(false)
     })
 })
 
