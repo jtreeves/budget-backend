@@ -26,13 +26,19 @@ async function createUser(user) {
 }
 
 async function loggingUser(user) {
-    await request(app)
+    const loggedUser = await request(app)
         .post('/users/login')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
             email: user.email,
             password: user.password
-        }) 
+        })
+    console.log(`LOGGED USER: ${loggedUser}`)
+    console.log(`LOGGED USER.BODY: ${loggedUser.body}`)
+    console.log(`LOGGED USER.BODY.TOKEN: ${loggedUser.body.token}`)
+    console.log(`LOGGED USER KEYS: ${Object.keys(loggedUser)}`)
+    console.log(`LOGGED USER.BODY KEYS: ${Object.keys(loggedUser.body)}`)
+    return loggedUser.body.token
 }
 
 // Delete all existing users and budgets before running tests
@@ -71,9 +77,10 @@ before(async () => {
     //         password: users.debra.password
     //     })
     // tokens.debra = loggingDebra.body.token
-
-    tokens.debra = loggingUser(users.debra).body.token
+    // const loggingDebra = loggingUser(users.debra)
+    tokens.debra = loggingUser(users.debra)
     console.log(`TOKENS.DEBRA: ${tokens.debra}`)
+    console.log(`TOKENS.DEBRA KEYS: ${Object.keys(tokens.debra)}`)
 
     const loggingJohn = await request(app)
         .post('/users/login')
