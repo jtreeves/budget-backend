@@ -77,50 +77,44 @@ describe('USERS: POST route for /login', () => {
     })
 })
 
-// Test GET route for users/current
-describe('USERS: GET route for /current', () => {
+// Test GET route for users/:id
+describe('USERS: GET route for /:id', () => {
     it('displays info of authenticated user', async () => {
         const currentUser = await request(app)
-            .get('/users/current')
+            .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', tokens.john)
-        console.log(`CURRENT USER: ${currentUser}`)
-        console.log(`CURRENT USER.BODY: ${currentUser.body}`)
-        console.log(`CURRENT USER.BODY.MSG: ${currentUser.body.msg}`)
-        console.log(`CURRENT USER KEYS: ${Object.keys(currentUser)}`)
-        console.log(`CURRENT USER.BODY KEYS: ${Object.keys(currentUser.body)}`)
-        console.log(`CURRENT USER.BODY.MSG KEYS: ${Object.keys(currentUser.body.msg)}`)
         expect(currentUser.body).to.have.property('id')
     })
 
     it('fails to display info of unauthenticated user', async () => {
         const currentUser = await request(app)
-            .get('/users/current')
+            .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', 'Bearer token')
         expect(currentUser.body).to.not.have.property('id')
     })
 })
 
 // THIS TEST PASSES BUT DOESN'T UPDATE ANYTHING
-// Test PUT route for users/current
-describe('USERS: PUT route for /current', () => {
+// Test PUT route for users/:id
+describe('USERS: PUT route for /:id', () => {
     it('updates name field for a specific user', async () => {
-        const currentUser = await request(app)
-            .put('/users/current')
+        const updatedUser = await request(app)
+            .put(`/users/${dbUsers.adam._id}`)
             .set('Authorization', tokens.adam)
             .send({
                 _id: dbUsers.adam._id,
                 name: 'Adam Is Awesome'
             })
-        expect(currentUser.status).to.equal(200)
+        expect(updatedUser.status).to.equal(200)
     })
 })
 
 // THIS TEST PASSES BUT DOESN'T DELETE ANYTHING
-// Test DELETE route for users/current
-describe('USERS: DELETE route for /current', () => {
+// Test DELETE route for users/:id
+describe('USERS: DELETE route for /:id', () => {
     it('deletes a user', async () => {
         const deletedUser = await request(app)
-            .delete('/users/current')
+            .delete(`/users/${dbUsers.susan._id}`)
             .set('Authorization', tokens.susan)
             .send({
                 _id: dbUsers.susan._id
