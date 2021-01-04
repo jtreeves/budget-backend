@@ -54,6 +54,24 @@ before(async () => {
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
+            name: users.mark.name,
+            email: users.mark.email,
+            password: users.mark.password
+        })
+
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            name: users.rebecca.name,
+            email: users.rebecca.email,
+            password: users.rebecca.password
+        })
+
+    await request(app)
+        .post('/users/signup')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
             name: users.susan.name,
             email: users.susan.email,
             password: users.susan.password
@@ -77,6 +95,16 @@ before(async () => {
     })
     dbUsers.john = dbJohnUser
 
+    dbMarkUser = await db.User.findOne({
+        email: users.mark.email
+    })
+    dbUsers.mark = dbMarkUser
+
+    dbRebeccaUser = await db.User.findOne({
+        email: users.rebecca.email
+    })
+    dbUsers.rebecca = dbRebeccaUser
+
     dbSusanUser = await db.User.findOne({
         email: users.susan.email
     })
@@ -99,6 +127,16 @@ before(async () => {
         user: dbJohnUser._id
     })
     dbBudgets.john = dbJohnBudget
+
+    dbMarkBudget = await db.Budget.findOne({
+        user: dbMarkUser._id
+    })
+    dbBudgets.mark = dbMarkBudget
+
+    dbRebeccaBudget = await db.Budget.findOne({
+        user: dbRebeccaUser._id
+    })
+    dbBudgets.rebecca = dbRebeccaBudget
 
     dbSusanBudget = await db.Budget.findOne({
         user: dbSusanUser._id
