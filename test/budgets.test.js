@@ -16,10 +16,10 @@ describe('BUDGETS: POST route for /:id', () => {
             .set('Authorization', tokens.john)
             .send({
                 user: dbUsers.john._id,
-                title: 'Test Budget',
-                colorScheme: 'Not Green',
-                location: 'New York, NY',
-                income: 1000000,
+                title: 'A Nice Simple Budget',
+                colorScheme: 'Blue',
+                location: 'Chicago, IL',
+                income: 800000,
                 categories: {
                     housing: {inputs: {}},
                     utility: {inputs: {}},
