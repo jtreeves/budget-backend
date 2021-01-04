@@ -135,32 +135,32 @@ before(async () => {
 
 // Find new users in database
 before(async () => {
-    dbAdamUser = await db.User.findOne({
+    const dbAdamUser = await db.User.findOne({
         email: users.adam.email
     })
     dbUsers.adam = dbAdamUser
 
-    dbDebraUser = await db.User.findOne({
+    const dbDebraUser = await db.User.findOne({
         email: users.debra.email
     })
     dbUsers.debra = dbDebraUser
 
-    dbJohnUser = await db.User.findOne({
+    const dbJohnUser = await db.User.findOne({
         email: users.john.email
     })
     dbUsers.john = dbJohnUser
 
-    dbMarkUser = await db.User.findOne({
+    const dbMarkUser = await db.User.findOne({
         email: users.mark.email
     })
     dbUsers.mark = dbMarkUser
 
-    dbRebeccaUser = await db.User.findOne({
+    const dbRebeccaUser = await db.User.findOne({
         email: users.rebecca.email
     })
     dbUsers.rebecca = dbRebeccaUser
 
-    dbSusanUser = await db.User.findOne({
+    const dbSusanUser = await db.User.findOne({
         email: users.susan.email
     })
     dbUsers.susan = dbSusanUser
@@ -172,55 +172,55 @@ before(async () => {
     
     
     
-    const newBudget = await request(app)
-            .post(`/budgets/${dbUsers.john._id}`)
-            .set('Authorization', tokens.john)
-            .send({
-                user: dbUsers.john._id,
-                title: 'Test Budget',
-                colorScheme: 'Not Green',
-                location: 'New York, NY',
-                income: 1000000,
-                categories: {
-                    housing: {inputs: {}},
-                    utility: {inputs: {}},
-                    food: {inputs: {}},
-                    transportation: {inputs: {}},
-                    entertainment: {inputs: {}},
-                    misc: {inputs: {}}
-                }
-            })
+    const dbAdamBudget = await request(app)
+        .post(`/budgets/${dbUsers.adam._id}`)
+        .set('Authorization', tokens.adam)
+        .send({
+            user: dbUsers.adam._id,
+            title: budgets.rich.title,
+            colorScheme: budgets.rich.colorScheme,
+            location: budgets.rich.location,
+            income: budgets.rich.income,
+            categories: {
+                housing: {inputs: {}},
+                utility: {inputs: {}},
+                food: {inputs: {}},
+                transportation: {inputs: {}},
+                entertainment: {inputs: {}},
+                misc: {inputs: {}}
+            }
+        })
     
     
-    dbAdamBudget = await db.Budget.findOne({
-        user: dbAdamUser._id
-    })
-    dbBudgets.adam = dbAdamBudget
+    // dbAdamBudget = await db.Budget.findOne({
+    //     user: dbAdamUser._id
+    // })
+    // dbBudgets.adam = dbAdamBudget
 
-    dbDebraBudget = await db.Budget.findOne({
-        user: dbDebraUser._id
-    })
-    dbBudgets.debra = dbDebraBudget
+    // dbDebraBudget = await db.Budget.findOne({
+    //     user: dbDebraUser._id
+    // })
+    // dbBudgets.debra = dbDebraBudget
 
-    dbJohnBudget = await db.Budget.findOne({
-        user: dbJohnUser._id
-    })
-    dbBudgets.john = dbJohnBudget
+    // dbJohnBudget = await db.Budget.findOne({
+    //     user: dbJohnUser._id
+    // })
+    // dbBudgets.john = dbJohnBudget
 
-    dbMarkBudget = await db.Budget.findOne({
-        user: dbMarkUser._id
-    })
-    dbBudgets.mark = dbMarkBudget
+    // dbMarkBudget = await db.Budget.findOne({
+    //     user: dbMarkUser._id
+    // })
+    // dbBudgets.mark = dbMarkBudget
 
-    dbRebeccaBudget = await db.Budget.findOne({
-        user: dbRebeccaUser._id
-    })
-    dbBudgets.rebecca = dbRebeccaBudget
+    // dbRebeccaBudget = await db.Budget.findOne({
+    //     user: dbRebeccaUser._id
+    // })
+    // dbBudgets.rebecca = dbRebeccaBudget
 
-    dbSusanBudget = await db.Budget.findOne({
-        user: dbSusanUser._id
-    })
-    dbBudgets.susan = dbSusanBudget
+    // dbSusanBudget = await db.Budget.findOne({
+    //     user: dbSusanUser._id
+    // })
+    // dbBudgets.susan = dbSusanBudget
 })
 
 // Test home page

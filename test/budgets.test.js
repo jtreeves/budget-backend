@@ -32,6 +32,13 @@ describe('BUDGETS: POST route for /:id', () => {
         const foundBudgets = await db.Budget.find({
             user: dbUsers.john._id
         })
+        console.log(`NEW BUDGET: ${newBudget}`)
+        console.log(`NEW BUDGET.BODY: ${newBudget.body}`)
+        console.log(`NEW BUDGET.BODY.BUDGET: ${newBudget.body.budget}`)
+        console.log(`NEW BUDGET.BODY.BUDGET.TITLE: ${newBudget.body.budget.title}`)
+        console.log(`NEW BUDGET KEYS: ${Object.keys(newBudget)}`)
+        console.log(`NEW BUDGET.BODY KEYS: ${Object.keys(newBudget.body)}`)
+        console.log(`NEW BUDGET.BODY.BUDGET KEYS: ${Object.keys(newBudget.body.budget)}`)
         expect(newBudget).to.exist
         expect(foundBudgets).to.have.lengthOf.above(1)
     })
