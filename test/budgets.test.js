@@ -20,7 +20,7 @@ describe('BUDGETS: POST route for /:id', () => {
                 colorScheme: 'Blue',
                 location: 'Chicago, IL',
                 income: 800000,
-                categories: budgets.rich.categories
+                categories: budgets.empty.categories
             })
         const foundBudgets = await db.Budget.find({
             user: dbUsers.john._id

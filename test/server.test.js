@@ -211,10 +211,10 @@ before(async () => {
     const dbRebeccaBudget = await db.Budget.create({
         user: dbUsers.rebecca._id,
         title: 'Rebecca Budget',
-        colorScheme: budgets.empty.colorScheme,
-        location: budgets.empty.location,
-        income: budgets.empty.income,
-        categories: budgets.empty.categories
+        colorScheme: budgets.full.colorScheme,
+        location: budgets.full.location,
+        income: budgets.full.income,
+        categories: budgets.full.categories
     })
     dbBudgets.rebecca = dbRebeccaBudget
 
