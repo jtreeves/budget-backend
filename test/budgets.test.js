@@ -36,6 +36,8 @@ describe('BUDGETS: POST route for /:id', () => {
         console.log(`NEW BUDGET.BODY: ${newBudget.body}`)
         console.log(`NEW BUDGET.BODY.BUDGET: ${newBudget.body.budget}`)
         console.log(`NEW BUDGET.BODY.BUDGET.TITLE: ${newBudget.body.budget.title}`)
+        console.log(`NEW BUDGET.BODY.BUDGET.USER: ${newBudget.body.budget.user}`)
+        console.log(`NEW BUDGET.BODY.BUDGET._ID: ${newBudget.body.budget._id}`)
         console.log(`NEW BUDGET KEYS: ${Object.keys(newBudget)}`)
         console.log(`NEW BUDGET.BODY KEYS: ${Object.keys(newBudget.body)}`)
         console.log(`NEW BUDGET.BODY.BUDGET KEYS: ${Object.keys(newBudget.body.budget)}`)
