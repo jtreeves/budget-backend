@@ -68,23 +68,21 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
         try {
             const updatedBudget = await db.Budget.updateOne(
                 {_id: req.params.id},
-                {$set: {
-                    'categories': req.body.categories
-                }}
-                )
-                res.status(200).json({budget: updatedBudget})
-            } catch(error) {
-                res.status(400).json({ msg: error })
-            }
-        } else {
-            try {
+                {$set: {categories: req.body.categories}}
+            )
+            res.status(200).json({budget: updatedBudget})
+        } catch(error) {
+            res.status(400).json({msg: error})
+        }
+    } else {
+        try {
             const updatedBudget = await db.Budget.updateOne(
                 {_id: req.params.id},
                 {$set: {
-                    'title': req.body.title,
-                    'location': req.body.location,
-                    'colorScheme': req.body.colorScheme,
-                    'categories': req.body.categories
+                    title: req.body.title,
+                    location: req.body.location,
+                    colorScheme: req.body.colorScheme,
+                    categories: req.body.categories
                 }}
             )
             res.status(200).json({budget: updatedBudget})
@@ -97,10 +95,8 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
 // Create DELETE route for budgets/:id
 router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        const currentBudget = await db.Budget.deleteOne(
-            {_id: req.params.id}
-        )
-        res.status(200).json({budget: currentBudget})
+        await db.Budget.deleteOne({_id: req.params.id})
+        res.status(200).json({msg: 'Budget deleted'})
     } catch(error) {
         res.status(400).json({msg: error})
     }
