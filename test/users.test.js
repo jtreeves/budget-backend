@@ -15,12 +15,12 @@ describe('USERS: POST route for /signup', () => {
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: 'Mark Davidson',
-                email: 'mark@email.com',
-                password: 'mark1234'
+                name: users.bryan.name,
+                email: users.bryan.email,
+                password: users.bryan.password
             })
         const foundUser = await db.User.findOne({
-            email: 'mark@email.com'
+            email: users.bryan.email
         })
         const foundBudget = await db.Budget.findOne({
             user: foundUser._id
