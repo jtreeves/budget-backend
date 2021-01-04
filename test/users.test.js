@@ -94,7 +94,6 @@ describe('USERS: GET route for /:id', () => {
     })
 })
 
-// THIS TEST PASSES BUT DOESN'T UPDATE ANYTHING
 // Test PUT route for users/:id
 describe('USERS: PUT route for /:id', () => {
     it('updates firstTimeUser field for a specific user to false', async () => {
