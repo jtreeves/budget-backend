@@ -5,7 +5,7 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-// const users = require('../seeders/users')
+const budgets = require('../seeders/budgets')
 const { dbUsers, dbBudgets, tokens } = require('./server.test')
 
 // Test POST route for budgets/:id
@@ -66,8 +66,6 @@ describe('BUDGETS: GET route for /all/:id', () => {
     })
 })
 
-// THIS PASSES BUT DOES NOT UPDATE BUDGET'S TITLE
-// INSTEAD IT VOIDS ALL THE CATEGORIES
 // Test PUT route for budgets/:id
 describe('BUDGETS: PUT route for /:id', () => {
     it('updates a specific budget', async () => {
@@ -76,7 +74,18 @@ describe('BUDGETS: PUT route for /:id', () => {
             .set('Authorization', tokens.john)
             .send({
                 _id: dbBudgets.john._id,
-                title: 'Updated Budget Name'
+                title: 'Updated Budget Name',
+                colorScheme: 'Not A Real Color',
+                location: 'Nashville, TN',
+                income: 50000,
+                categories: {
+                    housing: {inputs: budgets.rich.housing},
+                    utility: {inputs: budgets.rich.utility},
+                    food: {inputs: budgets.rich.food},
+                    transportation: {inputs: budgets.rich.transportation},
+                    entertainment: {inputs: budgets.rich.entertainment},
+                    misc: {inputs: budgets.rich.misc}
+                }
             })
         expect(updatedBudget.status).to.equal(200)
     })
