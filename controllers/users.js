@@ -43,7 +43,6 @@ router.post('/signup', async (req, res) => {
                         newUser.password = hash
                         // Save new user with hashed password
                         const createdUser = await newUser.save()
-
                         res.status(200).json({
                             user: createdUser
                         })
