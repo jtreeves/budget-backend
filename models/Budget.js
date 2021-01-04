@@ -30,7 +30,7 @@ const budgetSchema = new Schema({
         transportation: transportationSchema,
         entertainment: entertainmentSchema,
         misc: miscSchema
-    },
+    }
 })
 
 // Export Budget
