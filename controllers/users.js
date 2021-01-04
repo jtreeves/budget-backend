@@ -97,7 +97,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// Create GET route for users/current (Private)
+// Create GET route for users/:id (Private)
 router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
         const currentUser = await db.User.findOne({
@@ -109,7 +109,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, r
     }
 })
 
-// Greate PUT route for users/current (Private)
+// Greate PUT route for users/:id (Private)
 router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     const { firstTimeUser } = req.body
     try {
