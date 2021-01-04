@@ -113,26 +113,22 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
     try {
         const updatedUser = await db.User.updateOne(
             {_id: req.params.id},
-            {$set: { firstTimeUser: firstTimeUser }}
+            {$set: {firstTimeUser: firstTimeUser}}
         )
         res.status(200).json({user: updatedUser})
     } catch(error) {
-        res.status(400).json({ msg: error })
+        res.status(400).json({msg: error})
     }
 })
 
 // Create DELETE route for users/:id (Private)
 router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        await db.Budget.deleteMany(
-            {user: req.params.id}
-        )
-        await db.User.deleteOne(
-            {_id: req.params.id}
-        )
-        res.status(200)
+        await db.Budget.deleteMany({user: req.params.id})
+        await db.User.deleteOne({_id: req.params.id})
+        res.status(200).json({msg: 'User deleted'})
     } catch(error) {
-        res.status(400).json({ msg: error })
+        res.status(400).json({msg: error})
     }
 })
 
