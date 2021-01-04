@@ -105,18 +105,9 @@ describe('USERS: PUT route for /:id', () => {
                 _id: dbUsers.adam._id,
                 firstTimeUser: false
             })
-        console.log(`UPDATED USER: ${updatedUser}`)
-        console.log(`UPDATED USER.BODY: ${updatedUser.body}`)
-        console.log(`UPDATED USER.BODY.USER: ${updatedUser.body.user}`)
-        console.log(`UPDATED USER KEYS: ${Object.keys(updatedUser)}`)
-        console.log(`UPDATED USER.BODY KEYS: ${Object.keys(updatedUser.body)}`)
-        console.log(`UPDATED USER.BODY.USER KEYS: ${Object.keys(updatedUser.body.user)}`)
         const foundUser = await db.User.findOne({
             _id: dbUsers.adam._id
         })
-        console.log(`FOUND USER: ${foundUser}`)
-        console.log(`FOUND USER.FIRSTTIMEUSER: ${foundUser.firstTimeUser}`)
-        console.log(`FOUND USER KEYS: ${Object.keys(foundUser)}`)
         expect(foundUser.firstTimeUser).to.equal(false)
     })
 })
