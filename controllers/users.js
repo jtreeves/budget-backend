@@ -133,13 +133,16 @@ router.put('/current', passport.authenticate('jwt', {session: false}), async (re
     }
 })
 
-// Create DELETE route for users/current (Private)
-router.delete('/current', passport.authenticate('jwt', {session: false}), async (req, res) => {
+// Create DELETE route for users/:id (Private)
+router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        const currentUser = await db.User.deleteOne(
+        await db.Budget.deleteMany(
+            {user: req.params.id}
+        )
+        await db.User.deleteOne(
             {_id: req.params.id}
         )
-        res.status(200).json({user: currentUser})
+        res.status(200)
     } catch(error) {
         res.status(400).json({ msg: error })
     }
