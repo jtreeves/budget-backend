@@ -82,7 +82,6 @@ describe('BUDGETS: PUT route for /:id', () => {
     })
 })
 
-// THIS WORKS BUT IT LETS YOU DELETE THE A USER'S ONLY BUDGET
 // Test DELETE route for budgets/:id
 describe('BUDGETS: DELETE route for /:id', () => {
     it('deletes a specific budget', async () => {
