@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const app = require('../server')
 const db = require('../models')
 const users = require('../seeders/userSeeder')
-const { dbUsers, dbBudgets } = require('./server.test')
+const { dbUsers, tokens } = require('./server.test')
 
 // Test POST route for users/signup
 describe('USERS: POST route for /signup', () => {
@@ -52,8 +52,8 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users.adam.email,
-                password: users.adam.password
+                email: users.mark.email,
+                password: users.mark.password
             })
         expect(currentUser.status).to.equal(200)
     })
@@ -63,7 +63,7 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users.adam.email,
+                email: users.rebecca.email,
                 password: 'notcorrectpassword'
             })
         expect(currentUser.body.msg).to.equal('Password is incorrect')
@@ -74,8 +74,8 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: 'victor@email.com',
-                password: 'victor1234'
+                email: users.caroline.email,
+                password: users.caroline.password
             })
         expect(currentUser.body.msg).to.equal('User not found')
     })
@@ -84,16 +84,16 @@ describe('USERS: POST route for /login', () => {
 // Test GET route for users/current
 describe('USERS: GET route for /current', () => {
     it('displays info of authenticated user', async () => {
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: users.adam.email,
-                password: users.adam.password
-            })
+        // const loggingUser = await request(app)
+        //     .post('/users/login')
+        //     .set('Content-Type', 'application/x-www-form-urlencoded')
+        //     .send({
+        //         email: users.adam.email,
+        //         password: users.adam.password
+        //     })
         const currentUser = await request(app)
             .get('/users/current')
-            .set('Authorization', loggingUser.body.token)
+            .set('Authorization', tokens.john)
         expect(currentUser.body).to.have.property('id')
     })
 
@@ -109,16 +109,16 @@ describe('USERS: GET route for /current', () => {
 // Test PUT route for users/current
 describe('USERS: PUT route for /current', () => {
     it('updates name field for a specific user', async () => {
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: users.adam.email,
-                password: users.adam.password
-            })
+        // const loggingUser = await request(app)
+        //     .post('/users/login')
+        //     .set('Content-Type', 'application/x-www-form-urlencoded')
+        //     .send({
+        //         email: users.adam.email,
+        //         password: users.adam.password
+        //     })
         const currentUser = await request(app)
             .put('/users/current')
-            .set('Authorization', loggingUser.body.token)
+            .set('Authorization', tokens.adam)
             .send({
                 _id: dbUsers.adam._id,
                 name: 'Adam Is Awesome'
@@ -131,16 +131,16 @@ describe('USERS: PUT route for /current', () => {
 // Test DELETE route for users/current
 describe('USERS: DELETE route for /current', () => {
     it('deletes a user', async () => {
-        const loggingUser = await request(app)
-            .post('/users/login')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({
-                email: users.susan.email,
-                password: users.susan.password
-            })
+        // const loggingUser = await request(app)
+        //     .post('/users/login')
+        //     .set('Content-Type', 'application/x-www-form-urlencoded')
+        //     .send({
+        //         email: users.susan.email,
+        //         password: users.susan.password
+        //     })
         const deletedUser = await request(app)
             .delete('/users/current')
-            .set('Authorization', loggingUser.body.token)
+            .set('Authorization', tokens.susan)
             .send({
                 _id: dbUsers.susan._id
             })
