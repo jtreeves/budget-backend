@@ -7,13 +7,10 @@ const app = require('../server')
 const db = require('../models')
 const users = require('../seeders/userSeeder')
 
-// // Create new variables for test users and budgets
-let dbAdamUser, dbDebraUser, dbJohnUser, dbSusanUser
-let dbAdamBudget, dbDebraBudget, dbJohnBudget, dbSusanBudget
-
-// Create arrays for holding users and budgets
+// Create objects for holding users, budgets, and tokens
 let dbUsers = {}
 let dbBudgets = {}
+let tokens = {}
 
 // Delete all existing users and budgets before running tests
 before(async () => {
@@ -78,7 +75,7 @@ before(async () => {
         })
 })
 
-// Find users in database
+// Find new users in database
 before(async () => {
     dbAdamUser = await db.User.findOne({
         email: users.adam.email
@@ -111,7 +108,7 @@ before(async () => {
     dbUsers.susan = dbSusanUser
 })
 
-// Find budgets in database
+// Find new users' budgets in database
 before(async () => {
     dbAdamBudget = await db.Budget.findOne({
         user: dbAdamUser._id
@@ -144,6 +141,45 @@ before(async () => {
     dbBudgets.susan = dbSusanBudget
 })
 
+// Log in a subset of newly created users and grab their tokens
+before(async () => {
+    const loggingAdam = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.adam.email,
+            password: users.adam.password
+        })
+    tokens.adam = loggingAdam.body.token
+    
+    const loggingDebra = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.debra.email,
+            password: users.debra.password
+        })
+    tokens.debra = loggingDebra.body.token
+
+    const loggingJohn = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.john.email,
+            password: users.john.password
+        })
+    tokens.john = loggingJohn.body.token
+
+    const loggingSusan = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.susan.email,
+            password: users.susan.password
+        })
+    tokens.susan = loggingSusan.body.token
+})
+
 // Test home page
 describe('SERVER: GET route for /', () => {
     it('accesses backend and displays stored message', async () => {
@@ -155,4 +191,4 @@ describe('SERVER: GET route for /', () => {
     })
 })
 
-module.exports = { dbUsers, dbBudgets }
+module.exports = { dbUsers, dbBudgets, tokens }
