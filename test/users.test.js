@@ -97,15 +97,15 @@ describe('USERS: GET route for /:id', () => {
 // THIS TEST PASSES BUT DOESN'T UPDATE ANYTHING
 // Test PUT route for users/:id
 describe('USERS: PUT route for /:id', () => {
-    it('updates name field for a specific user', async () => {
+    it('updates firstTimeUser field for a specific user to false', async () => {
         const updatedUser = await request(app)
             .put(`/users/${dbUsers.adam._id}`)
             .set('Authorization', tokens.adam)
             .send({
                 _id: dbUsers.adam._id,
-                name: 'Adam Is Awesome'
+                firstTimeUser: false
             })
-        expect(updatedUser.status).to.equal(200)
+        expect(updatedUser.body.user.firstTimeUser).to.equal('false')
     })
 })
 
