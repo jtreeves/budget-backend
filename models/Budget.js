@@ -18,7 +18,7 @@ const budgetSchema = new Schema({
     title: String,
     colorScheme: String,
     location: String,
-    income: String,
+    income: Number,
     date: {
         type: Date,
         default: Date.now()
