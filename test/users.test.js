@@ -37,9 +37,9 @@ describe('USERS: POST route for /signup', () => {
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                name: users[0].name,
-                email: users[0].email,
-                password: users[0].password
+                name: users.adam.name,
+                email: users.adam.email,
+                password: users.adam.password
             })
         expect(newUser.body.msg).to.equal('Email already in use')
     })
@@ -52,8 +52,8 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[0].email,
-                password: users[0].password
+                email: users.adam.email,
+                password: users.adam.password
             })
         expect(currentUser.status).to.equal(200)
     })
@@ -63,7 +63,7 @@ describe('USERS: POST route for /login', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[0].email,
+                email: users.adam.email,
                 password: 'notcorrectpassword'
             })
         expect(currentUser.body.msg).to.equal('Password is incorrect')
@@ -88,8 +88,8 @@ describe('USERS: GET route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[0].email,
-                password: users[0].password
+                email: users.adam.email,
+                password: users.adam.password
             })
         const currentUser = await request(app)
             .get('/users/current')
@@ -113,8 +113,8 @@ describe('USERS: PUT route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[0].email,
-                password: users[0].password
+                email: users.adam.email,
+                password: users.adam.password
             })
         const currentUser = await request(app)
             .put('/users/current')
@@ -135,8 +135,8 @@ describe('USERS: DELETE route for /current', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[3].email,
-                password: users[3].password
+                email: users.susan.email,
+                password: users.susan.password
             })
         const deletedUser = await request(app)
             .delete('/users/current')

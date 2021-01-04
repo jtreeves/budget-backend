@@ -15,8 +15,8 @@ describe('BUDGETS: POST route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[1].email,
-                password: users[1].password
+                email: users.debra.email,
+                password: users.debra.password
             })
         const currentUser = await request(app)
             .get('/users/current')
@@ -53,8 +53,8 @@ describe('BUDGETS: GET route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[2].email,
-                password: users[2].password
+                email: users.john.email,
+                password: users.john.password
             })
         const getBudget = await request(app)
             .get(`/budgets/${dbBudgets[2]._id}`)
@@ -76,8 +76,8 @@ describe('BUDGETS: GET route for /all/:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[1].email,
-                password: users[1].password
+                email: users.debra.email,
+                password: users.debra.password
             })
         const foundBudgets = await db.Budget.find({
             user: dbUsers[1]._id
@@ -97,8 +97,8 @@ describe('BUDGETS: PUT route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[2].email,
-                password: users[2].password
+                email: users.john.email,
+                password: users.john.password
             })
         const updatedBudget = await request(app)
             .put(`/budgets/${dbBudgets[2]._id}`)
@@ -119,8 +119,8 @@ describe('BUDGETS: DELETE route for /:id', () => {
             .post('/users/login')
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                email: users[2].email,
-                password: users[2].password
+                email: users.john.email,
+                password: users.john.password
             })
         const deletedBudget = await request(app)
             .delete(`/budgets/${dbBudgets[2]._id}`)

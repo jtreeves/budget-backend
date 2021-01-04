@@ -27,58 +27,58 @@ before(async () => {
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-            name: users[0].name,
-            email: users[0].email,
-            password: users[0].password
+            name: users.adam.name,
+            email: users.adam.email,
+            password: users.adam.password
         })
     
     await request(app)
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-            name: users[1].name,
-            email: users[1].email,
-            password: users[1].password
+            name: users.debra.name,
+            email: users.debra.email,
+            password: users.debra.password
         })
 
     await request(app)
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-            name: users[2].name,
-            email: users[2].email,
-            password: users[2].password
+            name: users.john.name,
+            email: users.john.email,
+            password: users.john.password
         })
 
     await request(app)
         .post('/users/signup')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-            name: users[3].name,
-            email: users[3].email,
-            password: users[3].password
+            name: users.susan.name,
+            email: users.susan.email,
+            password: users.susan.password
         })
 })
 
 // Find users in database
 before(async () => {
     dbAdamUser = await db.User.findOne({
-        email: users[0].email
+        email: users.adam.email
     })
     dbUsers.push(dbAdamUser)
 
     dbDebraUser = await db.User.findOne({
-        email: users[1].email
+        email: users.debra.email
     })
     dbUsers.push(dbDebraUser)
 
     dbJohnUser = await db.User.findOne({
-        email: users[2].email
+        email: users.john.email
     })
     dbUsers.push(dbJohnUser)
 
     dbSusanUser = await db.User.findOne({
-        email: users[3].email
+        email: users.susan.email
     })
     dbUsers.push(dbSusanUser)
 })
