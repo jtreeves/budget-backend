@@ -22,28 +22,14 @@ router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, 
             title: req.body.title,
             colorScheme: req.body.colorScheme,
             categories: {
-                housing: {
-                    inputs: housing.inputs
-                },
-                utility: {
-                    inputs: utility.inputs
-                },
-                food: {
-                    inputs: food.inputs
-                },
-                transportation: {
-                    inputs: transportation.inputs
-                },
-                entertainment: {
-                    inputs: entertainment.inputs
-                },
-                misc: {
-                    inputs: misc.inputs
-                },
-                income: {
-                    inputs: income.inputs
-                },  
-            },
+                housing: {inputs: housing.inputs},
+                utility: {inputs: utility.inputs},
+                food: {inputs: food.inputs},
+                transportation: {inputs: transportation.inputs},
+                entertainment: {inputs: entertainment.inputs},
+                misc: {inputs: misc.inputs},
+                income: {inputs: income.inputs}  
+            }
         })
         res.status(200).json({budget: newBudget})
     } catch(error) {
@@ -54,7 +40,9 @@ router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, 
 // Create GET route for budgets/all/:id
 router.get('/all/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        const allBudgets = await db.Budget.find({user: req.params.id})
+        const allBudgets = await db.Budget.find({
+            user: req.params.id
+        })
         res.status(200).json({budgets: allBudgets})
     } catch(error) {
         res.status(400).json({msg: error})
@@ -64,7 +52,9 @@ router.get('/all/:id', passport.authenticate('jwt', {session: false}), async (re
 // Create GET route for budgets/:id
 router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        const currentBudget = await db.Budget.findOne({_id: req.params.id})
+        const currentBudget = await db.Budget.findOne({
+            _id: req.params.id
+        })
         res.status(200).json({budget: currentBudget})
     } catch(error) {
         res.status(400).json({msg: error})
@@ -97,7 +87,7 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, r
             )
             res.status(200).json({budget: updatedBudget})
         } catch(error) {
-            res.status(400).json({ msg: error })
+            res.status(400).json({msg: error})
         }
     }
 })
@@ -110,7 +100,7 @@ router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req
         )
         res.status(200).json({budget: currentBudget})
     } catch(error) {
-        res.status(400).json({ msg: error })
+        res.status(400).json({msg: error})
     }
 })
 
