@@ -111,16 +111,29 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, r
 
 // Greate PUT route for users/:id (Private)
 router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    const { firstTimeUser } = req.body
-    try {
-        const updatedUser = await db.User.updateOne(
-            {_id: req.params.id},
-            {$set: {firstTimeUser: firstTimeUser}}
-        )
-        res.status(200).json({user: updatedUser})
-    } catch(error) {
-        res.status(400).json({msg: error})
+    const { firstTimeUser, newName } = req.body
+    if(firstTimeUser) {
+        try {
+            const updatedUser = await db.User.updateOne(
+                {_id: req.params.id},
+                {$set: {firstTimeUser: firstTimeUser}}
+            )
+            res.status(200).json({user: updatedUser})
+        } catch(error) {
+            res.status(400).json({msg: error})
+        }
+    } else {
+        try {
+            const updatedUser = await db.User.updateOne(
+                {_id: req.params.id},
+                {$set: {name: newName}}
+            )
+            res.status(200).json({user: updatedUser})
+        } catch(error) {
+            res.status(400).json({msg: error})
+        }
     }
+
 })
 
 // Create DELETE route for users/:id (Private)
