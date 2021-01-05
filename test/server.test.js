@@ -5,7 +5,8 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const users = require('../seeders/userSeeder')
+const users = require('../seeders/users')
+const budgets = require('../seeders/budgets')
 
 // Create objects for holding users, budgets, and tokens
 let dbUsers = {}
@@ -18,7 +19,7 @@ before(async () => {
     await db.Budget.deleteMany({})
 })
 
-// Create four new test users before running tests
+// Create new test users before running tests
 before(async () => {
     await request(app)
         .post('/users/signup')
@@ -75,73 +76,7 @@ before(async () => {
         })
 })
 
-// Find new users in database
-before(async () => {
-    dbAdamUser = await db.User.findOne({
-        email: users.adam.email
-    })
-    dbUsers.adam = dbAdamUser
-
-    dbDebraUser = await db.User.findOne({
-        email: users.debra.email
-    })
-    dbUsers.debra = dbDebraUser
-
-    dbJohnUser = await db.User.findOne({
-        email: users.john.email
-    })
-    dbUsers.john = dbJohnUser
-
-    dbMarkUser = await db.User.findOne({
-        email: users.mark.email
-    })
-    dbUsers.mark = dbMarkUser
-
-    dbRebeccaUser = await db.User.findOne({
-        email: users.rebecca.email
-    })
-    dbUsers.rebecca = dbRebeccaUser
-
-    dbSusanUser = await db.User.findOne({
-        email: users.susan.email
-    })
-    dbUsers.susan = dbSusanUser
-})
-
-// Find new users' budgets in database
-before(async () => {
-    dbAdamBudget = await db.Budget.findOne({
-        user: dbAdamUser._id
-    })
-    dbBudgets.adam = dbAdamBudget
-
-    dbDebraBudget = await db.Budget.findOne({
-        user: dbDebraUser._id
-    })
-    dbBudgets.debra = dbDebraBudget
-
-    dbJohnBudget = await db.Budget.findOne({
-        user: dbJohnUser._id
-    })
-    dbBudgets.john = dbJohnBudget
-
-    dbMarkBudget = await db.Budget.findOne({
-        user: dbMarkUser._id
-    })
-    dbBudgets.mark = dbMarkBudget
-
-    dbRebeccaBudget = await db.Budget.findOne({
-        user: dbRebeccaUser._id
-    })
-    dbBudgets.rebecca = dbRebeccaBudget
-
-    dbSusanBudget = await db.Budget.findOne({
-        user: dbSusanUser._id
-    })
-    dbBudgets.susan = dbSusanBudget
-})
-
-// Log in a subset of newly created users and grab their tokens
+// Log in newly created users and grab their tokens
 before(async () => {
     const loggingAdam = await request(app)
         .post('/users/login')
@@ -170,6 +105,24 @@ before(async () => {
         })
     tokens.john = loggingJohn.body.token
 
+    const loggingMark = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.mark.email,
+            password: users.mark.password
+        })
+    tokens.mark = loggingMark.body.token
+
+    const loggingRebecca = await request(app)
+        .post('/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            email: users.rebecca.email,
+            password: users.rebecca.password
+        })
+    tokens.rebecca = loggingRebecca.body.token
+
     const loggingSusan = await request(app)
         .post('/users/login')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -178,6 +131,102 @@ before(async () => {
             password: users.susan.password
         })
     tokens.susan = loggingSusan.body.token
+})
+
+// Find new users in database
+before(async () => {
+    const dbAdamUser = await db.User.findOne({
+        email: users.adam.email
+    })
+    dbUsers.adam = dbAdamUser
+
+    const dbDebraUser = await db.User.findOne({
+        email: users.debra.email
+    })
+    dbUsers.debra = dbDebraUser
+
+    const dbJohnUser = await db.User.findOne({
+        email: users.john.email
+    })
+    dbUsers.john = dbJohnUser
+
+    const dbMarkUser = await db.User.findOne({
+        email: users.mark.email
+    })
+    dbUsers.mark = dbMarkUser
+
+    const dbRebeccaUser = await db.User.findOne({
+        email: users.rebecca.email
+    })
+    dbUsers.rebecca = dbRebeccaUser
+
+    const dbSusanUser = await db.User.findOne({
+        email: users.susan.email
+    })
+    dbUsers.susan = dbSusanUser
+})
+
+// Create budgets for new users
+before(async () => {
+    const dbAdamBudget = await db.Budget.create({
+        user: dbUsers.adam._id,
+        title: 'Adam Budget',
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: budgets.rich.categories
+    })
+    dbBudgets.adam = dbAdamBudget
+
+    const dbDebraBudget = await db.Budget.create({
+        user: dbUsers.debra._id,
+        title: 'Debra Budget',
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: budgets.rich.categories
+    })
+    dbBudgets.debra = dbDebraBudget
+
+    const dbJohnBudget = await db.Budget.create({
+        user: dbUsers.john._id,
+        title: 'John Budget',
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: budgets.rich.categories
+    })
+    dbBudgets.john = dbJohnBudget
+
+    const dbMarkBudget = await db.Budget.create({
+        user: dbUsers.mark._id,
+        title: 'Mark Budget',
+        colorScheme: budgets.poor.colorScheme,
+        location: budgets.poor.location,
+        income: budgets.poor.income,
+        categories: budgets.poor.categories
+    })
+    dbBudgets.mark = dbMarkBudget
+
+    const dbRebeccaBudget = await db.Budget.create({
+        user: dbUsers.rebecca._id,
+        title: 'Rebecca Budget',
+        colorScheme: budgets.full.colorScheme,
+        location: budgets.full.location,
+        income: budgets.full.income,
+        categories: budgets.full.categories
+    })
+    dbBudgets.rebecca = dbRebeccaBudget
+
+    const dbSusanBudget = await db.Budget.create({
+        user: dbUsers.susan._id,
+        title: 'Susan Budget',
+        colorScheme: budgets.rich.colorScheme,
+        location: budgets.rich.location,
+        income: budgets.rich.income,
+        categories: budgets.rich.categories
+    })
+    dbBudgets.susan = dbSusanBudget
 })
 
 // Test home page

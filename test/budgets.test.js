@@ -5,7 +5,7 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const users = require('../seeders/userSeeder')
+const budgets = require('../seeders/budgets')
 const { dbUsers, dbBudgets, tokens } = require('./server.test')
 
 // Test POST route for budgets/:id
@@ -16,17 +16,11 @@ describe('BUDGETS: POST route for /:id', () => {
             .set('Authorization', tokens.john)
             .send({
                 user: dbUsers.john._id,
-                title: 'Test Budget',
-                colorScheme: 'Not Green',
-                categories: {
-                    housing: {inputs: {}},
-                    utility: {inputs: {}},
-                    food: {inputs: {}},
-                    transportation: {inputs: {}},
-                    entertainment: {inputs: {}},
-                    misc: {inputs: {}},
-                    income: {inputs: {}}  
-                }
+                title: 'A Nice Simple Budget',
+                colorScheme: 'Blue',
+                location: 'Chicago, IL',
+                income: 800000,
+                categories: budgets.empty.categories
             })
         const foundBudgets = await db.Budget.find({
             user: dbUsers.john._id
@@ -65,7 +59,6 @@ describe('BUDGETS: GET route for /all/:id', () => {
     })
 })
 
-// THIS PASSES BUT DOES NOT UPDATE BUDGET'S TITLE
 // Test PUT route for budgets/:id
 describe('BUDGETS: PUT route for /:id', () => {
     it('updates a specific budget', async () => {
@@ -74,13 +67,50 @@ describe('BUDGETS: PUT route for /:id', () => {
             .set('Authorization', tokens.john)
             .send({
                 _id: dbBudgets.john._id,
-                title: 'Updated Budget Name'
+                title: 'Updated Budget for John',
+                colorScheme: 'Not A Real Color',
+                location: 'Nashville, TN',
+                income: 50000,
+                categories: {
+                    housing: {
+                        inputs: {
+                            'rent': 1000
+                        }
+                    },
+                    utility: {
+                        inputs: {
+                            'water': 100,
+                            'electric': 100
+                        }
+                    },
+                    food: {
+                        inputs: {
+                            'grocery': 200,
+                            'restaurant': 150
+                        }
+                    },
+                    transportation: {
+                        inputs: {
+                            'gas': 350
+                        }
+                    },
+                    entertainment: {
+                        inputs: {
+                            'books': 75,
+                            'movies': 85
+                        }
+                    },
+                    misc: {
+                        inputs: {
+                            'flower': 1
+                        }
+                    }
+                }
             })
         expect(updatedBudget.status).to.equal(200)
     })
 })
 
-// THIS WORKS BUT IT LETS YOU DELETE THE A USER'S ONLY BUDGET
 // Test DELETE route for budgets/:id
 describe('BUDGETS: DELETE route for /:id', () => {
     it('deletes a specific budget', async () => {

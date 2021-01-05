@@ -43,7 +43,6 @@ router.post('/signup', async (req, res) => {
                         newUser.password = hash
                         // Save new user with hashed password
                         const createdUser = await newUser.save()
-
                         res.status(200).json({
                             user: createdUser
                         })
@@ -98,42 +97,40 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// Create GET route for users/current (Private)
+// Create GET route for users/:id (Private)
 router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        const user = await db.User.findOne({_id: req.params.id})
-        res.status(200).json({user})
+        const currentUser = await db.User.findOne({
+            _id: req.params.id
+        })
+        res.status(200).json({user: currentUser})
     } catch(error) {
         res.status(400).json({msg: error})
     }
 })
 
-// Greate PUT route for users/current (Private)
+// Greate PUT route for users/:id (Private)
 router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     const { firstTimeUser } = req.body
     try {
         const updatedUser = await db.User.updateOne(
             {_id: req.params.id},
-            {$set: { firstTimeUser: firstTimeUser }}
+            {$set: {firstTimeUser: firstTimeUser}}
         )
         res.status(200).json({user: updatedUser})
     } catch(error) {
-        res.status(400).json({ msg: error })
+        res.status(400).json({msg: error})
     }
 })
 
 // Create DELETE route for users/:id (Private)
 router.delete('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        await db.Budget.deleteMany(
-            {user: req.params.id}
-        )
-        await db.User.deleteOne(
-            {_id: req.params.id}
-        )
-        res.status(200)
+        await db.Budget.deleteMany({user: req.params.id})
+        await db.User.deleteOne({_id: req.params.id})
+        res.status(200).json({msg: 'User deleted'})
     } catch(error) {
-        res.status(400).json({ msg: error })
+        res.status(400).json({msg: error})
     }
 })
 

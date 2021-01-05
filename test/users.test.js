@@ -5,12 +5,12 @@ const expect = require('chai').expect
 // Import internal dependencies
 const app = require('../server')
 const db = require('../models')
-const users = require('../seeders/userSeeder')
+const users = require('../seeders/users')
 const { dbUsers, tokens } = require('./server.test')
 
 // Test POST route for users/signup
 describe('USERS: POST route for /signup', () => {
-    it('creates a new user and saves it to the database with a hashed password, a date field, and a new budget', async () => {
+    it('creates a new user and saves it to the database with a hashed password and a date field', async () => {
         const newUser = await request(app)
             .post('/users/signup')
             .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -22,14 +22,10 @@ describe('USERS: POST route for /signup', () => {
         const foundUser = await db.User.findOne({
             email: users.bryan.email
         })
-        const foundBudget = await db.Budget.findOne({
-            user: foundUser._id
-        })
         expect(newUser.status).to.equal(200)
         expect(foundUser).to.exist
         expect(foundUser.password).to.not.equal('mark1234')
         expect(foundUser).to.have.property('date')
-        expect(foundBudget).to.have.property('categories')
     })
 
     it('fails to create a user if email already in use', async () => {
@@ -81,44 +77,46 @@ describe('USERS: POST route for /login', () => {
     })
 })
 
-// Test GET route for users/current
-describe('USERS: GET route for /current', () => {
+// Test GET route for users/:id
+describe('USERS: GET route for /:id', () => {
     it('displays info of authenticated user', async () => {
         const currentUser = await request(app)
-            .get('/users/current')
+            .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', tokens.john)
-        expect(currentUser.body).to.have.property('id')
+        expect(currentUser.body.user).to.have.property('_id')
     })
 
     it('fails to display info of unauthenticated user', async () => {
         const currentUser = await request(app)
-            .get('/users/current')
+            .get(`/users/${dbUsers.john._id}`)
             .set('Authorization', 'Bearer token')
-        expect(currentUser.body).to.not.have.property('id')
+        expect(currentUser.error).to.not.equal(false)
     })
 })
 
-// THIS TEST PASSES BUT DOESN'T UPDATE ANYTHING
-// Test PUT route for users/current
-describe('USERS: PUT route for /current', () => {
-    it('updates name field for a specific user', async () => {
-        const currentUser = await request(app)
-            .put('/users/current')
+// Test PUT route for users/:id
+describe('USERS: PUT route for /:id', () => {
+    it('updates firstTimeUser field for a specific user to false', async () => {
+        const updatedUser = await request(app)
+            .put(`/users/${dbUsers.adam._id}`)
             .set('Authorization', tokens.adam)
             .send({
                 _id: dbUsers.adam._id,
-                name: 'Adam Is Awesome'
+                firstTimeUser: false
             })
-        expect(currentUser.status).to.equal(200)
+        const foundUser = await db.User.findOne({
+            _id: dbUsers.adam._id
+        })
+        expect(updatedUser.body.user.nModified).to.equal(1)
+        expect(foundUser.firstTimeUser).to.equal(false)
     })
 })
 
-// THIS TEST PASSES BUT DOESN'T DELETE ANYTHING
-// Test DELETE route for users/current
-describe('USERS: DELETE route for /current', () => {
+// Test DELETE route for users/:id
+describe('USERS: DELETE route for /:id', () => {
     it('deletes a user', async () => {
         const deletedUser = await request(app)
-            .delete('/users/current')
+            .delete(`/users/${dbUsers.susan._id}`)
             .set('Authorization', tokens.susan)
             .send({
                 _id: dbUsers.susan._id
