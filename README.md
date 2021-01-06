@@ -55,15 +55,18 @@ We knew that we wanted to produce a budgeting app, but we were initially unsure 
 
 ## Routes
 
-| Method | Path             | File       | Description              |
-| ------ | ---------------- | ---------- | ------------------------ |
-| POST   | /users/signup    | users.js   | Sign up a new user       |
-| POST   | /users/login     | users.js   | Log in an existing user  |
-| GET    | /users/current   | users.js   | Display a user's data    |
-| POST   | /budgets/:id     | budgets.js | Create a new budget      |
-| GET    | /budgets/all/:id | budgets.js | View all budgets of user |
-| GET    | /budgets/:id     | budgets.js | View one budget of user  |
-| PUT    | /budgets/:id     | budgets.js | Update one budget        |
+| Method | Path             | File       | Description                    |
+| ------ | ---------------- | ---------- | ------------------------------ |
+| POST   | /users/signup    | users.js   | Sign up a new user             |
+| POST   | /users/login     | users.js   | Log in an existing user        |
+| GET    | /users/:id       | users.js   | Display a user's data          |
+| PUT    | /users/:id       | users.js   | Update a user's data           |
+| DELETE | /users/:id       | users.js   | Delete a user's account        |
+| POST   | /budgets/:id     | budgets.js | Create a new budget            |
+| GET    | /budgets/all/:id | budgets.js | View all of a user's budgets   |
+| GET    | /budgets/:id     | budgets.js | View one of a user's budgets   |
+| PUT    | /budgets/:id     | budgets.js | Update one of a user's budgets |
+| DELETE | /budgets/:id     | budgets.js | Delete one of a user's budgets |
 
 ## Dependencies
 
