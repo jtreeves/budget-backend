@@ -16,7 +16,6 @@ const router = express.Router()
 // Create POST route for budgets/:id
 router.post('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     const { housing, utility, food, transportation, misc, entertainment } = req.body.categories
-    console.log(`REQ.BODY: ${req.body}`)
     try {
         const newBudget = await db.Budget.create({
             user: req.params.id,

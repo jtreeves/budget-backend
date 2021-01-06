@@ -112,7 +112,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, r
 // Greate PUT route for users/:id (Private)
 router.put('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
     const { firstTimeUser, newName } = req.body
-    if(firstTimeUser) {
+    if(firstTimeUser === false) {
         try {
             const updatedUser = await db.User.updateOne(
                 {_id: req.params.id},
