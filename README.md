@@ -11,7 +11,8 @@ This is the backend repository for the Kaleidoscope app. It contains the code ne
 5. [Models](https://github.com/jtreeves/budget-backend#models)
 6. [Routes](https://github.com/jtreeves/budget-backend#routes)
 7. [Dependencies](https://github.com/jtreeves/budget-backend#dependencies)
-8. [Stretch Goals](https://github.com/jtreeves/budget-backend#stretch-goals)
+8. [Code Examples](https://github.com/jtreeves/budget-backend#code-examples)
+9. [Stretch Goals](https://github.com/jtreeves/budget-backend#stretch-goals)
 
 ## About
 
@@ -79,6 +80,33 @@ We knew that we wanted to produce a budgeting app, but we were initially unsure 
 - mongoose
 - passport
 - passport-jwt
+
+## Code Examples
+
+**Flexible schemas allow the user to input fields with whatever names they want**
+```javascript
+const foodSchema = new Schema({
+    inputs: { type: Schema.Types.Mixed, default: {} },
+    date: {
+        type: Date,
+        default: Date.now()
+    },
+}, { minimize: false })
+```
+
+**Protected routes ensure only the user can access their budget information**
+```javascript
+router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    try {
+        const currentBudget = await db.Budget.findOne({
+            _id: req.params.id
+        })
+        res.status(200).json({budget: currentBudget})
+    } catch(error) {
+        res.status(400).json({msg: error})
+    }
+})
+```
 
 ## Stretch Goals
 
