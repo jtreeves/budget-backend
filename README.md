@@ -11,7 +11,7 @@ This is the backend repository for the Kaleidoscope app. It contains the code ne
 5. [Models](https://github.com/jtreeves/budget-backend#models)
 6. [Routes](https://github.com/jtreeves/budget-backend#routes)
 7. [Dependencies](https://github.com/jtreeves/budget-backend#dependencies)
-8. [Further Thoughts](https://github.com/jtreeves/budget-backend#further-thoughts)
+8. [Stretch Goals](https://github.com/jtreeves/budget-backend#stretch-goals)
 
 ## About
 
@@ -74,6 +74,11 @@ We knew that we wanted to produce a budgeting app, but we were initially unsure 
 - passport
 - passport-jwt
 
-## Further Thoughts
+## Stretch Goals
 
-Notes aboud stretch goals and problem areas TK.
+- Add more explanatory information to the Compare Locations pages to clarify to the user just what this information means for them and their budgetary concerns
+- Deploy an alternate version of the app that does not use the Numbeo API
+- While our app is designed for desktop use and not mobile use, we could make its design more responsive (it already is responsive, but it is not as mobile friendly as the user might want)
+- While our app is designed for personal use and not social networking, we could build out the profile section to let users upload a profile image and about text
+- Include more tests and a seeder file for development purposes
+- Create a separate organization page on GitHub to host the repositories, instead of having them hosted by a specific team member
