@@ -108,6 +108,41 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), async (req, r
 })
 ```
 
+**Tests confirm new users get hashed passwords and users cannot sign up with existing email accounts**
+```javascript
+describe('USERS: POST route for /signup', () => {
+    it('creates a new user and saves it to the database with a hashed password and a date field', async () => {
+        const newUser = await request(app)
+            .post('/users/signup')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                name: users.bryan.name,
+                email: users.bryan.email,
+                password: users.bryan.password
+            })
+        const foundUser = await db.User.findOne({
+            email: users.bryan.email
+        })
+        expect(newUser.status).to.equal(200)
+        expect(foundUser).to.exist
+        expect(foundUser.password).to.not.equal(users.bryan.password)
+        expect(foundUser).to.have.property('date')
+    })
+
+    it('fails to create a user if email already in use', async () => {
+        const newUser = await request(app)
+            .post('/users/signup')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                name: users.adam.name,
+                email: users.adam.email,
+                password: users.adam.password
+            })
+        expect(newUser.body.msg).to.equal('Email already in use')
+    })
+})
+```
+
 ## Stretch Goals
 
 - Add more explanatory information to the Compare Locations pages to clarify to the user just what this information means for them and their budgetary concerns
