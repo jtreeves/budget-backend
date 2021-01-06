@@ -24,7 +24,7 @@ describe('USERS: POST route for /signup', () => {
         })
         expect(newUser.status).to.equal(200)
         expect(foundUser).to.exist
-        expect(foundUser.password).to.not.equal('bryan1234')
+        expect(foundUser.password).to.not.equal(users.bryan.password)
         expect(foundUser).to.have.property('date')
     })
 
