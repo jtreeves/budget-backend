@@ -44,7 +44,10 @@ We knew that we wanted to produce a budgeting app, but we were initially unsure 
 ## Features
 
 - Models for users and budgets with full CRUD functionality
+- Flexible schemas to allow users to upload a variety of fields to the budget documents
+- Routes for accessing models
 - Authentication measures to protect user information
+- Tests for all routes
 
 ## Models
 
