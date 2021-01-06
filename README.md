@@ -35,7 +35,7 @@ Kaleidoscope is an app for seeing how simple life changes can result in dramatic
 1. Run `npm start` from within both the backend directory and the frontend directory
 2. View the live version of the site at `http://localhost:3000` in the browser of your choosing
 
-Alternatively, you may use the live version of the [Kaleidoscope](HEROKULINKTK) app.
+Alternatively, you may use the live version of the [Kaleidoscope](https://kaleidoscope-budget.herokuapp.com) app.
 
 ## Explanation
 
