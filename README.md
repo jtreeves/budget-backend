@@ -151,3 +151,5 @@ describe('USERS: POST route for /signup', () => {
 - While our app is designed for personal use and not social networking, we could build out the profile section to let users upload a profile image and about text
 - Include more tests and a seeder file for development purposes
 - Create a separate organization page on GitHub to host the repositories, instead of having them hosted by a specific team member
+
+**READY FOR CODE REVIEW**
