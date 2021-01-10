@@ -1,5 +1,5 @@
 {
-    "name": "mern-auth-backend",
+    "name": "kaleidoscope-server",
     "version": "1.0.0",
     "description": "This is a codealong for MERN Auth",
     "main": "server.js",
