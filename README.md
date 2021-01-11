@@ -147,7 +147,9 @@ describe('USERS: POST route for /signup', () => {
 
 - Add more explanatory information to the Compare Locations pages to clarify to the user just what this information means for them and their budgetary concerns
 - Deploy an alternate version of the app that does not use the Numbeo API
-- While our app is designed for desktop use and not mobile use, we could make its design more responsive (it already is responsive, but it is not as mobile friendly as the user might want)
+- Further customize the charts for more readability and to make them even easier for users to understand
+- Add additional featuers, like expense tracking
+- While our app is designed for desktop use and not mobile use, we could make its design more responsive (it already is responsive, but it is not as mobile friendly as the user might want); alternatively, we could create a separate mobile version of the app
 - While our app is designed for personal use and not social networking, we could build out the profile section to let users upload a profile image and about text
 - Include more tests and a seeder file for development purposes
 - Create a separate organization page on GitHub to host the repositories, instead of having them hosted by a specific team member
