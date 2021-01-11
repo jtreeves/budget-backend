@@ -68,7 +68,7 @@ describe('BUDGETS: PUT route for /:id', () => {
             .send({
                 _id: dbBudgets.john._id,
                 title: 'Updated Budget for John',
-                colorScheme: 'Not A Real Color',
+                colorScheme: 'Orange',
                 location: 'Nashville, TN',
                 income: 50000,
                 categories: {
